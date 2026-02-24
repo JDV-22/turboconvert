@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://turboconvert.io/</loc>
+    <lastmod>2026-02-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- PDF Tools -->
+  <url><loc>https://turboconvert.io/pdf-to-word</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/word-to-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/compress-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/pdf-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/merge-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/split-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/pdf-to-excel</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/rotate-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Document Tools -->
+  <url><loc>https://turboconvert.io/excel-to-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/ppt-to-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/pdf-to-ppt</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/word-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Image Tools -->
+  <url><loc>https://turboconvert.io/jpg-to-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/png-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/compress-image</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/heic-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/webp-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/jpg-to-png</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Audio & Video Tools -->
+  <url><loc>https://turboconvert.io/mp4-to-mp3</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://turboconvert.io/wav-to-mp3</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/mp3-to-wav</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/mp3-to-mp4</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Blog -->
+  <url><loc>https://turboconvert.io/blog</loc><lastmod>2026-02-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-compress-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-merge-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/mp4-to-mp3</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/jpg-to-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-reduce-image-size</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-split-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/heic-to-jpg</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-rotate-pdf</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/how-to-convert-pdf-to-word</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/wav-to-mp3</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://turboconvert.io/blog/best-free-pdf-tools</loc><lastmod>2026-02-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://turboconvert.io/privacy</loc><lastmod>2026-02-23</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://turboconvert.io/terms</loc><lastmod>2026-02-23</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
+</urlset>

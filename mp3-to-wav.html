@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MP3 to WAV Online — Free, No Upload | TurboConvert</title>
+  <meta name="description" content="Convert MP3 audio to uncompressed WAV format for maximum quality. Runs in your browser — no upload, no account, no limits. Free MP3 to WAV converter."/>
+  <link rel="canonical" href="https://turboconvert.io/mp3-to-wav"/>
+  <meta property="og:title" content="MP3 to WAV Online — Free, No Upload | TurboConvert"/>
+  <meta property="og:description" content="Convert MP3 audio to uncompressed WAV format for maximum quality."/>
+  <meta property="og:url" content="https://turboconvert.io/mp3-to-wav"/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238323731269830" crossorigin="anonymous"></script>
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #f7f6f4;
+  --surface: #ffffff;
+  --ink:     #0f0f0e;
+  --mid:     #5c5b57;
+  --soft:    #a8a7a2;
+  --line:    #e4e3df;
+  --line2:   #ececea;
+  --hover:   #f0efe9;
+  --font-body:    'Geist', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --nav-h: 52px;
+  --max-wide: 1100px;
+  --max-tool: 720px;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: rgba(247,246,244,.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--line); }
+.logo { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; flex-shrink: 0; cursor: pointer; }
+.logo-mark svg { width: 22px; height: 22px; display: block; }
+.logo-text { font-family: var(--font-display); font-size: 15px; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
+.logo-text .dim { font-weight: 400; color: var(--mid); }
+.nav-links { display: flex; align-items: center; }
+.nav-links a { height: var(--nav-h); display: flex; align-items: center; padding: 0 12px; font-size: 13px; color: var(--mid); text-decoration: none; transition: color .15s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { font-size: 13px; font-weight: 500; color: var(--ink); text-decoration: none; padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); transition: border-color .15s; }
+.nav-cta:hover { border-color: var(--ink); }
+.back { font-size: 13px; color: var(--mid); text-decoration: none; transition: color .15s; cursor: pointer; }
+.back:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero { max-width: var(--max-wide); margin: 0 auto; padding: 40px 32px 32px; border-bottom: 1px solid var(--line); }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--mid); margin-bottom: 16px; opacity: 0; animation: fadeUp .5s .05s ease forwards; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+h1 { font-family: var(--font-display); font-size: clamp(28px,3.5vw,44px); font-weight: 600; line-height: 1.06; letter-spacing: -0.04em; color: var(--ink); opacity: 0; animation: fadeUp .5s .1s ease forwards; }
+
+/* ── SHIMMER ── */
+h1 em, .how-title em {
+  background: linear-gradient(100deg, #a8a7a2 0%, #a8a7a2 20%, #ffffff 38%, #0f0f0e 50%, #ffffff 62%, #a8a7a2 80%, #a8a7a2 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 150% center; }
+  100% { background-position: -50% center; }
+}
+
+/* ── DETECTOR (hero upload) ── */
+.detector { margin-top: 24px; opacity: 0; animation: fadeUp .5s .15s ease forwards; }
+.detector-zone {
+  border: 1.5px dashed var(--line);
+  border-radius: var(--r-lg);
+  padding: 22px 32px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--surface);
+  position: relative;
+  transition: border-color .25s, background .25s;
+  overflow: hidden;
+}
+.detector-zone::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(15,15,14,.04) 0%, transparent 70%);
+  opacity: 0; transition: opacity .3s;
+  pointer-events: none;
+}
+.detector-zone:hover { border-color: var(--ink); background: var(--hover); }
+.detector-zone:hover::before { opacity: 1; }
+.detector-zone:hover .det-icon-wrap { border-color: var(--ink); }
+
+/* Icône animée */
+.det-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+  position: relative;
+  transition: border-color .25s;
+}
+.det-icon-wrap::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  animation: pulseRing 2s ease-out infinite;
+}
+.det-icon-wrap::after {
+  content: '';
+  position: absolute; inset: -13px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  animation: pulseRing 2s ease-out infinite .4s;
+}
+@keyframes pulseRing {
+  0%   { opacity: .8; transform: scale(1); }
+  100% { opacity: 0;  transform: scale(1.25); }
+}
+.det-icon-wrap svg { animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  45%       { transform: translateY(-3px); }
+  65%       { transform: translateY(-1px); }
+}
+
+.det-title { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 2px; }
+.det-sub { font-size: 12px; color: var(--soft); font-weight: 300; margin-bottom: 12px; }
+
+/* Chips avec icônes */
+.det-formats { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-bottom: 0; }
+.det-chip {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.02em;
+  color: var(--mid); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 100px;
+  padding: 3px 10px 3px 7px;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: border-color .2s;
+}
+.det-chip-icon { font-size: 11px; line-height: 1; }
+.detector-zone:hover .det-chip { border-color: #c8c7c2; }
+
+/* Hero actions & stats */
+.hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 24px; opacity: 0; animation: fadeUp .5s .22s ease forwards; }
+.btn-dark { background: var(--ink); color: #fff; padding: 9px 18px; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; letter-spacing: -0.01em; text-decoration: none; transition: opacity .15s; white-space: nowrap; cursor: pointer; }
+.btn-dark:hover { opacity: .8; }
+.btn-text { font-size: 13px; color: var(--mid); text-decoration: none; transition: color .15s; white-space: nowrap; }
+.btn-text:hover { color: var(--ink); }
+.hero-stats { display: flex; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); opacity: 0; animation: fadeUp .5s .28s ease forwards; }
+.hero-stats > div { padding: 0 32px 0 0; margin-right: 32px; border-right: 1px solid var(--line); }
+.hero-stats > div:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.stat-n { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.04em; color: var(--ink); display: block; line-height: 1; }
+.stat-l { font-size: 11px; color: var(--soft); display: block; margin-top: 4px; }
+
+/* ── AD PLACEHOLDERS ── */
+.ad-placeholder {
+  background: #fffbf0; border: 1.5px dashed #e8c84a; border-radius: var(--r-md);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; text-align: center; font-size: 11px; font-weight: 500; color: #9a7c0a;
+}
+.ad-placeholder .ad-size { font-size: 10px; color: #b8962a; font-weight: 400; }
+.ad-placeholder .ad-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: #e8c84a; color: #5a4a00; padding: 2px 8px; border-radius: 100px; margin-bottom: 2px; }
+.ad-slot-hero { max-width: var(--max-wide); margin: 0 auto; padding: 12px 32px; }
+.ad-slot-hero .ad-placeholder { height: 90px; }
+
+/* ── TOOLS ── */
+.tools-wrap { max-width: var(--max-wide); margin: 0 auto; padding: 32px 32px 40px; }
+.tools-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.section-eyebrow { font-size: 10.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--soft); display: flex; align-items: center; gap: 16px; margin-bottom: 0; }
+.section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* Filter group */
+.filter-group { display: flex; gap: 2px; background: var(--line2); border: 1px solid var(--line); border-radius: 8px; padding: 3px; flex-wrap: wrap; }
+.filter-btn { font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: var(--mid); background: none; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; transition: background .15s, color .15s; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.filter-btn:hover { color: var(--ink); background: rgba(255,255,255,.6); }
+.filter-btn.active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.filter-count { font-size: 10.5px; font-weight: 400; color: var(--soft); }
+.filter-btn.active .filter-count { color: var(--mid); }
+
+.cat-block { margin-bottom: 32px; }
+.cat-label { font-family: var(--font-display); font-size: 15px; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 12px; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.tools-grid-flat { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.tool-card { background: var(--surface); padding: 20px; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 4px; position: relative; transition: background .15s; min-height: 100px; }
+.tool-card:hover { background: var(--hover); }
+.tool-card:hover .tc-arr { opacity: 1; transform: translate(0,0); }
+.tc-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.tc-icon { width: 26px; height: 26px; border-radius: 6px; background: var(--line2); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.tc-arr { font-size: 12px; color: var(--soft); opacity: 0; transform: translate(-3px,3px); transition: opacity .15s, transform .15s; }
+.tc-name { font-family: var(--font-display); font-size: 13.5px; font-weight: 600; letter-spacing: -0.02em; margin-top: 12px; line-height: 1.2; }
+.tc-desc { font-size: 11.5px; color: var(--mid); line-height: 1.45; font-weight: 300; }
+.tc-badge { font-size: 9.5px; font-weight: 500; letter-spacing: 0.03em; padding: 2px 7px; border-radius: 100px; width: fit-content; margin-top: 4px; }
+.b-hot { background: #fff0ee; color: #b83011; }
+.b-new { background: #f0fdf4; color: #15803d; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* ── WHY ── */
+.why-wrap { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.why-inner { max-width: var(--max-wide); margin: 0 auto; padding: 48px 32px; }
+.section-label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--soft); display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.why-title { font-family: var(--font-display); font-size: clamp(22px,3vw,34px); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 32px; margin-top: 12px; }
+.why-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.why-card { background: var(--bg); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.why-icon { font-size: 20px; }
+.why-card h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+.why-card p { font-size: 13px; color: var(--mid); line-height: 1.65; font-weight: 300; flex: 1; }
+.why-vs { font-size: 11px; color: var(--soft); border-top: 1px solid var(--line); padding-top: 12px; }
+
+/* ── HOW ── */
+.how-wrap { background: var(--bg); border-top: 1px solid var(--line); }
+.how-inner { max-width: var(--max-wide); margin: 0 auto; padding: 48px 32px 32px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: start; }
+.how-title { font-family: var(--font-display); font-size: clamp(22px,3vw,36px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
+.how-sub { margin-top: 12px; font-size: 13px; color: var(--mid); line-height: 1.7; font-weight: 300; }
+.steps { display: flex; flex-direction: column; }
+.step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.step:first-child { border-top: 1px solid var(--line); }
+.step-n { font-family: var(--font-display); font-size: 15px; font-weight: 300; color: var(--soft); font-style: italic; min-width: 18px; padding-top: 1px; }
+.step h4 { font-size: 13.5px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 3px; }
+.step p { font-size: 12px; color: var(--mid); line-height: 1.6; font-weight: 300; }
+
+/* ── TRUST PILL (dans le bloc How) ── */
+.trust-wrap { background: var(--bg); padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+.trust-inner { max-width: var(--max-wide); margin: 0 auto; padding: 0 32px; display: flex; justify-content: center; }
+.trust-pill {
+  display: inline-flex; align-items: center; flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 10px 20px;
+  gap: 0;
+}
+.trust-sep { width: 1px; height: 12px; background: var(--line); margin: 0 16px; flex-shrink: 0; }
+.trust-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--mid); white-space: nowrap; }
+.trust-item::before { content: '✓'; font-size: 10px; color: #22c55e; font-weight: 600; }
+
+/* ── FAQ ── */
+.faq-section { background: var(--bg); border-top: 1px solid var(--line); }
+.faq-wrap { max-width: 640px; margin: 0 auto; padding: 48px 32px; background: none; }
+.faq-wrap h2 { font-family: var(--font-display); font-size: clamp(20px,3vw,32px); font-weight: 600; letter-spacing: -0.04em; margin-bottom: 24px; }
+details { border-top: 1px solid var(--line); }
+details:last-child { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 14px 0; font-size: 13.5px; font-weight: 400; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+.si { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 10px; color: var(--soft); transition: all .15s; }
+details[open] .si { background: var(--ink); color: white; border-color: var(--ink); }
+details[open] .si::after { content: '−'; }
+.si::after { content: '+'; }
+details p { padding: 0 0 14px; font-size: 13px; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+/* ── AD SLOT 3 ── */
+.ad-slot-footer-wrap { background: var(--surface); border-top: 1px solid var(--line); }
+.ad-slot-footer-inner { max-width: var(--max-wide); margin: 0 auto; padding: 24px 32px; }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--line); background: var(--surface); padding: 24px 32px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+.footer-logo { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.footer-logo .logo-text { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--mid); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--ink); }
+footer p { font-size: 11.5px; color: var(--soft); }
+
+/* ══ TOOL PAGE ══ */
+.page { max-width: var(--max-tool); margin: 0 auto; padding: 40px 32px 80px; }
+.breadcrumb { font-size: 11.5px; color: var(--soft); margin-bottom: 24px; display: flex; align-items: center; gap: 5px; }
+.breadcrumb a { color: var(--soft); text-decoration: none; }
+.tool-eyebrow { font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); display: block; margin-bottom: 8px; }
+.page h1 { font-family: var(--font-display); font-size: clamp(22px,4vw,36px); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 8px; opacity: 1; animation: none; -webkit-text-fill-color: var(--ink); background: none; }
+.tool-desc { font-size: 14px; color: var(--mid); line-height: 1.65; font-weight: 300; max-width: 480px; }
+.ad-slot-tool-top { height: 90px; border-radius: var(--r-md); margin: 20px 0; }
+.upload-zone { border: 1.5px dashed var(--line); border-radius: var(--r-lg); padding: 40px 32px; text-align: center; cursor: pointer; background: var(--surface); position: relative; transition: border-color .2s, background .2s; }
+.upload-zone:hover, .upload-zone.over { border-color: var(--ink); background: var(--hover); }
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.upload-icon { width: 44px; height: 44px; border-radius: var(--r-md); background: var(--line2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 20px; margin: 0 auto 16px; }
+.upload-zone h2 { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
+.upload-zone p { font-size: 12px; color: var(--mid); font-weight: 300; }
+.file-row { display: none; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 20px; align-items: center; gap: 16px; flex-wrap: wrap; }
+.file-row.show { display: flex; }
+.file-icon { font-size: 20px; flex-shrink: 0; }
+.file-meta { flex: 1; min-width: 140px; }
+.file-name { font-size: 13.5px; font-weight: 500; word-break: break-all; letter-spacing: -0.01em; }
+.file-size { font-size: 11.5px; color: var(--soft); margin-top: 2px; }
+.convert-btn { background: var(--ink); color: white; padding: 9px 20px; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; border: none; cursor: pointer; white-space: nowrap; transition: opacity .15s; flex-shrink: 0; }
+.convert-btn:hover { opacity: .8; }
+.convert-btn:disabled { background: var(--line2); color: var(--soft); cursor: not-allowed; }
+.progress-wrap { display: none; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px; }
+.progress-wrap.show { display: block; }
+.progress-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--mid); margin-bottom: 8px; }
+.progress-track { height: 2px; background: var(--line); border-radius: 100px; overflow: hidden; }
+.progress-bar { height: 100%; background: var(--ink); border-radius: 100px; width: 0; transition: width .35s ease; }
+.dl-wrap { display: none; margin-top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 32px; text-align: center; }
+.dl-wrap.show { display: block; }
+.dl-check { font-size: 28px; line-height: 1; margin-bottom: 12px; }
+.dl-wrap h3 { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; }
+.dl-wrap p { font-size: 12.5px; color: var(--mid); margin-bottom: 20px; }
+.dl-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: white; padding: 10px 24px; border-radius: var(--r-sm); font-size: 13.5px; font-weight: 500; text-decoration: none; transition: opacity .15s; }
+.dl-btn:hover { opacity: .8; }
+.again { display: block; margin-top: 16px; font-size: 12px; color: var(--soft); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
+.again:hover { color: var(--ink); }
+.ad-slot-tool-mid { height: 90px; border-radius: var(--r-md); margin-top: 24px; }
+.features { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; margin-top: 32px; }
+.feat { background: var(--surface); padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+.feat-icon { font-size: 18px; }
+.feat h4 { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; }
+.feat p { font-size: 11.5px; color: var(--mid); line-height: 1.5; font-weight: 300; }
+.content { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+.content h2 { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
+.content p { font-size: 13px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+.faq { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.faq h2 { font-family: var(--font-display); font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+.related { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.related h3 { font-size: 13px; font-weight: 500; color: var(--soft); margin-bottom: 16px; }
+.related-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.rl { font-size: 12.5px; color: var(--mid); text-decoration: none; padding: 5px 12px; border: 1px solid var(--line); border-radius: 100px; transition: border-color .15s, color .15s; }
+.rl:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero, .tools-wrap, .why-inner, .how-inner, .faq-wrap, footer { padding-left: 20px; padding-right: 20px; }
+  .ad-slot-hero { padding-left: 20px; padding-right: 20px; }
+  .how-inner { grid-template-columns: 1fr; gap: 32px; }
+  .features { grid-template-columns: 1fr 1fr; }
+  .page { padding: 24px 20px 64px; }
+  .tools-grid, .tools-grid-flat { grid-template-columns: repeat(2,1fr); } .tools-grid .tool-card:empty { display:none; }
+  .tools-header { flex-direction: column; align-items: flex-start; }
+  .filter-group { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .trust-pill { border-radius: 14px; padding: 12px 16px; }
+  .trust-sep { display: none; }
+  .trust-item { width: 50%; }
+}
+</style>
+  <meta property="og:image" content="https://turboconvert.io/og-image.png"/>
+</head>
+<body><nav>
+  <a href="/" class="logo">
+    <div class="logo-mark"><svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f0f0e"/><rect x="5" y="8" width="18" height="3" rx="1.5" fill="white"/><rect x="11.5" y="11" width="3" height="7" rx="1.5" fill="white"/><path d="M14.5 17.5L18 21M18 21H14.5M18 21V17.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-text">Turbo<span class="dim">Convert</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="/#tools">Tools</a>
+    <a href="/#how">How it works</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/blog">Blog</a>
+  </div>
+  <a href="/" class="nav-cta">All tools →</a>
+</nav>
+
+<div class="page">
+  <div class="breadcrumb">
+    <a href="/">Home</a> ›
+    <a href="/#tools">Audio & Video</a> ›
+    <span style="color:var(--ink)">MP3 to WAV</span>
+  </div>
+
+  <span class="tool-eyebrow">Audio & Video</span>
+  <h1>MP3 to WAV Online</h1>
+  <p class="tool-desc">Convert MP3 audio to uncompressed WAV format for maximum quality.</p>
+
+  <div style="margin:20px 0;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;"/>
+    <div class="upload-icon">🔊</div>
+    <h2>Drop your MP3 file here</h2>
+    <p>or click to browse · Max 500 MB</p>
+  </div>
+
+  <div class="file-row" id="fileRow">
+    <span class="file-icon">🔊</span>
+    <div class="file-meta">
+      <div class="file-name" id="fileName"></div>
+      <div class="file-size" id="fileSize"></div>
+    </div>
+    <button class="convert-btn" id="convertBtn">MP3 to WAV →</button>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-row"><span id="progressLabel">Processing…</span><span id="progressPct">0%</span></div>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <div class="dl-wrap" id="dlWrap">
+    <div class="dl-check">✓</div>
+    <h3>Your file is ready.</h3>
+    <p>Conversion complete — click below to download your WAV file.</p>
+    <a href="#" class="dl-btn" id="dlBtn">⬇ Download WAV</a>
+    <span class="again" id="again">Convert another file</span>
+  </div>
+
+  <div id="adAfterDownload" style="display:none;margin-top:24px;"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+  <div class="features">
+    <div class="feat"><div class="feat-icon">⚡</div><h4>Instant conversion</h4><p>No waiting for servers. Starts immediately in your browser.</p></div>
+    <div class="feat"><div class="feat-icon">🔒</div><h4>100% private</h4><p>Your file never leaves your device.</p></div>
+    <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no paywall, no limits.</p></div>
+    <div class="feat"><div class="feat-icon">📱</div><h4>Any device</h4><p>Works on desktop, tablet and mobile.</p></div>
+    <div class="feat"><div class="feat-icon">🎯</div><h4>High quality</h4><p>Best-in-class output quality.</p></div>
+    <div class="feat"><div class="feat-icon">🌐</div><h4>No install</h4><p>Works directly in your browser.</p></div>
+  </div>
+
+  <div class="faq" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--line);">
+    <h2>Questions about MP3 to WAV</h2>
+    <details><summary>Is this tool really free?<div class="si"></div></summary><p>Yes, completely free. No paid plan, no daily limits. Supported by non-intrusive ads.</p></details>
+    <details><summary>Do you store my files?<div class="si"></div></summary><p>No. Your file is processed entirely in your browser and never uploaded to any server.</p></details>
+    <details><summary>What is the maximum file size?<div class="si"></div></summary><p>Up to 500 MB. No artificial limits beyond what your browser can handle.</p></details>
+    <details><summary>Do I need to create an account?<div class="si"></div></summary><p>Never. Just drop your file and convert. No email or signup required.</p></details>
+  </div>
+
+  <div class="related">
+    <h3>Related tools</h3>
+    <div class="related-links"><a href="/wav-to-mp3" class="rl">🎵 WAV to MP3</a><a href="/mp4-to-mp3" class="rl">🎬 MP4 to MP3</a><a href="/mp3-to-mp4" class="rl">▶️ MP3 to MP4</a></div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">
+    <div class="logo-mark" style="width:18px;height:18px;"><svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#0f0f0e"/><rect x="5" y="8" width="18" height="3" rx="1.5" fill="white"/><rect x="11.5" y="11" width="3" height="7" rx="1.5" fill="white"/><path d="M14.5 17.5L18 21M18 21H14.5M18 21V17.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="logo-text">Turbo<span class="dim">Convert</span></div>
+  </a>
+  <div class="footer-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/blog">Blog</a></div>
+  <p>© 2025 TurboConvert.io</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "MP3 to WAV Converter",
+  "description": "Convert MP3 to uncompressed WAV for free. Ideal for audio editors and DAWs. Runs in your browser \u2014 no upload, no account, no limits.",
+  "url": "https://turboconvert.io/mp3-to-wav",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "TurboConvert",
+    "url": "https://turboconvert.io"
+  }
+}
+
+
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert MP3 to WAV for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TurboConvert MP3 to WAV converts your MP3 to an uncompressed WAV file directly in your browser \u2014 ideal for Audacity, GarageBand, or Pro Tools. No upload, no account."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why would I need to convert MP3 to WAV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Some audio editors and DAWs require uncompressed WAV files. TurboConvert MP3 to WAV produces a lossless WAV from your MP3 for free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best free MP3 to WAV converter with no account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TurboConvert \u2014 no signup required, no daily limits, processes entirely in your browser."
+      }
+    }
+  ]
+}
+
+
+const { createFFmpeg, fetchFile } = FFmpeg;
+const ffmpeg = createFFmpeg({
+  log: false,
+  corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
+});
+
+const zone=document.getElementById('zone'),inp=document.getElementById('inp'),
+  frow=document.getElementById('frow'),fname=document.getElementById('fname'),fsize=document.getElementById('fsize'),
+  cbtn=document.getElementById('cbtn'),prog=document.getElementById('prog'),
+  pbar=document.getElementById('pbar'),ppct=document.getElementById('ppct'),plabel=document.getElementById('plabel'),
+  dl=document.getElementById('dl'),err=document.getElementById('err'),
+  dlbtn=document.getElementById('dlbtn'),again=document.getElementById('again');
+let file=null,blob=null,outname='';
+
+const fmt=b=>b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(1)+' MB';
+function setP(p,l){pbar.style.width=p+'%';ppct.textContent=p+'%';plabel.textContent=l;}
+function showErr(m){err.innerHTML=m;err.classList.add('show');prog.classList.remove('show');cbtn.disabled=false;}
+function loadFile(f){
+  if(!f)return;
+  file=f;fname.textContent=f.name;fsize.textContent=fmt(f.size);
+  frow.classList.add('show');dl.classList.remove('show');err.classList.remove('show');
+  prog.classList.remove('show');pbar.style.width='0';cbtn.disabled=false;
+}
+inp.addEventListener('change',e=>loadFile(e.target.files[0]));
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
+zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');loadFile(e.dataTransfer.files[0]);});
+
+cbtn.addEventListener('click',async()=>{
+  if(!file)return;
+  cbtn.disabled=true;prog.classList.add('show');err.classList.remove('show');dl.classList.remove('show');
+  try{
+    setP(5,'Loading converter…');
+    if(!ffmpeg.isLoaded()) await ffmpeg.load();
+    setP(25,'Reading file…');
+    ffmpeg.FS('writeFile','input.mp3',await fetchFile(file));
+    setP(35,'Extracting audio…');
+    ffmpeg.setProgress(({ratio})=>{ if(ratio>0) setP(Math.round(35+ratio*55),'Converting…'); });
+    await ffmpeg.run('-i','input.mp3','output.wav');
+    setP(93,'Preparing download…');
+    const data=ffmpeg.FS('readFile','output.mp3');
+    blob=new Blob([data.buffer],{type:'audio/wav'});
+    outname=file.name.replace(/.[^.]+$/i,'.wav'));
+    ffmpeg.FS('unlink','input.mp3');
+    ffmpeg.FS('unlink','output.wav');
+    setP(100,'Done!');
+    setTimeout(()=>{prog.classList.remove('show');dl.classList.add('show');},400);
+  }catch(e){showErr('⚠️ '+(e.message||'Something went wrong. Please try again.'));}
+});
+
+dlbtn.addEventListener('click',()=>{
+  if(!blob)return;
+  const u=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=u;a.download=outname;a.click();
+  setTimeout(()=>URL.revokeObjectURL(u),1000);
+});
+again.addEventListener('click',()=>{
+  frow.classList.remove('show');dl.classList.remove('show');err.classList.remove('show');
+  inp.value='';file=null;blob=null;pbar.style.width='0';cbtn.disabled=false;
+});
+
+// ── Pré-chargement depuis la homepage ────────────────────────────────────────
+(function() {
+  function idbRead(cb) {
+    try {
+      var req = indexedDB.open('turboconvert', 1);
+      req.onupgradeneeded = function(e) { e.target.result.createObjectStore('pending_file'); };
+      req.onsuccess = function(e) {
+        var db = e.target.result;
+        var tx = db.transaction('pending_file', 'readwrite');
+        var store = tx.objectStore('pending_file');
+        var getReq = store.get('file');
+        getReq.onsuccess = function() {
+          var f = getReq.result;
+          store.delete('file');
+          db.close();
+          if (f && typeof loadFile === 'function') {
+            loadFile(f);
+            var z = document.getElementById('zone');
+            if (z) {
+              z.style.transition = 'border-color 0.4s';
+              z.style.borderColor = 'var(--ink)';
+              setTimeout(function() { z.style.borderColor = ''; }, 1200);
+            }
+          }
+        };
+      };
+    } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { idbRead(); });
+  } else {
+    idbRead();
+  }
+})();
+</script>
+<script src="/adsense-guard.js"></script>
+</body></html>
