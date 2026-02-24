@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+// Extension error guard — prevents browser extensions from breaking the page
+window.addEventListener('error', function(e) {
+  if (e && e.message && (
+    e.message.includes('message channel closed') ||
+    e.message.includes('listener indicated an asynchronous') ||
+    e.message.includes('Extension context invalidated') ||
+    e.message.includes('chrome-extension') ||
+    e.message.includes('moz-extension')
+  )) { e.stopImmediatePropagation(); e.preventDefault(); return true; }
+});
+window.addEventListener('unhandledrejection', function(e) {
+  if (e && e.reason && e.reason.message && (
+    e.reason.message.includes('message channel closed') ||
+    e.reason.message.includes('listener indicated an asynchronous') ||
+    e.reason.message.includes('Extension context invalidated')
+  )) { e.stopImmediatePropagation(); e.preventDefault(); }
+});
+</script>
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PNG to JPG Online — Free, No Upload | TurboConvert</title>
