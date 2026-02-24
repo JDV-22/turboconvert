@@ -51,26 +51,16 @@ nav { position: sticky; top: 0; z-index: 100; height: var(--nav-h); display: fle
 
 /* ── HERO ── */
 .hero { max-width: var(--max-wide); margin: 0 auto; padding: 40px 32px 32px; border-bottom: 1px solid var(--line); }
-.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--mid); margin-bottom: 16px; opacity: 0; animation: fadeUp .5s .05s ease forwards; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--mid); margin-bottom: 16px;  }
 .dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
-h1 { font-family: var(--font-display); font-size: clamp(28px,3.5vw,44px); font-weight: 600; line-height: 1.06; letter-spacing: -0.04em; color: var(--ink); opacity: 0; animation: fadeUp .5s .1s ease forwards; }
+h1 { font-family: var(--font-display); font-size: clamp(28px,3.5vw,44px); font-weight: 600; line-height: 1.06; letter-spacing: -0.04em; color: var(--ink);  }
 
-/* ── SHIMMER ── */
-h1 em, .how-title em {
-  background: linear-gradient(100deg, #a8a7a2 0%, #a8a7a2 20%, #ffffff 38%, #0f0f0e 50%, #ffffff 62%, #a8a7a2 80%, #a8a7a2 100%);
-  background-size: 250% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 2.4s ease-in-out infinite;
-}
-@keyframes shimmer {
-  0%   { background-position: 150% center; }
+.hero h1 em, .how-title em { font-style: italic; color: var(--mid); }
   100% { background-position: -50% center; }
 }
 
 /* ── DETECTOR (hero upload) ── */
-.detector { margin-top: 24px; opacity: 0; animation: fadeUp .5s .15s ease forwards; }
+.detector { margin-top: 24px;  }
 .detector-zone {
   border: 1.5px dashed var(--line);
   border-radius: var(--r-lg);
@@ -146,12 +136,12 @@ h1 em, .how-title em {
 .detector-zone:hover .det-chip { border-color: #c8c7c2; }
 
 /* Hero actions & stats */
-.hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 24px; opacity: 0; animation: fadeUp .5s .22s ease forwards; }
+.hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 24px;  }
 .btn-dark { background: var(--ink); color: #fff; padding: 9px 18px; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; letter-spacing: -0.01em; text-decoration: none; transition: opacity .15s; white-space: nowrap; cursor: pointer; }
 .btn-dark:hover { opacity: .8; }
 .btn-text { font-size: 13px; color: var(--mid); text-decoration: none; transition: color .15s; white-space: nowrap; }
 .btn-text:hover { color: var(--ink); }
-.hero-stats { display: flex; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); opacity: 0; animation: fadeUp .5s .28s ease forwards; }
+.hero-stats { display: flex; flex-wrap: wrap; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line);  }
 .hero-stats > div { padding: 0 32px 0 0; margin-right: 32px; border-right: 1px solid var(--line); }
 .hero-stats > div:last-child { border-right: none; padding-right: 0; margin-right: 0; }
 .stat-n { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.04em; color: var(--ink); display: block; line-height: 1; }
@@ -197,7 +187,7 @@ h1 em, .how-title em {
 .tc-badge { font-size: 9.5px; font-weight: 500; letter-spacing: 0.03em; padding: 2px 7px; border-radius: 100px; width: fit-content; margin-top: 4px; }
 .b-hot { background: #fff0ee; color: #b83011; }
 .b-new { background: #f0fdf4; color: #15803d; }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+ to { opacity:1; } }
 
 /* ── WHY ── */
 .why-wrap { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -321,7 +311,7 @@ footer p { font-size: 11.5px; color: var(--soft); }
 .rl:hover { border-color: var(--ink); color: var(--ink); }
 
 /* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+ to { opacity:1; transform:translateY(0); } }
 
 
 
