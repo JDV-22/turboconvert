@@ -1,0 +1,12 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#f7f6f4"/>
+  <rect x="80" y="80" width="44" height="44" rx="10" fill="#0f0f0e"/>
+  <rect x="88" y="94" width="28" height="5" rx="2.5" fill="white"/>
+  <rect x="101" y="99" width="5" height="11" rx="2.5" fill="white"/>
+  <text x="148" y="115" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#0f0f0e">TurboConvert</text>
+  <text x="80" y="320" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#0f0f0e">Convert any file,</text>
+  <text x="80" y="410" font-family="Georgia, serif" font-size="72" font-style="italic" fill="#5c5b57">privately.</text>
+  <text x="80" y="500" font-family="Arial, sans-serif" font-size="32" fill="#5c5b57">Free · No upload · No account · 22+ tools</text>
+  <rect x="80" y="545" width="200" height="48" rx="8" fill="#0f0f0e"/>
+  <text x="102" y="576" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">Try for free →</text>
+</svg>

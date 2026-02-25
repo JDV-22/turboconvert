@@ -525,9 +525,7 @@ def test_sitemap_no_extra_urls(files, r):
 
 
 def test_adsense_guard_present(files, r):
-    """T23 — désactivé (adsense-guard retiré car causait display:none sur body)"""
-    r.ok(); return
-    
+    """T23 — adsense-guard.js inclus sur toutes les pages avec AdSense."""
     for name, c in sorted(files.items()):
         if not name.endswith('.html'): continue
         if 'adsbygoogle' not in c: continue
