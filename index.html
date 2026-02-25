@@ -1,34 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>(function(){var s=document.createElement("style");s.textContent="body{display:block!important;opacity:1!important}";document.head.appendChild(s);var o=new MutationObserver(function(m){m.forEach(function(r){if(r.target===document.body&&document.body.style.display==="none"){document.body.style.cssText=document.body.style.cssText.replace(/display\s*:\s*none\s*;?/gi,"");}});});document.addEventListener("DOMContentLoaded",function(){o.observe(document.body,{attributes:true,attributeFilter:["style"]});});})();</script>
-<script>
-// Extension error guard — prevents browser extensions from breaking the page
-window.addEventListener('error', function(e) {
-  if (e && e.message && (
-    e.message.includes('message channel closed') ||
-    e.message.includes('listener indicated an asynchronous') ||
-    e.message.includes('Extension context invalidated') ||
-    e.message.includes('chrome-extension') ||
-    e.message.includes('moz-extension')
-  )) { e.stopImmediatePropagation(); e.preventDefault(); return true; }
-});
-window.addEventListener('unhandledrejection', function(e) {
-  if (e && e.reason && e.reason.message && (
-    e.reason.message.includes('message channel closed') ||
-    e.reason.message.includes('listener indicated an asynchronous') ||
-    e.reason.message.includes('Extension context invalidated')
-  )) { e.stopImmediatePropagation(); e.preventDefault(); }
-});
-</script>
-
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TurboConvert — Free File Converter | PDF, Image, Audio & Video</title>
-  <meta name="description" content="Free file conversion tools running entirely in your browser. 22+ tools: PDF, images, audio, video. No upload, no account, no limits."/>
+  <meta name="description" content="Free file conversion tools running entirely in your browser. 22+ tools for PDF, images, audio and video. No upload, no account, no limits — forever free."/>
   <link rel="canonical" href="https://turboconvert.io/"/>
   <meta property="og:title" content="TurboConvert — Free File Converter | PDF, Image, Audio & Video"/>
-  <meta property="og:description" content="Free file conversion tools running entirely in your browser. 22+ tools: PDF, images, audio, video. No upload, no account, no limits."/>
+  <meta property="og:description" content="Free file conversion tools running entirely in your browser. 22+ tools for PDF, images, audio and video. No upload, no account, no limits — forever free."/>
   <meta property="og:url" content="https://turboconvert.io/"/>
   <meta property="og:type" content="website"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
@@ -76,8 +55,10 @@ nav { position: sticky; top: 0; z-index: 100; height: var(--nav-h); display: fle
 .dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
 h1 { font-family: var(--font-display); font-size: clamp(28px,3.5vw,44px); font-weight: 600; line-height: 1.06; letter-spacing: -0.04em; color: var(--ink);  }
 
-.hero h1 em, .how-title em { font-style: italic; color: var(--mid); }
-  100% { background-position: -50% center; }
+/* ── SHIMMER ── */
+.hero h1 em, .how-title em {
+  font-style: italic;
+  color: var(--mid);
 }
 
 /* ── DETECTOR (hero upload) ── */
@@ -208,7 +189,7 @@ h1 { font-family: var(--font-display); font-size: clamp(28px,3.5vw,44px); font-w
 .tc-badge { font-size: 9.5px; font-weight: 500; letter-spacing: 0.03em; padding: 2px 7px; border-radius: 100px; width: fit-content; margin-top: 4px; }
 .b-hot { background: #fff0ee; color: #b83011; }
 .b-new { background: #f0fdf4; color: #15803d; }
- to { opacity:1; } }
+
 
 /* ── WHY ── */
 .why-wrap { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -332,7 +313,7 @@ footer p { font-size: 11.5px; color: var(--soft); }
 .rl:hover { border-color: var(--ink); color: var(--ink); }
 
 /* ── ANIMATIONS ── */
- to { opacity:1; transform:translateY(0); } }
+
 
 
 
@@ -367,8 +348,9 @@ footer p { font-size: 11.5px; color: var(--soft); }
 
 </style>
   <meta property="og:image" content="https://turboconvert.io/og-image.png"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "TurboConvert", "url": "https://turboconvert.io", "description": "Free file conversion tools running entirely in your browser."}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is TurboConvert really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free. No paid plan, no daily limits, no watermarks."}}, {"@type": "Question", "name": "Do you store my files?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your files never leave your device. All conversion happens in your browser."}}, {"@type": "Question", "name": "What is the maximum file size?", "acceptedAnswer": {"@type": "Answer", "text": "100 MB for most tools, 500 MB for audio and video."}}, {"@type": "Question", "name": "Do I need an account?", "acceptedAnswer": {"@type": "Answer", "text": "Never. Just drop your file and convert."}}]}</script>
+  <meta name="twitter:image" content="https://turboconvert.io/og-image.png"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "TurboConvert", "url": "https://turboconvert.io", "description": "Free file conversion tools running entirely in your browser. No upload, no account, no limits."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is TurboConvert really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free. No paid plan, no daily limits, no watermarks."}}, {"@type": "Question", "name": "Do you store my files?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your files never leave your device. All conversion happens locally in your browser using WebAssembly."}}, {"@type": "Question", "name": "What is the maximum file size?", "acceptedAnswer": {"@type": "Answer", "text": "100 MB for most tools, 500 MB for audio and video."}}, {"@type": "Question", "name": "Do I need to create an account?", "acceptedAnswer": {"@type": "Answer", "text": "Never. Just drop your file and convert. No email, no signup required."}}]}</script>
 </head>
 <body><nav>
   <a href="/" class="logo">
@@ -634,5 +616,5 @@ dZone.addEventListener('drop', function(e) {
   if (e.dataTransfer.files[0]) detectFile(e.dataTransfer.files[0]);
 });
 </script>
-<script src="/adsense-guard.js"></script>
+<script src="/schema-inject.js"></script>
 </body></html>
