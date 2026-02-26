@@ -24,10 +24,6 @@
     h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:600;line-height:1.1;letter-spacing:-.03em;margin-bottom:.75rem}
     .desc{font-size:.9rem;color:var(--mid);line-height:1.7;font-weight:300;max-width:520px}
     .ad{height:90px;border-radius:8px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--soft);margin:2rem 0}
-    .qbar{display:flex;align-items:center;justify-content:space-between;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:.65rem 1rem;margin-bottom:1rem;font-size:.75rem;color:var(--mid)}
-    .qdots{display:flex;gap:.3rem}
-    .qdot{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .2s}
-    .qdot.used{background:var(--ink)}
     .zone{border:1.5px dashed var(--line);border-radius:12px;padding:2.75rem 2rem;text-align:center;cursor:pointer;background:var(--white);position:relative;transition:border-color .2s,background .2s}
     .zone:hover,.zone.over{border-color:var(--ink);background:var(--bg)}
     .zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -181,17 +177,17 @@
   <h1>PDF to Word Converter</h1>
   <p class="desc">Convert any PDF into a fully editable Word document (DOCX) — free, fast, and secure. No account needed.</p>
   <!-- AdSense: before tool -->
-<div class="qbar"><span id="qtext">Loading…</span><div class="qdots"><div class="qdot" id="d1"></div><div class="qdot" id="d2"></div><div class="qdot" id="d3"></div></div></div>
+
 <div style="max-width:728px;margin:16px auto;text-align:center;">
   <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;max-width:100%"
     data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="horizontal"
     data-full-width-responsive="true"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-  <div class="zone" id="zone"><input type="file" id="inp" accept=".pdf"><div class="zi">📄</div><h2>Drop your PDF here</h2><p>or click to browse · Max 100 MB</p><div class="zcta">Select file</div></div>
-  <div class="frow" id="frow"><span style="font-size:1.3rem">📄</span><div class="fmeta"><div class="fname" id="fname">—</div><div class="fsize" id="fsize">—</div></div><button class="cbtn" id="cbtn">Convert to Word →</button></div>
-  <div class="prog" id="prog"><div class="prow"><span id="plabel">Uploading…</span><span id="ppct">0%</span></div><div class="ptrack"><div class="pbar" id="pbar"></div></div></div>
-  <div class="err" id="err"></div>
+  <div class="zone" id="zone"><input type="file" id="inp" accept=".pdf"><div class="zi">📄</div><h2>Drop your PDF here</h2><p>or click to browse · Max 100 MB</p><div class="zcta">Select file
+  <div class="frow" id="frow"><span style="font-size:1.3rem">📄</span><div class="fmeta"><div class="fname" id="fname">—</div><div class="fsize" id="fsize">—<button class="cbtn" id="cbtn">Convert to Word →</button></div>
+  <div class="prog" id="prog"><div class="prow"><span id="plabel">Uploading…</span><span id="ppct">0%</span></div><div class="ptrack">
+  
   <div class="dl" id="dl"><div class="dlck">✓</div><h3>Your file is ready.</h3><p>Your Word document is ready to download.</p><button class="dlbtn" id="dlbtn">⬇ Download DOCX</button><span class="again" id="again">Convert another file</span></div>
   <div class="qlimit" id="qlimit"><h3>Daily limit reached 👋</h3><p>You've used your 3 free conversions for today.<br>Come back tomorrow for 3 more — completely free.</p><span class="qreset" id="qreset"></span></div>
   <div class="feats">
@@ -200,8 +196,7 @@
     <div class="feat"><div class="feat-i">🗑️</div><h4>Auto-deleted</h4><p>After processing.</p></div>
     <div class="feat"><div class="feat-i">📱</div><h4>Any device</h4><p>Desktop or mobile.</p></div>
     <div class="feat"><div class="feat-i">🆓</div><h4>Free</h4><p>No signup needed.</p></div>
-    <div class="feat"><div class="feat-i">🔍</div><h4>OCR</h4><p>Works on scans.</p></div>
-  </div>
+    <div class="feat"><div class="feat-i">🔍</div><h4>OCR</h4><p>Works on scans.</p>
 <div style="display:flex;justify-content:center;margin:24px 0;">
   <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
     data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
@@ -209,13 +204,13 @@
 </div>
   <div class="body"><h2>Why convert PDF to Word?</h2><p>PDFs are great for sharing but not for editing. Converting to Word gives you full control — edit text, update tables, change formatting, and save in a format compatible with Microsoft Office and Google Docs.</p></div>
   <div class="faq"><h2>Questions</h2>
-    <details open><summary>How do I convert PDF to Word for free? <div class="si"></div></summary><p>Upload your PDF above, click Convert, and download your DOCX. Free, no account required.</p></details>
-    <details><summary>Will formatting be preserved? <div class="si"></div></summary><p>Yes. Fonts, tables, columns and images are preserved. Complex layouts may need minor adjustments.</p></details>
-    <details><summary>Does it work on scanned PDFs? <div class="si"></div></summary><p>Yes — OCR recognises text in scanned PDFs and produces fully editable documents.</p></details>
-    <details><summary>How many conversions per day? <div class="si"></div></summary><p>3 free conversions per day. Resets every 24 hours.</p></details>
-    <details><summary>Are my files safe? <div class="si"></div></summary><p>SSL encryption on all transfers. Files deleted immediately after conversion.</p></details>
+    <details open><summary>How do I convert PDF to Word for free? </summary><p>Upload your PDF above, click Convert, and download your DOCX. Free, no account required.</p></details>
+    <details><summary>Will formatting be preserved? </summary><p>Yes. Fonts, tables, columns and images are preserved. Complex layouts may need minor adjustments.</p></details>
+    <details><summary>Does it work on scanned PDFs? </summary><p>Yes — OCR recognises text in scanned PDFs and produces fully editable documents.</p></details>
+    <details><summary>How many conversions per day? </summary><p>3 free conversions per day. Resets every 24 hours.</p></details>
+    <details><summary>Are my files safe? </summary><p>SSL encryption on all transfers. Files deleted immediately after conversion.</p></details>
   </div>
-  <div class="rel"><h3>Related tools</h3><div class="rlinks"><a href="/word-to-pdf" class="rl">Word to PDF</a><a href="/compress-pdf" class="rl">Compress PDF</a><a href="/pdf-to-jpg" class="rl">PDF to JPG</a><a href="/merge-pdf" class="rl">Merge PDF</a><a href="/split-pdf" class="rl">Split PDF</a><a href="/pdf-to-excel" class="rl">PDF to Excel</a></div></div>
+  <div class="rel"><h3>Related tools</h3><div class="rlinks"><a href="/word-to-pdf" class="rl">Word to PDF</a><a href="/compress-pdf" class="rl">Compress PDF</a><a href="/pdf-to-jpg" class="rl">PDF to JPG</a><a href="/merge-pdf" class="rl">Merge PDF</a><a href="/split-pdf" class="rl">Split PDF</a><a href="/pdf-to-excel" class="rl">PDF to Excel</a>
 </div>
 <div style="display:flex;justify-content:center;margin:24px 0;">
   <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"

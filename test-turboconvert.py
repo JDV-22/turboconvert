@@ -588,6 +588,25 @@ def test_input_file_hidden(files, r):
 # RUNNER
 # ══════════════════════════════════════════════════════════════════════
 
+def test_no_zombie_ui(files, r):
+    """T27 — Pas de blocs UI zombies (quota bar, loading spinner orphelin)."""
+    for name, c in sorted(files.items()):
+        if not name.endswith('.html'): continue
+        errs = []
+        # qbar/qdot : vestiges du systeme de quota journalier
+        if re.search(r'class=["\'"]q(?:bar|dot|dots|text)["\']', c):
+            errs.append('bloc quota UI zombie (qbar/qdot) detecte')
+        # Loading orphelin — OK seulement dans progressLabel/plabel
+        loading_in_label = re.search(r'id=["\'"](?:progressLabel|plabel)["\'][^>]*>[^<]*Loading', c)
+        loading_orphan = re.search(r'>Loading(?:\.\.\.|…)<', c)
+        if loading_orphan and not loading_in_label:
+            errs.append('texte "Loading…" orphelin visible au chargement')
+        if errs:
+            for e in errs: r.fail(name, e)
+        else:
+            r.ok()
+
+
 def run(path_arg):
     print(f'\n📂 Chargement : {path_arg}')
     files = load_site(path_arg)
@@ -623,6 +642,7 @@ def run(path_arg):
     test_no_double_upload_trigger(files, r)
     test_blog_canonical_correct(files, r)
     test_input_file_hidden(files, r)
+    test_no_zombie_ui(files, r)
 
     success = r.report()
     return 0 if success else 1
