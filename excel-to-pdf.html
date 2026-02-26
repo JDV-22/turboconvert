@@ -260,7 +260,6 @@
     fileRow.classList.add('show');dlWrap.classList.remove('show');convertBtn.disabled=false;
   }
   input.addEventListener('change',e=>load(e.target.files[0]));
-  zone.addEventListener('click',()=>input.click());
   zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
   zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
   zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');load(e.dataTransfer.files[0]);});
