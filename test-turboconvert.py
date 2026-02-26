@@ -190,7 +190,7 @@ def test_real_conversion_logic(files, r):
     """T5 — Chaque page outil contient de la vraie logique de conversion (pas un faux loader)."""
     CONVERSION_SIGNALS = [
         r'FileReader', r'canvas\.', r'pdf-lib', r'pdfjsLib', r'mammoth',
-        r'FFmpeg', r'ffmpeg', r'createFFmpeg', r'UTIF\b', r'heic2any',
+        r'FFmpeg', r'ffmpeg', r'createFFmpeg', r'UTIF\b', r'heic2any', r'libheif',
         r'ImageMagick', r'Ghostscript', r'drawImage', r'toBlob', r'toDataURL',
         r'getDocument', r'renderPage', r'PDFDocument',
         r'convertapi', r'formData', r'fetch\(', r'XMLHttpRequest', r'Worker',

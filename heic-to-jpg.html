@@ -258,41 +258,85 @@
   zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
   zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');load(e.dataTransfer.files[0]);});
 
-  convertBtn.addEventListener('click',async()=>{
-    if(!currentFile)return;
-    convertBtn.disabled=true;
+  // Charge un script dynamiquement
+  function loadScript(src){
+    return new Promise((res,rej)=>{
+      if(document.querySelector(`script[src="${src}"]`)){res();return;}
+      const s=document.createElement('script');
+      s.src=src; s.onload=res; s.onerror=rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  // Conversion via libheif-js (supporte HEIC/HEIF modernes : heix, MiHB, Live Photo, etc.)
+  async function convertWithLibheif(file){
+    await loadScript('https://cdn.jsdelivr.net/npm/libheif-js@1.17.1/libheif-bundle.js');
+    const libheif = window.libheif ? window.libheif() : LibHeif();
+    const decoder = new libheif.HeifDecoder();
+    const ab = await file.arrayBuffer();
+    const data = decoder.decode(new Uint8Array(ab));
+    if(!data || !data.length) throw new Error('No image decoded');
+    const image = data[0];
+    const w = image.get_width(), h = image.get_height();
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    const imgData = ctx.createImageData(w, h);
+    await new Promise((res, rej) => image.display(imgData, (result) => {
+      if(!result) rej(new Error('Display failed')); else res();
+    }));
+    ctx.putImageData(imgData, 0, 0);
+    return new Promise(res => canvas.toBlob(res, 'image/jpeg', 0.92));
+  }
+
+  // Conversion via heic2any (fallback, compatibilité large)
+  async function convertWithHeic2any(file){
+    await loadScript('https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js');
+    const result = await heic2any({blob: file, toType: 'image/jpeg', quality: 0.92});
+    return Array.isArray(result) ? result[0] : result;
+  }
+
+  convertBtn.addEventListener('click', async () => {
+    if(!currentFile) return;
+    convertBtn.disabled = true;
     progressWrap.classList.add('show');
-    progressLabel.textContent='Loading heic2any library…';
-    progressBar.style.width='20%'; progressPct.textContent='20%';
+    progressLabel.textContent = 'Loading converter…';
+    progressBar.style.width = '15%'; progressPct.textContent = '15%';
 
-    try{
-      // heic2any handles HEIC/HEIF natively in browser
-      if(typeof heic2any==='undefined'){
-        progressLabel.textContent='Loading converter…';
-        await new Promise((res,rej)=>{
-          const s=document.createElement('script');
-          s.src='https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
-          s.onload=res; s.onerror=rej;
-          document.head.appendChild(s);
-        });
+    try {
+      let blob = null;
+
+      // Essayer libheif-js en premier (meilleure compatibilité HEIC moderne)
+      try {
+        progressLabel.textContent = 'Converting HEIC…';
+        progressBar.style.width = '50%'; progressPct.textContent = '50%';
+        blob = await convertWithLibheif(currentFile);
+      } catch(e1) {
+        // Fallback vers heic2any si libheif échoue
+        progressLabel.textContent = 'Retrying with fallback…';
+        try {
+          blob = await convertWithHeic2any(currentFile);
+        } catch(e2) {
+          throw new Error('Both converters failed: ' + e1.message);
+        }
       }
-      progressLabel.textContent='Converting HEIC…';
-      progressBar.style.width='55%'; progressPct.textContent='55%';
 
-      const blob=await heic2any({blob:currentFile,toType:'image/jpeg',quality:0.92});
-      progressLabel.textContent='Finalising…';
-      progressBar.style.width='90%'; progressPct.textContent='90%';
+      if(!blob) throw new Error('No output blob');
 
-      const outName=currentFile.name.replace(/\.heic$/i,'')+'.jpg';
-      const blobUrl=URL.createObjectURL(blob);
-      dlBtn.href=blobUrl;
-      dlBtn.download=outName;
+      progressLabel.textContent = 'Finalising…';
+      progressBar.style.width = '90%'; progressPct.textContent = '90%';
 
-      progressBar.style.width='100%'; progressPct.textContent='100%';
-      setTimeout(()=>{progressWrap.classList.remove('show');dlWrap.classList.add('show');},300);
-    }catch(e){
-      alert('Conversion failed. Make sure the file is a valid HEIC image.');
-      convertBtn.disabled=false;
+      const outName = currentFile.name.replace(/\.(heic|heif)$/i, '') + '.jpg';
+      const blobUrl = URL.createObjectURL(blob);
+      dlBtn.href = blobUrl;
+      dlBtn.download = outName;
+
+      progressBar.style.width = '100%'; progressPct.textContent = '100%';
+      setTimeout(() => { progressWrap.classList.remove('show'); dlWrap.classList.add('show'); }, 300);
+
+    } catch(e) {
+      alert('Conversion failed: ' + e.message + '\n\nMake sure the file is a valid HEIC/HEIF image.');
+      convertBtn.disabled = false;
       progressWrap.classList.remove('show');
     }
   });
