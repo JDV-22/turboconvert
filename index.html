@@ -3,20 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TurboConvert — Free File Converter | PDF, Image, Audio & Video</title>
-  <meta name="description" content="Free file conversion tools that run entirely in your browser. PDF, images, audio and video — 22+ tools, no upload, no account, no limits." />
+  <title>TurboConvert — Free Online File Converter: PDF, Image, Audio & Video</title>
+  <meta name="description" content="Free online file converter — PDF, images, audio and video. 22 browser-based tools: PDF to Word, MP4 to MP3, HEIC to JPG and more. No upload, no account." />
   <link rel="canonical" href="https://turboconvert.io/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TurboConvert" />
+  <meta property="og:title" content="TurboConvert — Free Online File Converter" />
+  <meta property="og:description" content="Convert PDF, images, audio and video for free — entirely in your browser. No upload, no account, no limits." />
+  <meta property="og:url" content="https://turboconvert.io/" />
+  <meta property="og:image" content="https://turboconvert.io/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TurboConvert — Free Online File Converter" />
+  <meta name="twitter:description" content="Convert PDF, images, audio and video for free — entirely in your browser. No upload, no account, no limits." />
+  <meta name="twitter:image" content="https://turboconvert.io/og-image.png" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TurboConvert",
+    "url": "https://turboconvert.io",
+    "description": "Free online file converter — PDF, images, audio and video. 22 tools running entirely in your browser with no upload required.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://turboconvert.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Is TurboConvert completely free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool is 100% free with no hidden fees, no subscription and no account needed."}},
+      {"@type":"Question","name":"Do files get uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All conversions run locally in your browser via WebAssembly. Your files never leave your device."}},
+      {"@type":"Question","name":"How do I convert a PDF to Word?","acceptedAnswer":{"@type":"Answer","text":"Go to the PDF to Word tool, upload your PDF, click Convert and download your editable DOCX in seconds."}},
+      {"@type":"Question","name":"What file formats are supported?","acceptedAnswer":{"@type":"Answer","text":"PDF, DOCX, XLSX, PPTX, JPG, PNG, WebP, HEIC, MP4, MP3, WAV and more across 22+ tools."}}
+    ]
+  }
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238323731269830" crossorigin="anonymous"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #f9f8f6; --white: #ffffff; --ink: #111110;
-      --mid: #6a6a65; --soft: #adadaa; --line: #e6e5e1; --line2: #efeeea; --hover: #f3f2ee;
+      --bg:    #f9f8f6;
+      --white: #ffffff;
+      --ink:   #111110;
+      --mid:   #6a6a65;
+      --soft:  #adadaa;
+      --line:  #e6e5e1;
+      --line2: #efeeea;
+      --hover: #f3f2ee;
+      /* Alternating section backgrounds */
+      --s1: #f9f8f6;   /* parchment */
+      --s2: #ffffff;   /* white */
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
 
-    /* NAV */
+    /* ── NAV ─────────────────────────────────────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -34,47 +87,69 @@
     .nav-cta { font-size: 0.78rem; font-weight: 500; color: var(--ink); text-decoration: none; padding: 0.4rem 0.9rem; border: 1px solid var(--line); border-radius: 6px; background: var(--white); transition: border-color 0.15s; white-space: nowrap; }
     .nav-cta:hover { border-color: var(--ink); }
 
-    /* HERO */
-    .hero { max-width: 1100px; margin: 0 auto; padding: 1.75rem 2rem 1.5rem; border-bottom: 1px solid var(--line); }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; color: var(--mid); margin-bottom: 0.6rem; opacity: 0; animation: up 0.5s 0.05s ease forwards; }
+    /* ── HERO ────────────────────────────────────────────────────────────── */
+    .hero { background: var(--s1); border-bottom: 1px solid var(--line); }
+    .hero-inner { max-width: 1100px; margin: 0 auto; padding: 2.25rem 2rem 2rem; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; color: var(--mid); margin-bottom: 0.75rem; opacity: 0; animation: up 0.5s 0.05s ease forwards; }
     .dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
-    h1 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.04em; color: var(--ink); opacity: 0; animation: up 0.5s 0.1s ease forwards; }
+    h1 { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 2.9rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.04em; color: var(--ink); opacity: 0; animation: up 0.5s 0.1s ease forwards; max-width: 640px; }
     h1 em { font-style: italic; font-weight: 300; color: var(--mid); }
-    .hero-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 1rem; opacity: 0; animation: up 0.5s 0.2s ease forwards; }
+    .hero-sub { margin-top: 0.75rem; font-size: 0.85rem; color: var(--mid); line-height: 1.6; font-weight: 300; max-width: 480px; opacity: 0; animation: up 0.5s 0.15s ease forwards; }
+    .hero-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.25rem; opacity: 0; animation: up 0.5s 0.2s ease forwards; }
     .btn-dark { background: var(--ink); color: #fff; padding: 0.55rem 1.2rem; border-radius: 7px; font-size: 0.8rem; font-weight: 500; letter-spacing: -0.01em; text-decoration: none; transition: opacity 0.15s; white-space: nowrap; }
     .btn-dark:hover { opacity: 0.8; }
     .btn-text { font-size: 0.8rem; color: var(--mid); text-decoration: none; transition: color 0.15s; white-space: nowrap; }
     .btn-text:hover { color: var(--ink); }
-    .hero-stats { display: flex; gap: 2rem; padding-top: 1.25rem; margin-top: 1.25rem; border-top: 1px solid var(--line); opacity: 0; animation: up 0.5s 0.2s ease forwards; flex-wrap: wrap; }
-    .stat-n { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: -0.04em; color: var(--ink); display: block; }
-    .stat-l { font-size: 0.65rem; color: var(--soft); display: block; }
+    .hero-stats { display: flex; gap: 2.5rem; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--line); opacity: 0; animation: up 0.5s 0.25s ease forwards; flex-wrap: wrap; }
+    .stat-n { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.04em; color: var(--ink); display: block; }
+    .stat-l { font-size: 0.65rem; color: var(--soft); display: block; margin-top: 0.1rem; }
     @keyframes up { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-    /* AD */
-    .ad-slot { max-width: 1100px; margin: 0 auto; height: 72px; border-radius: 8px; border: 1px dashed var(--line); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--soft); }
-    .ad-wrap { padding: 0 2rem; }
+    /* ── DETECTOR ───────────────────────────────────────────────────────── */
+    .detector { margin-top: 1.5rem; opacity: 0; animation: up 0.5s 0.15s ease forwards; }
+    .detector-zone { border: 1.5px dashed var(--line); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; background: var(--white); position: relative; transition: border-color 0.2s, background 0.2s; }
+    .detector-zone:hover, .detector-zone.over { border-color: var(--ink); background: var(--bg); }
+    .detector-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .detector-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--line2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .detector-text h3 { font-size: 0.82rem; font-weight: 500; letter-spacing: -0.01em; }
+    .detector-text p { font-size: 0.72rem; color: var(--soft); margin-top: 0.1rem; font-weight: 300; }
+    .detector-results { display: none; margin-top: 1rem; background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.25rem; }
+    .detector-results.show { display: block; }
+    .detector-file { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+    .detector-file-icon { font-size: 1.4rem; }
+    .detector-file-name { font-size: 0.82rem; font-weight: 500; letter-spacing: -0.01em; }
+    .detector-file-type { font-size: 0.7rem; color: var(--soft); margin-top: 0.1rem; }
+    .detector-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--soft); margin-bottom: 0.5rem; }
+    .detector-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .ds-card { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 0.55rem 0.9rem; text-decoration: none; color: var(--ink); font-size: 0.78rem; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; transition: border-color 0.15s, background 0.15s; letter-spacing: -0.01em; }
+    .ds-card:hover { border-color: var(--ink); background: var(--hover); }
+    .ds-none { font-size: 0.8rem; color: var(--mid); font-weight: 300; }
 
-
-
-    .ad-real { max-width: 1100px; margin: 0 auto; min-height: 90px; }
+    /* ── ADSENSE ─────────────────────────────────────────────────────────── */
+    .ad-band { background: var(--s2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .ad-band-inner { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem; display: flex; justify-content: center; }
     .adsbygoogle { display: block; }
-    /* WHY SECTION */
-    .why-wrap { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--white); }
-    .why-inner { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
-    .why-head { margin-bottom: 3rem; }
-    .why-title { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-top: 0.5rem; }
-    .why-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .why-card { background: var(--bg); padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .why-icon { font-size: 1.5rem; }
-    .why-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
-    .why-card p { font-size: 0.83rem; color: var(--mid); line-height: 1.7; font-weight: 300; flex: 1; }
-    .why-vs { font-size: 0.7rem; font-weight: 500; color: var(--soft); border-top: 1px solid var(--line); padding-top: 0.75rem; margin-top: 0.25rem; }
-    /* TOOLS */
-    .tools-wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 3.5rem; }
-    .section-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem; }
-    .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-    .cat-block { margin-bottom: 2.5rem; }
-    .cat-label { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+
+    /* ── TOOLS SECTION ───────────────────────────────────────────────────── */
+    .tools-section { background: var(--s1); padding: 3rem 2rem 4rem; }
+    .tools-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* Filter button group */
+    .filter-bar { display: flex; align-items: center; gap: 0; margin-bottom: 2.5rem; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; width: fit-content; background: var(--white); }
+    .filter-btn { padding: 0.55rem 1.1rem; font-size: 0.78rem; font-weight: 500; font-family: 'Geist', sans-serif; color: var(--mid); background: transparent; border: none; cursor: pointer; border-right: 1px solid var(--line); transition: background 0.15s, color 0.15s; letter-spacing: -0.01em; white-space: nowrap; }
+    .filter-btn:last-child { border-right: none; }
+    .filter-btn:hover { background: var(--hover); color: var(--ink); }
+    .filter-btn.active { background: var(--ink); color: #fff; }
+    .filter-count { font-size: 0.65rem; color: inherit; opacity: 0.6; margin-left: 0.25rem; }
+
+    /* Category blocks */
+    .cat-block { margin-bottom: 3rem; }
+    .cat-block[data-cat].hidden { display: none; }
+    .cat-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line); }
+    .cat-label { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.03em; }
+    .cat-count { font-size: 0.72rem; color: var(--soft); }
+
+    /* Tool cards grid */
     .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
     .tool-card { background: var(--white); padding: 1.25rem; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 0.4rem; position: relative; transition: background 0.15s; }
     .tool-card:hover { background: var(--hover); }
@@ -88,28 +163,37 @@
     .b-hot { background: #fff0ee; color: #c43a1a; }
     .b-new { background: #f0fdf4; color: #15803d; }
 
-    /* HOW */
-    .how-wrap { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .how-inner { max-width: 1100px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: 1fr 1.8fr; gap: 3.5rem; align-items: start; }
-    .how-title { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
+    /* ── HOW IT WORKS ────────────────────────────────────────────────────── */
+    .how-section { background: var(--s2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .how-inner { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; display: grid; grid-template-columns: 1fr 1.8fr; gap: 4rem; align-items: start; }
+    .how-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; color: var(--ink); }
     .how-title em { font-style: italic; font-weight: 300; color: var(--mid); }
     .how-sub { margin-top: 0.75rem; font-size: 0.82rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+    /* Trust pill — single pill spanning full width after steps */
+    .trust-pill { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 400; color: var(--mid); background: var(--bg); border: 1px solid var(--line); border-radius: 100px; padding: 0.35rem 1rem; margin-top: 2rem; grid-column: 1 / -1; }
     .steps { display: flex; flex-direction: column; }
     .step { display: flex; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); }
     .step:first-child { border-top: 1px solid var(--line); }
     .step-n { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 300; color: var(--soft); font-style: italic; min-width: 18px; padding-top: 1px; }
-    .step h4 { font-size: 0.85rem; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 0.2rem; }
+    .step h4 { font-size: 0.85rem; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 0.2rem; color: var(--ink); }
     .step p { font-size: 0.77rem; color: var(--mid); line-height: 1.6; font-weight: 300; }
 
-    /* TRUST */
-    .trust-wrap { background: var(--white); border-bottom: 1px solid var(--line); padding: 1.75rem 2rem; }
-    .trust-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; }
-    .trust-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.77rem; color: var(--mid); }
-    .trust-item::before { content: '—'; color: var(--line); font-size: 0.65rem; }
+    /* ── WHY ─────────────────────────────────────────────────────────────── */
+    .why-section { background: var(--s1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .why-inner { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-bottom: 0.5rem; }
+    .why-title { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 2.5rem; }
+    .why-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .why-card { background: var(--s1); padding: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .why-icon { font-size: 1.5rem; }
+    .why-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+    .why-card p { font-size: 0.83rem; color: var(--mid); line-height: 1.7; font-weight: 300; flex: 1; }
+    .why-vs { font-size: 0.7rem; font-weight: 500; color: var(--soft); border-top: 1px solid var(--line); padding-top: 0.75rem; margin-top: 0.25rem; }
 
-    /* FAQ */
-    .faq-wrap { max-width: 680px; margin: 0 auto; padding: 3.5rem 2rem; }
-    .faq-wrap h2 { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 600; letter-spacing: -0.04em; margin-bottom: 2rem; }
+    /* ── FAQ ─────────────────────────────────────────────────────────────── */
+    .faq-section { background: var(--s1); border-top: 1px solid var(--line); }
+    .faq-inner { max-width: 680px; margin: 0 auto; padding: 4rem 2rem; }
+    .faq-inner h2 { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 600; letter-spacing: -0.04em; margin-bottom: 2rem; }
     details { border-top: 1px solid var(--line); padding: 1rem 0; }
     details:last-child { border-bottom: 1px solid var(--line); }
     summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; font-weight: 400; gap: 1rem; }
@@ -119,8 +203,8 @@
     .si::after { content: '+'; }
     details p { margin-top: 0.6rem; font-size: 0.8rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
 
-    /* FOOTER */
-    footer { border-top: 1px solid var(--line); padding: 1.75rem 2rem; display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: space-between; align-items: center; }
+    /* ── FOOTER ─────────────────────────────────────────────────────────── */
+    footer { background: var(--s2); border-top: 1px solid var(--line); padding: 1.75rem 2rem; display: flex; flex-wrap: wrap; gap: 1.25rem; justify-content: space-between; align-items: center; }
     .footer-logo { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; }
     .footer-logo .logo-text { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 600; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
     .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
@@ -128,67 +212,20 @@
     .footer-links a:hover { color: var(--ink); }
     footer p { font-size: 0.7rem; color: var(--soft); }
 
-    @media (max-width: 600px) {
+    /* ── RESPONSIVE ─────────────────────────────────────────────────────── */
+    @media (max-width: 700px) {
       .nav-links { display: none; }
-      .how-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .how-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .hero-stats { gap: 1.5rem; }
+      .filter-bar { flex-wrap: wrap; width: 100%; border-radius: 8px; }
+      .filter-btn { flex: 1 1 auto; border-right: none; border-bottom: 1px solid var(--line); }
+      .filter-btn:last-child { border-bottom: none; }
     }
-
-    /* FILE DETECTOR */
-    .detector { margin-top: 1.25rem; opacity: 0; animation: up 0.5s 0.15s ease forwards; }
-    .detector-zone { border: 1.5px dashed var(--line); border-radius: 12px; padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; background: var(--white); position: relative; transition: border-color 0.2s, background 0.2s; }
-    .detector-zone:hover, .detector-zone.over { border-color: var(--ink); background: var(--bg); }
-    .detector-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .detector-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--line2); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .detector-text h3 { font-size: 0.82rem; font-weight: 500; letter-spacing: -0.01em; }
-    .detector-text p { font-size: 0.72rem; color: var(--soft); margin-top: 0.1rem; font-weight: 300; }
-    .detector-results { display: none; margin-top: 1rem; }
-    .detector-results.show { display: block; }
-    .detector-file { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
-    .detector-file-icon { font-size: 1.4rem; }
-    .detector-file-name { font-size: 0.82rem; font-weight: 500; letter-spacing: -0.01em; }
-    .detector-file-type { font-size: 0.7rem; color: var(--soft); margin-top: 0.1rem; }
-    .detector-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--soft); margin-bottom: 0.5rem; }
-    .detector-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .ds-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 0.6rem 0.9rem; text-decoration: none; color: var(--ink); font-size: 0.78rem; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; transition: border-color 0.15s, background 0.15s; letter-spacing: -0.01em; }
-    .ds-card:hover { border-color: var(--ink); background: var(--bg); }
-    .ds-card .ds-arr { font-size: 0.7rem; color: var(--soft); }
-    .ds-none { font-size: 0.8rem; color: var(--mid); font-weight: 300; }
   </style>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="TurboConvert" />
-  <meta property="og:title" content="TurboConvert — Free File Converter" />
-  <meta property="og:description" content="Free file conversion tools that run entirely in your browser. PDF, images, audio and video — 22+ tools, no upload, no account, no limits." />
-  <meta property="og:url" content="https://turboconvert.io/" />
-  <meta property="og:image" content="https://turboconvert.io/og-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TurboConvert — Free File Converter" />
-  <meta name="twitter:description" content="Free file conversion tools that run entirely in your browser. PDF, images, audio and video — 22+ tools, no upload, no account, no limits." />
-  <meta name="twitter:image" content="https://turboconvert.io/og-image.png" />
-  <!-- Schema.org -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "TurboConvert",
-  "url": "https://turboconvert.io",
-  "description": "Free file conversion tools that run entirely in your browser. PDF, images, audio and video \u2014 22+ tools, no upload, no account, no limits.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://turboconvert.io/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238323731269830"
-     crossorigin="anonymous"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238323731269830" crossorigin="anonymous"></script>
 </head>
 <body>
 
+<!-- ── NAV ──────────────────────────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="logo">
     <div class="logo-mark">
@@ -210,153 +247,292 @@
   <a href="#tools" class="nav-cta">Start converting →</a>
 </nav>
 
+<!-- ── HERO ─────────────────────────────────────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-eyebrow"><span class="dot"></span> Your file never leaves your device · No signup · Always free</div>
-  <h1>Convert any file, <em>privately.</em></h1>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span> Files stay on your device · No signup · Always free</div>
+    <h1>Convert any file, <em>instantly.</em></h1>
+    <p class="hero-sub">22 free tools for PDF, images, audio and video — running entirely in your browser. No upload, no account, no waiting.</p>
 
-  <!-- FILE DETECTOR MODULE -->
-  <div class="detector">
-    <div class="detector-zone" id="detectorZone" style="position:relative;">
-      <input type="file" id="detectorInput" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" />
-      <div class="detector-icon">&#128269;</div>
-      <div class="detector-text">
-        <h3>Drop any file &#8212; we&#39;ll find the right tool</h3>
-        <p>Supports PDF, DOCX, XLSX, JPG, PNG, MP4, MP3, WAV, HEIC, WebP and more</p>
-      </div>
-    </div>
-    <div class="detector-results" id="detectorResults">
-      <div class="detector-file">
-        <span class="detector-file-icon" id="detFileIcon">&#128196;</span>
-        <div>
-          <div class="detector-file-name" id="detFileName">&#8212;</div>
-          <div class="detector-file-type" id="detFileType">&#8212;</div>
+    <!-- Smart file detector -->
+    <div class="detector">
+      <div class="detector-zone" id="detectorZone" style="position:relative;">
+        <input type="file" id="detectorInput" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" />
+        <div class="detector-icon">🔍</div>
+        <div class="detector-text">
+          <h3>Drop a file — we'll find the right tool</h3>
+          <p>PDF, DOCX, XLSX, JPG, PNG, MP4, MP3, WAV, HEIC, WebP and more</p>
         </div>
       </div>
-      <div class="detector-label">Suggested tools</div>
-      <div class="detector-suggestions" id="detSuggestions"></div>
+      <div class="detector-results" id="detectorResults">
+        <div class="detector-file">
+          <span class="detector-file-icon" id="detFileIcon">📄</span>
+          <div>
+            <div class="detector-file-name" id="detFileName">—</div>
+            <div class="detector-file-type" id="detFileType">—</div>
+          </div>
+        </div>
+        <div class="detector-label">Suggested tools</div>
+        <div class="detector-suggestions" id="detSuggestions"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-actions">
-    <a href="#tools" class="btn-dark">Browse all tools</a>
-    <a href="#how" class="btn-text">How it works →</a>
-  </div>
-  <div class="hero-stats">
-    <div><span class="stat-n">0</span><span class="stat-l">Files uploaded to servers</span></div>
-    <div><span class="stat-n">22+</span><span class="stat-l">Free tools</span></div>
-    <div><span class="stat-n">∞</span><span class="stat-l">No limits, ever</span></div>
-    <div><span class="stat-n">0€</span><span class="stat-l">Forever free</span></div>
+    <div class="hero-actions">
+      <a href="#tools" class="btn-dark">Browse all 22 tools</a>
+      <a href="#how" class="btn-text">How it works →</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-n">0</span><span class="stat-l">Files uploaded to servers</span></div>
+      <div><span class="stat-n">22+</span><span class="stat-l">Free tools</span></div>
+      <div><span class="stat-n">∞</span><span class="stat-l">No daily limits</span></div>
+      <div><span class="stat-n">0€</span><span class="stat-l">Forever free</span></div>
+    </div>
   </div>
 </section>
 
-</div>
-
-<section class="tools-wrap" id="tools">
-  <div class="section-eyebrow">All Tools</div>
-
-  <!-- PDF -->
-  <div class="cat-block">
-    <div class="cat-label">PDF</div>
-    <div class="tools-grid">
-      <a href="/pdf-to-word" class="tool-card"><div class="tc-top"><div class="tc-icon">📄</div><span class="tc-arr">↗</span></div><div class="tc-name">PDF to Word</div><div class="tc-desc">Convert PDF into an editable DOCX.</div><span class="tc-badge b-hot">Most popular</span></a>
-      <a href="/word-to-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">📝</div><span class="tc-arr">↗</span></div><div class="tc-name">Word to PDF</div><div class="tc-desc">Turn DOCX files into PDF documents.</div><span class="tc-badge b-hot">Popular</span></a>
-      <a href="/compress-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">🗜️</div><span class="tc-arr">↗</span></div><div class="tc-name">Compress PDF</div><div class="tc-desc">Reduce PDF size without quality loss.</div><span class="tc-badge b-hot">Popular</span></a>
-      <a href="/pdf-to-jpg" class="tool-card"><div class="tc-top"><div class="tc-icon">🖼️</div><span class="tc-arr">↗</span></div><div class="tc-name">PDF to JPG</div><div class="tc-desc">Extract pages as high-quality images.</div></a>
-      <a href="/merge-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">🔗</div><span class="tc-arr">↗</span></div><div class="tc-name">Merge PDF</div><div class="tc-desc">Combine multiple PDFs into one file.</div></a>
-      <a href="/split-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">✂️</div><span class="tc-arr">↗</span></div><div class="tc-name">Split PDF</div><div class="tc-desc">Separate a PDF into pages or ranges.</div></a>
-      <a href="/pdf-to-excel" class="tool-card"><div class="tc-top"><div class="tc-icon">📊</div><span class="tc-arr">↗</span></div><div class="tc-name">PDF to Excel</div><div class="tc-desc">Extract tables into spreadsheets.</div><span class="tc-badge b-new">New</span></a>
-      <a href="/rotate-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">🔄</div><span class="tc-arr">↗</span></div><div class="tc-name">Rotate PDF</div><div class="tc-desc">Fix page orientation in any PDF.</div></a>
-    </div>
-  </div>
-
-  <!-- DOCUMENTS -->
-  <div class="cat-block">
-    <div class="cat-label">Documents</div>
-    <div class="tools-grid">
-      <a href="/excel-to-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">📈</div><span class="tc-arr">↗</span></div><div class="tc-name">Excel to PDF</div><div class="tc-desc">Convert spreadsheets to PDF format.</div></a>
-      <a href="/ppt-to-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">📽️</div><span class="tc-arr">↗</span></div><div class="tc-name">PPT to PDF</div><div class="tc-desc">Convert presentations to PDF.</div></a>
-      <a href="/pdf-to-ppt" class="tool-card"><div class="tc-top"><div class="tc-icon">🎯</div><span class="tc-arr">↗</span></div><div class="tc-name">PDF to PPT</div><div class="tc-desc">Turn PDF slides into editable PowerPoint.</div><span class="tc-badge b-new">New</span></a>
-      <a href="/word-to-jpg" class="tool-card"><div class="tc-top"><div class="tc-icon">🖼️</div><span class="tc-arr">↗</span></div><div class="tc-name">Word to JPG</div><div class="tc-desc">Convert Word documents to images.</div></a>
-    </div>
-  </div>
-
-  <!-- IMAGES -->
-  <div class="cat-block">
-    <div class="cat-label">Images</div>
-    <div class="tools-grid">
-      <a href="/jpg-to-pdf" class="tool-card"><div class="tc-top"><div class="tc-icon">📸</div><span class="tc-arr">↗</span></div><div class="tc-name">JPG to PDF</div><div class="tc-desc">Combine images into a single PDF.</div></a>
-      <a href="/png-to-jpg" class="tool-card"><div class="tc-top"><div class="tc-icon">🎨</div><span class="tc-arr">↗</span></div><div class="tc-name">PNG to JPG</div><div class="tc-desc">Convert PNG to JPG to reduce size.</div></a>
-      <a href="/compress-image" class="tool-card"><div class="tc-top"><div class="tc-icon">📦</div><span class="tc-arr">↗</span></div><div class="tc-name">Compress Image</div><div class="tc-desc">Reduce image size without visible loss.</div><span class="tc-badge b-hot">Popular</span></a>
-      <a href="/heic-to-jpg" class="tool-card"><div class="tc-top"><div class="tc-icon">📱</div><span class="tc-arr">↗</span></div><div class="tc-name">HEIC to JPG</div><div class="tc-desc">Convert iPhone HEIC photos to JPG.</div><span class="tc-badge b-hot">Popular</span></a>
-      <a href="/webp-to-jpg" class="tool-card"><div class="tc-top"><div class="tc-icon">🌐</div><span class="tc-arr">↗</span></div><div class="tc-name">WebP to JPG</div><div class="tc-desc">Convert WebP to compatible JPG.</div></a>
-      <a href="/jpg-to-png" class="tool-card"><div class="tc-top"><div class="tc-icon">🖌️</div><span class="tc-arr">↗</span></div><div class="tc-name">JPG to PNG</div><div class="tc-desc">Convert JPG to PNG with transparency.</div></a>
-    </div>
-  </div>
-
-  <!-- AUDIO & VIDEO — NEW -->
-  <div class="cat-block">
-    <div class="cat-label">Audio & Video</div>
-    <div class="tools-grid">
-      <a href="/mp4-to-mp3" class="tool-card"><div class="tc-top"><div class="tc-icon">🎬</div><span class="tc-arr">↗</span></div><div class="tc-name">MP4 to MP3</div><div class="tc-desc">Extract audio from any video file.</div><span class="tc-badge b-hot">Popular</span></a>
-      <a href="/mp3-to-mp4" class="tool-card"><div class="tc-top"><div class="tc-icon">▶️</div><span class="tc-arr">↗</span></div><div class="tc-name">MP3 to MP4</div><div class="tc-desc">Turn audio into an uploadable video.</div><span class="tc-badge b-new">New</span></a>
-      <a href="/wav-to-mp3" class="tool-card"><div class="tc-top"><div class="tc-icon">🎵</div><span class="tc-arr">↗</span></div><div class="tc-name">WAV to MP3</div><div class="tc-desc">Compress WAV files to lightweight MP3.</div><span class="tc-badge b-new">New</span></a>
-      <a href="/mp3-to-wav" class="tool-card"><div class="tc-top"><div class="tc-icon">🎚️</div><span class="tc-arr">↗</span></div><div class="tc-name">MP3 to WAV</div><div class="tc-desc">Convert to uncompressed WAV for editing.</div><span class="tc-badge b-new">New</span></a>
-    </div>
-  </div>
-
-</section>
-
-</div>
-
-<div style="display:flex;justify-content:center;margin:24px 0;">
-  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
-    data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+<!-- ── AD · Slot B · Hero → Tools ───────────────────────────────────────────── -->
+<div style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;padding:1.25rem 2rem;">
+  <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px;max-width:100%"
+    data-ad-client="ca-pub-6238323731269830"
+    data-ad-slot="REPLACE_WITH_SLOT_ID"
+    data-ad-format="leaderboard"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<div class="how-wrap" id="how">
+
+<!-- ── TOOLS ─────────────────────────────────────────────────────────────────── -->
+<section class="tools-section" id="tools" aria-label="All conversion tools">
+  <div class="tools-inner">
+
+    <!-- Filter button group -->
+    <div class="filter-bar" role="group" aria-label="Filter tools by category">
+      <button class="filter-btn active" data-filter="all" onclick="filterTools(this,'all')">All tools <span class="filter-count">22</span></button>
+      <button class="filter-btn" data-filter="pdf"  onclick="filterTools(this,'pdf')">PDF <span class="filter-count">8</span></button>
+      <button class="filter-btn" data-filter="docs" onclick="filterTools(this,'docs')">Documents <span class="filter-count">4</span></button>
+      <button class="filter-btn" data-filter="image" onclick="filterTools(this,'image')">Images <span class="filter-count">6</span></button>
+      <button class="filter-btn" data-filter="audio" onclick="filterTools(this,'audio')">Audio &amp; Video <span class="filter-count">4</span></button>
+    </div>
+
+    <!-- PDF ───────────────────────────────────── -->
+    <div class="cat-block" data-cat="pdf">
+      <div class="cat-header">
+        <span class="cat-label">PDF Tools</span>
+        <span class="cat-count">8 tools</span>
+      </div>
+      <div class="tools-grid">
+        <a href="/pdf-to-word" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📄</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PDF to Word</div>
+          <div class="tc-desc">Convert PDF into an editable DOCX file.</div>
+          <span class="tc-badge b-hot">Most popular</span>
+        </a>
+        <a href="/word-to-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📝</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Word to PDF</div>
+          <div class="tc-desc">Turn any DOCX document into a PDF.</div>
+          <span class="tc-badge b-hot">Popular</span>
+        </a>
+        <a href="/compress-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🗜️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Compress PDF</div>
+          <div class="tc-desc">Reduce file size without quality loss.</div>
+          <span class="tc-badge b-hot">Popular</span>
+        </a>
+        <a href="/pdf-to-jpg" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🖼️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PDF to JPG</div>
+          <div class="tc-desc">Extract each page as a high-quality image.</div>
+        </a>
+        <a href="/merge-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🔗</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Merge PDF</div>
+          <div class="tc-desc">Combine multiple PDFs into one document.</div>
+        </a>
+        <a href="/split-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">✂️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Split PDF</div>
+          <div class="tc-desc">Separate a PDF into pages or custom ranges.</div>
+        </a>
+        <a href="/pdf-to-excel" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📊</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PDF to Excel</div>
+          <div class="tc-desc">Extract tables into an editable spreadsheet.</div>
+          <span class="tc-badge b-new">New</span>
+        </a>
+        <a href="/rotate-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🔄</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Rotate PDF</div>
+          <div class="tc-desc">Fix page orientation with one click.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS ─────────────────────────────── -->
+    <div class="cat-block" data-cat="docs">
+      <div class="cat-header">
+        <span class="cat-label">Document Tools</span>
+        <span class="cat-count">4 tools</span>
+      </div>
+      <div class="tools-grid">
+        <a href="/excel-to-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📈</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Excel to PDF</div>
+          <div class="tc-desc">Convert spreadsheets to PDF format.</div>
+        </a>
+        <a href="/ppt-to-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📽️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PPT to PDF</div>
+          <div class="tc-desc">Convert any PowerPoint presentation to PDF.</div>
+        </a>
+        <a href="/pdf-to-ppt" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🎯</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PDF to PPT</div>
+          <div class="tc-desc">Turn PDF slides into editable PowerPoint.</div>
+          <span class="tc-badge b-new">New</span>
+        </a>
+        <a href="/word-to-jpg" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🖼️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Word to JPG</div>
+          <div class="tc-desc">Convert Word documents to images.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- IMAGES ────────────────────────────────── -->
+    <div class="cat-block" data-cat="image">
+      <div class="cat-header">
+        <span class="cat-label">Image Tools</span>
+        <span class="cat-count">6 tools</span>
+      </div>
+      <div class="tools-grid">
+        <a href="/jpg-to-pdf" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📸</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">JPG to PDF</div>
+          <div class="tc-desc">Combine one or more images into a PDF.</div>
+        </a>
+        <a href="/compress-image" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📦</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">Compress Image</div>
+          <div class="tc-desc">Reduce image size without visible loss.</div>
+          <span class="tc-badge b-hot">Popular</span>
+        </a>
+        <a href="/heic-to-jpg" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">📱</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">HEIC to JPG</div>
+          <div class="tc-desc">Convert iPhone HEIC photos to JPG.</div>
+          <span class="tc-badge b-hot">Popular</span>
+        </a>
+        <a href="/png-to-jpg" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🎨</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">PNG to JPG</div>
+          <div class="tc-desc">Convert PNG files to lighter JPG images.</div>
+        </a>
+        <a href="/webp-to-jpg" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🌐</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">WebP to JPG</div>
+          <div class="tc-desc">Convert WebP to universal JPG format.</div>
+        </a>
+        <a href="/jpg-to-png" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🖌️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">JPG to PNG</div>
+          <div class="tc-desc">Convert JPG to PNG with transparency support.</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- AUDIO & VIDEO ─────────────────────────── -->
+    <div class="cat-block" data-cat="audio">
+      <div class="cat-header">
+        <span class="cat-label">Audio &amp; Video</span>
+        <span class="cat-count">4 tools</span>
+      </div>
+      <div class="tools-grid">
+        <a href="/mp4-to-mp3" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🎬</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">MP4 to MP3</div>
+          <div class="tc-desc">Extract audio from any video file.</div>
+          <span class="tc-badge b-hot">Popular</span>
+        </a>
+        <a href="/mp3-to-mp4" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">▶️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">MP3 to MP4</div>
+          <div class="tc-desc">Turn audio into an uploadable video file.</div>
+          <span class="tc-badge b-new">New</span>
+        </a>
+        <a href="/wav-to-mp3" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🎵</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">WAV to MP3</div>
+          <div class="tc-desc">Compress WAV files to lightweight MP3.</div>
+          <span class="tc-badge b-new">New</span>
+        </a>
+        <a href="/mp3-to-wav" class="tool-card">
+          <div class="tc-top"><div class="tc-icon">🎚️</div><span class="tc-arr">↗</span></div>
+          <div class="tc-name">MP3 to WAV</div>
+          <div class="tc-desc">Convert MP3 to uncompressed WAV for editing.</div>
+          <span class="tc-badge b-new">New</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── AD · Slot F · Tools → How ────────────────────────────────────────────── -->
+<div style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;padding:1.5rem 2rem;">
+  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+    data-ad-client="ca-pub-6238323731269830"
+    data-ad-slot="REPLACE_WITH_SLOT_ID"
+    data-ad-format="rectangle"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<section class="how-section" id="how" aria-label="How TurboConvert works">
   <div class="how-inner">
     <div>
       <h2 class="how-title">Simple<br />as it<br /><em>gets.</em></h2>
       <p class="how-sub">Three steps, under ten seconds. No account, no software, no friction.</p>
     </div>
     <div class="steps">
-      <div class="step"><span class="step-n">1</span><div><h4>Drop your file</h4><p>Select or drag any PDF, image, audio or video. It stays on your device — nothing is sent anywhere.</p></div></div>
-      <div class="step"><span class="step-n">2</span><div><h4>Converted in your browser</h4><p>WebAssembly runs the full conversion engine locally. Same power as desktop software, zero upload.</p></div></div>
-      <div class="step"><span class="step-n">3</span><div><h4>Download & it's gone</h4><p>Your file is ready instantly. No account, no waiting, no limits. Close the tab and there's nothing left.</p></div></div>
+      <div class="step">
+        <span class="step-n">1</span>
+        <div>
+          <h4>Drop your file</h4>
+          <p>Select or drag any PDF, image, audio or video. It stays on your device — nothing is ever sent to a server.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">2</span>
+        <div>
+          <h4>Converted in your browser</h4>
+          <p>WebAssembly runs the full conversion engine locally. Same power as desktop software, zero upload, complete privacy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-n">3</span>
+        <div>
+          <h4>Download instantly</h4>
+          <p>Your file is ready in seconds. No account, no waiting list. Close the tab and there's nothing left on any server.</p>
+        </div>
+      </div>
     </div>
+    <span class="trust-pill">🔒 Never uploaded · ⚡ Instant · ∞ No limits · 🆓 Free · 📄 PDF · 🖼 Images · 🎵 Audio · 🎬 Video</span>
   </div>
-</div>
-
-<div class="trust-wrap">
-  <div class="trust-inner">
-    <div class="trust-item">🔒 File never leaves your device</div>
-    <div class="trust-item">⚡ No upload, no waiting</div>
-    <div class="trust-item">∞ Unlimited — no daily caps</div>
-    <div class="trust-item">🆓 100% free, no account</div>
-    <div class="trust-item">📄 PDF · 🖼 Images · 🎵 Audio · 🎬 Video</div>
-    <div class="trust-item">💻 Works on any device</div>
-  </div>
-</div>
-
-
-<section class="why-wrap" id="why">
+</section>
+<section class="why-section" id="why" aria-label="Why choose TurboConvert">
   <div class="why-inner">
-    <div class="why-head">
-      <span class="section-eyebrow">Why TurboConvert</span>
-      <h2 class="why-title">Built differently<br />than the rest.</h2>
-    </div>
+    <div class="section-eyebrow">Why TurboConvert</div>
+    <h2 class="why-title">Built differently<br />than the rest.</h2>
     <div class="why-cards">
       <div class="why-card">
         <div class="why-icon">🔒</div>
         <h3>Your file never leaves your device</h3>
-        <p>Every conversion runs in your browser via WebAssembly. There is no upload, no server, no 2-hour deletion promise. Your contract, your medical scan, your ID — stays yours. Always.</p>
+        <p>Every conversion runs in your browser via WebAssembly. There is no upload, no server, no "deleted in 2 hours" promise. Your contract, your medical scan, your photos — stay yours, always.</p>
         <div class="why-vs">ilovepdf uploads to servers. We don't.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">∞</div>
         <h3>No limits. No account. No paywalls.</h3>
         <p>Smallpdf limits free users to 2 tasks per day. ilovepdf pushes you toward Premium. TurboConvert has no daily cap, no file counter, no popup asking you to sign up. Convert as much as you want, forever.</p>
-        <div class="why-vs">Competitors limit free use. We don't.</div>
+        <div class="why-vs">Competitors gate free use. We don't.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">🎯</div>
@@ -367,22 +543,56 @@
     </div>
   </div>
 </section>
-<section class="faq-wrap" id="faq">
-  <h2>Questions</h2>
-  <details open><summary>Is TurboConvert completely free? <div class="si"></div></summary><p>Yes. Every tool is 100% free — no hidden fees, no subscription, no account needed. Funded by non-intrusive advertising.</p></details>
-  <details><summary>How do I convert a PDF to Word? <div class="si"></div></summary><p>Click "PDF to Word", upload your file, then hit Convert. Your editable DOCX is ready to download in seconds.</p></details>
-  <details><summary>How do I convert MP4 to MP3? <div class="si"></div></summary><p>Click "MP4 to MP3", upload your video, then hit Extract MP3. Your audio file is ready in seconds — no account needed.</p></details>
-  <details><summary>Are my files safe and private? <div class="si"></div></summary><p>Your files never leave your device. All conversions run locally in your browser via WebAssembly — no upload, no server, nothing to intercept. It's the same level of privacy as desktop software.</p></details>
-  <details><summary>What is the maximum file size? <div class="si"></div></summary><p>Up to 100 MB — sufficient for the vast majority of documents, images, and audio files.</p></details>
-  <details><summary>Do I need to install anything? <div class="si"></div></summary><p>No. TurboConvert works entirely in your browser on any device. No installation, no plugins, no signup.</p></details>
-  <details><summary>Which file formats are supported? <div class="si"></div></summary><p>PDF, DOCX, XLSX, PPTX, JPG, PNG, WebP, HEIC, MP4, MP3, WAV and more. New formats added regularly.</p></details>
-</section>
 
-<div style="display:flex;justify-content:center;margin:24px 0;">
-  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
-    data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+<!-- ── AD · Slot H · Why → FAQ ──────────────────────────────────────────────── -->
+<div style="background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;justify-content:center;padding:1.5rem 2rem;">
+  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+    data-ad-client="ca-pub-6238323731269830"
+    data-ad-slot="REPLACE_WITH_SLOT_ID"
+    data-ad-format="rectangle"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
+
+<!-- ── FAQ ──────────────────────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq" aria-label="Frequently asked questions">
+  <div class="faq-inner">
+    <h2>Questions</h2>
+    <details open>
+      <summary>Is TurboConvert completely free? <div class="si"></div></summary>
+      <p>Yes. Every tool is 100% free — no hidden fees, no subscription, no account needed. The service is funded by non-intrusive advertising.</p>
+    </details>
+    <details>
+      <summary>Do my files get uploaded to a server? <div class="si"></div></summary>
+      <p>Never. All conversions run locally in your browser via WebAssembly — no upload, no server processing, nothing to intercept. It's the same level of privacy as desktop software, in a browser tab.</p>
+    </details>
+    <details>
+      <summary>How do I convert a PDF to Word? <div class="si"></div></summary>
+      <p>Click <a href="/pdf-to-word">PDF to Word</a>, upload your file, then click Convert. Your editable DOCX is ready to download in seconds — no account required.</p>
+    </details>
+    <details>
+      <summary>How do I convert MP4 to MP3? <div class="si"></div></summary>
+      <p>Click <a href="/mp4-to-mp3">MP4 to MP3</a>, upload your video, then click Extract. Your audio file is ready in seconds. Works on any video format including MOV, AVI and MKV.</p>
+    </details>
+    <details>
+      <summary>Are my files safe and private? <div class="si"></div></summary>
+      <p>Yes. Your files never leave your device. Processing happens 100% in-browser — there is no server involved. Confidential documents, medical files, personal photos — all stay on your machine.</p>
+    </details>
+    <details>
+      <summary>What is the maximum file size? <div class="si"></div></summary>
+      <p>Most tools support up to 100 MB. Audio and video tools support up to 500 MB — more than enough for the vast majority of use cases.</p>
+    </details>
+    <details>
+      <summary>Do I need to install anything? <div class="si"></div></summary>
+      <p>No. TurboConvert works entirely in your browser on desktop, tablet or mobile. No installation, no plugin, no signup — just open a tool and convert.</p>
+    </details>
+    <details>
+      <summary>Which file formats are supported? <div class="si"></div></summary>
+      <p>PDF, DOCX, XLSX, PPTX, JPG, PNG, WebP, HEIC, MP4, MP3, WAV and more across 22 tools. New formats are added regularly.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────────────── -->
 <footer>
   <a href="/" class="footer-logo">
     <div class="logo-mark" style="width:20px;height:20px;">
@@ -399,58 +609,72 @@
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms</a>
     <a href="/blog">Blog</a>
-    <a href="/contact">Contact</a>
     <a href="/sitemap.xml">Sitemap</a>
   </div>
-  <p>© 2025 TurboConvert.io</p>
+  <p>© 2025 TurboConvert.io — All conversions run in your browser.</p>
 </footer>
 
+<!-- ── JS: Filter + Detector ────────────────────────────────────────────────── -->
 <script>
-var TOOL_MAP = {
-  pdf:  [{l:'PDF to Word',u:'/pdf-to-word',i:'&#128196;'},{l:'PDF to JPG',u:'/pdf-to-jpg',i:'&#128444;'},{l:'Compress PDF',u:'/compress-pdf',i:'&#128230;'},{l:'PDF to Excel',u:'/pdf-to-excel',i:'&#128202;'},{l:'Merge PDF',u:'/merge-pdf',i:'&#128279;'},{l:'Split PDF',u:'/split-pdf',i:'&#9988;'}],
-  docx: [{l:'Word to PDF',u:'/word-to-pdf',i:'&#128196;'},{l:'Word to JPG',u:'/word-to-jpg',i:'&#128444;'}],
-  doc:  [{l:'Word to PDF',u:'/word-to-pdf',i:'&#128196;'}],
-  xlsx: [{l:'Excel to PDF',u:'/excel-to-pdf',i:'&#128202;'}],
-  xls:  [{l:'Excel to PDF',u:'/excel-to-pdf',i:'&#128202;'}],
-  pptx: [{l:'PPT to PDF',u:'/ppt-to-pdf',i:'&#127909;'}],
-  ppt:  [{l:'PPT to PDF',u:'/ppt-to-pdf',i:'&#127909;'}],
-  jpg:  [{l:'JPG to PDF',u:'/jpg-to-pdf',i:'&#128248;'},{l:'JPG to PNG',u:'/jpg-to-png',i:'&#127912;'},{l:'Compress Image',u:'/compress-image',i:'&#128230;'}],
-  jpeg: [{l:'JPG to PDF',u:'/jpg-to-pdf',i:'&#128248;'},{l:'JPG to PNG',u:'/jpg-to-png',i:'&#127912;'},{l:'Compress Image',u:'/compress-image',i:'&#128230;'}],
-  png:  [{l:'PNG to JPG',u:'/png-to-jpg',i:'&#127912;'},{l:'JPG to PDF',u:'/jpg-to-pdf',i:'&#128248;'},{l:'Compress Image',u:'/compress-image',i:'&#128230;'}],
-  webp: [{l:'WebP to JPG',u:'/webp-to-jpg',i:'&#127758;'},{l:'Compress Image',u:'/compress-image',i:'&#128230;'}],
-  heic: [{l:'HEIC to JPG',u:'/heic-to-jpg',i:'&#128241;'}],
-  heif: [{l:'HEIC to JPG',u:'/heic-to-jpg',i:'&#128241;'}],
-  mp3:  [{l:'MP3 to MP4',u:'/mp3-to-mp4',i:'&#9654;'},{l:'MP3 to WAV',u:'/mp3-to-wav',i:'&#127930;'}],
-  wav:  [{l:'WAV to MP3',u:'/wav-to-mp3',i:'&#127925;'}],
-  m4a:  [{l:'WAV to MP3',u:'/wav-to-mp3',i:'&#127925;'}],
-  mp4:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'&#127916;'}],
-  mov:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'&#127916;'}],
-  avi:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'&#127916;'}],
-  mkv:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'&#127916;'}]
-};
-var FILE_ICONS = {pdf:'&#128196;',docx:'&#128196;',doc:'&#128196;',xlsx:'&#128202;',xls:'&#128202;',pptx:'&#127909;',ppt:'&#127909;',jpg:'&#128444;',jpeg:'&#128444;',png:'&#128444;',webp:'&#128444;',heic:'&#128241;',heif:'&#128241;',mp3:'&#127925;',wav:'&#127925;',m4a:'&#127925;',mp4:'&#127916;',mov:'&#127916;',avi:'&#127916;',mkv:'&#127916;'};
+/* ── Filter button group ───────────────────────────────────────────────────── */
+function filterTools(btn, cat) {
+  // Update active button
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
 
-// ── IndexedDB helper ──────────────────────────────────────────────────────────
-var IDB_NAME = 'turboconvert', IDB_STORE = 'pending_file', IDB_KEY = 'file';
-function idbSave(file, cb) {
-  var req = indexedDB.open(IDB_NAME, 1);
-  req.onupgradeneeded = function(e) { e.target.result.createObjectStore(IDB_STORE); };
+  // Show/hide category blocks
+  document.querySelectorAll('.cat-block[data-cat]').forEach(function(block) {
+    if (cat === 'all' || block.dataset.cat === cat) {
+      block.classList.remove('hidden');
+    } else {
+      block.classList.add('hidden');
+    }
+  });
+}
+
+/* ── File detector ─────────────────────────────────────────────────────────── */
+var TOOL_MAP = {
+  pdf:  [{l:'PDF to Word',u:'/pdf-to-word',i:'📄'},{l:'PDF to JPG',u:'/pdf-to-jpg',i:'🖼️'},{l:'Compress PDF',u:'/compress-pdf',i:'🗜️'},{l:'PDF to Excel',u:'/pdf-to-excel',i:'📊'},{l:'Merge PDF',u:'/merge-pdf',i:'🔗'},{l:'Split PDF',u:'/split-pdf',i:'✂️'}],
+  docx: [{l:'Word to PDF',u:'/word-to-pdf',i:'📝'},{l:'Word to JPG',u:'/word-to-jpg',i:'🖼️'}],
+  doc:  [{l:'Word to PDF',u:'/word-to-pdf',i:'📝'}],
+  xlsx: [{l:'Excel to PDF',u:'/excel-to-pdf',i:'📈'}],
+  xls:  [{l:'Excel to PDF',u:'/excel-to-pdf',i:'📈'}],
+  pptx: [{l:'PPT to PDF',u:'/ppt-to-pdf',i:'📽️'}],
+  ppt:  [{l:'PPT to PDF',u:'/ppt-to-pdf',i:'📽️'}],
+  jpg:  [{l:'JPG to PDF',u:'/jpg-to-pdf',i:'📸'},{l:'JPG to PNG',u:'/jpg-to-png',i:'🖌️'},{l:'Compress Image',u:'/compress-image',i:'📦'}],
+  jpeg: [{l:'JPG to PDF',u:'/jpg-to-pdf',i:'📸'},{l:'JPG to PNG',u:'/jpg-to-png',i:'🖌️'},{l:'Compress Image',u:'/compress-image',i:'📦'}],
+  png:  [{l:'PNG to JPG',u:'/png-to-jpg',i:'🎨'},{l:'JPG to PDF',u:'/jpg-to-pdf',i:'📸'},{l:'Compress Image',u:'/compress-image',i:'📦'}],
+  webp: [{l:'WebP to JPG',u:'/webp-to-jpg',i:'🌐'},{l:'Compress Image',u:'/compress-image',i:'📦'}],
+  heic: [{l:'HEIC to JPG',u:'/heic-to-jpg',i:'📱'}],
+  heif: [{l:'HEIC to JPG',u:'/heic-to-jpg',i:'📱'}],
+  mp3:  [{l:'MP3 to MP4',u:'/mp3-to-mp4',i:'▶️'},{l:'MP3 to WAV',u:'/mp3-to-wav',i:'🎚️'}],
+  wav:  [{l:'WAV to MP3',u:'/wav-to-mp3',i:'🎵'}],
+  m4a:  [{l:'WAV to MP3',u:'/wav-to-mp3',i:'🎵'}],
+  mp4:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'🎬'}],
+  mov:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'🎬'}],
+  avi:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'🎬'}],
+  mkv:  [{l:'MP4 to MP3',u:'/mp4-to-mp3',i:'🎬'}]
+};
+var FILE_ICONS = {pdf:'📄',docx:'📝',doc:'📝',xlsx:'📈',xls:'📈',pptx:'📽️',ppt:'📽️',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',webp:'🌐',heic:'📱',heif:'📱',mp3:'🎵',wav:'🎵',m4a:'🎵',mp4:'🎬',mov:'🎬',avi:'🎬',mkv:'🎬'};
+
+/* IndexedDB helper */
+function idbSave(file) {
+  var req = indexedDB.open('turboconvert', 1);
+  req.onupgradeneeded = function(e) { e.target.result.createObjectStore('pending_file'); };
   req.onsuccess = function(e) {
     var db = e.target.result;
-    var tx = db.transaction(IDB_STORE, 'readwrite');
-    tx.objectStore(IDB_STORE).put(file, IDB_KEY);
-    tx.oncomplete = function() { db.close(); if(cb) cb(); };
+    var tx = db.transaction('pending_file', 'readwrite');
+    tx.objectStore('pending_file').put(file, 'file');
+    tx.oncomplete = function() { db.close(); };
   };
 }
 
 function detectFile(file) {
   var ext = file.name.split('.').pop().toLowerCase();
   var sizeMB = (file.size / 1048576).toFixed(1);
-  document.getElementById('detFileIcon').innerHTML = FILE_ICONS[ext] || '&#128196;';
+  document.getElementById('detFileIcon').textContent = FILE_ICONS[ext] || '📄';
   document.getElementById('detFileName').textContent = file.name;
   document.getElementById('detFileType').textContent = ext.toUpperCase() + ' · ' + sizeMB + ' MB';
-
-  // Stocker le fichier dans IndexedDB pour le transmettre à la page outil
   idbSave(file);
 
   var tools = TOOL_MAP[ext] || [];
@@ -459,17 +683,17 @@ function detectFile(file) {
     container.innerHTML = '<span class="ds-none">No tool available for this format yet.</span>';
   } else {
     container.innerHTML = tools.map(function(t) {
-      return '<a href="' + t.u + '" class="ds-card">' + t.i + ' ' + t.l + ' <span class="ds-arr">&#8599;</span></a>';
+      return '<a href="' + t.u + '" class="ds-card">' + t.i + ' ' + t.l + ' <span style="font-size:.7rem;color:var(--soft)">↗</span></a>';
     }).join('');
   }
   document.getElementById('detectorResults').classList.add('show');
 }
 
-var dZone = document.getElementById('detectorZone');
+var dZone  = document.getElementById('detectorZone');
 var dInput = document.getElementById('detectorInput');
 dInput.addEventListener('change', function(e) { if (e.target.files[0]) detectFile(e.target.files[0]); });
-dZone.addEventListener('dragover', function(e) { e.preventDefault(); dZone.classList.add('over'); });
-dZone.addEventListener('dragleave', function() { dZone.classList.remove('over'); });
+dZone.addEventListener('dragover',  function(e) { e.preventDefault(); dZone.classList.add('over'); });
+dZone.addEventListener('dragleave', function()  { dZone.classList.remove('over'); });
 dZone.addEventListener('drop', function(e) {
   e.preventDefault(); dZone.classList.remove('over');
   if (e.dataTransfer.files[0]) detectFile(e.dataTransfer.files[0]);
