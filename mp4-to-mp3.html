@@ -74,6 +74,15 @@
     footer p{font-size:.7rem;color:var(--soft)}
     .logbox{margin-top:1rem;background:#111;border-radius:8px;padding:1rem;font-family:monospace;font-size:.7rem;color:#0f0;max-height:180px;overflow-y:auto;line-height:1.5;display:none}
     .logbox.show{display:block}
+      .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+    .blog-tip-label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+    .blog-tip-link{font-size:.82rem;color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:-.01em;transition:opacity .15s}
+    .blog-tip-link:hover{opacity:.7}
+      .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+    .related h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
+    .related-links{display:flex;flex-wrap:wrap;gap:.5rem}
+    .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
+    .rl:hover{border-color:var(--ink);color:var(--ink)}
   </style>
 
   <style>
@@ -191,37 +200,41 @@
     <p>Your MP3 is ready to download.</p>
     <button class="dlbtn" id="dlbtn">⬇ Download MP3</button>
     <span class="again" id="again">Convert another file</span>
+    <div class="blog-tip">
+    <span class="blog-tip-label">📖 Guide</span>
+    <a href="/blog/mp4-to-mp3" class="blog-tip-link">How to Extract Audio from Video →</a>
   </div>
-<div style="display:flex;justify-content:center;margin:24px 0;">
-  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
-    data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-  <div class="feats">
-    <div class="feat"><div class="feat-i">⚡</div><h4>Fast</h4><p>No upload — converted locally.</p></div>
-    <div class="feat"><div class="feat-i">🔒</div><h4>Private</h4><p>File never leaves your device.</p></div>
-    <div class="feat"><div class="feat-i">🆓</div><h4>Free</h4><p>No account, no limits.</p></div>
-    <div class="feat"><div class="feat-i">📱</div><h4>Any device</h4><p>Desktop or mobile.</p></div>
-    <div class="feat"><div class="feat-i">🎵</div><h4>High quality</h4><p>VBR ~190 kbps output.</p></div>
-    <div class="feat"><div class="feat-i">📦</div><h4>No install</h4><p>Works in your browser.</p></div>
+      <div class="features">
+    <div class="feat"><div class="feat-icon">🔒</div><h4>Stays on your device</h4><p>Nothing is ever uploaded to a server.</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h4>Under 10 seconds</h4><p>Fast processing for most files.</p></div>
+    <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no subscription, no paywall.</p></div>
+    <div class="feat"><div class="feat-icon">📱</div><h4>Works on any device</h4><p>Desktop, tablet, or mobile browser.</p></div>
+    <div class="feat"><div class="feat-icon">∞</div><h4>No file limits</h4><p>Convert as many files as you need.</p></div>
+    <div class="feat"><div class="feat-icon">🎯</div><h4>High quality output</h4><p>Clean, accurate results every time.</p></div>
   </div>
-  <div class="body">
-    <h2>Why convert MP4 to MP3?</h2>
-    <p>MP4 files contain both video and audio tracks. When you only need the audio — a podcast, a music video, a lecture — converting to MP3 strips the video and gives you a lightweight file that plays on every device. Perfect for listening offline or editing in audio software.</p>
+<div class="content">
+    <h2>Why extract audio from MP4?</h2>
+    <p>Extracting the audio track from a video lets you save music, podcasts, interviews, or voiceovers as standalone MP3 files — smaller, portable, and compatible with any audio player.</p>
+    <p>TurboConvert uses FFmpeg compiled to WebAssembly to extract audio directly in your browser. No upload, no account.</p>
   </div>
-  <div class="faq"><h2>Questions</h2>
-    <details open><summary>How does this work without uploading my file? <div class="si"></div></summary><p>TurboConvert uses FFmpeg compiled to WebAssembly, running entirely in your browser. Your file is never sent to any server.</p></details>
-    <details><summary>Will audio quality be preserved? <div class="si"></div></summary><p>Yes. Audio is re-encoded at high quality (VBR ~190 kbps). Indistinguishable from the source for most listeners.</p></details>
-    <details><summary>Why does it take a moment to start? <div class="si"></div></summary><p>The first conversion loads a ~20 MB WebAssembly engine. This is a one-time load per session — subsequent conversions start instantly.</p></details>
-    <details><summary>What file size is supported? <div class="si"></div></summary><p>Up to 500 MB — processed entirely in your browser.</p></details>
+
+    
+  <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <details open><summary>Will the audio quality change? <div class="si"></div></summary><p>No quality is lost during extraction. The MP3 is encoded from the original audio stream at 192kbps by default.</p></details>
+    <details><summary>Can I extract audio from any video format? <div class="si"></div></summary><p>TurboConvert supports MP4, MOV, and most common video containers via FFmpeg WASM.</p></details>
+    <details><summary>How long does conversion take? <div class="si"></div></summary><p>Most videos convert in under 30 seconds. Longer videos may take a minute or two.</p></details>
+    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 500 MB are supported.</p></details>
   </div>
-  <div class="rel"><h3>Related tools</h3>
-    <div class="rlinks">
+
+  <div class="related">
+    <h3>Related tools</h3>
+    <div class="related-links">
+      <a href="/mp3-to-wav" class="rl">MP3 to WAV</a>
       <a href="/wav-to-mp3" class="rl">WAV to MP3</a>
       <a href="/mp3-to-mp4" class="rl">MP3 to MP4</a>
-      <a href="/mp3-to-wav" class="rl">MP3 to WAV</a>
-      <a href="/compress-pdf" class="rl">Compress PDF</a>
       <a href="/compress-image" class="rl">Compress Image</a>
+      <a href="/pdf-to-jpg" class="rl">PDF to JPG</a>
     </div>
   </div>
 </div>

@@ -72,6 +72,11 @@
     footer{border-top:1px solid var(--line);padding:1.75rem 2.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:5rem}
     .fl a{font-size:.73rem;color:var(--mid);text-decoration:none;margin-left:1.25rem}
     footer p{font-size:.7rem;color:var(--soft)}
+      .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+    .related h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
+    .related-links{display:flex;flex-wrap:wrap;gap:.5rem}
+    .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
+    .rl:hover{border-color:var(--ink);color:var(--ink)}
   </style>
 
 
@@ -173,12 +178,31 @@
   <div class="dl" id="dl"><div class="dlck">✓</div><h3>Your file is ready.</h3><p>Your WAV file is ready to download.</p><button class="dlbtn" id="dlbtn">⬇ Download WAV</button><span class="again" id="again">Convert another file</span></div>
   <div class="feats"><div class="feat"><div class="feat-i">⚡</div><h4>Fast</h4><p>No upload — converted locally.</p></div><div class="feat"><div class="feat-i">🔒</div><h4>Private</h4><p>File never leaves your device.</p></div><div class="feat"><div class="feat-i">🆓</div><h4>Free</h4><p>No account, no limits.</p></div><div class="feat"><div class="feat-i">📱</div><h4>Any device</h4><p>Desktop or mobile.</p></div><div class="feat"><div class="feat-i">🎵</div><h4>High quality</h4><p>DAW-ready WAV output.</p></div><div class="feat"><div class="feat-i">📦</div><h4>No install</h4><p>Works in your browser.</p></div></div>
   <div class="body"><h2>Why convert MP3 to WAV?</h2><p>Professional audio editors — Audacity, Logic Pro, Pro Tools — work best with uncompressed WAV. Converting before editing avoids additional quality loss and ensures full compatibility.</p></div>
-  <div class="faq"><h2>Questions</h2>
-    <details open><summary>How does this work without uploading my file? <div class="si"></div></summary><p>TurboConvert uses FFmpeg compiled to WebAssembly, running entirely in your browser. Your file is never sent to any server.</p></details>
-    <details><summary>Will audio quality be preserved? <div class="si"></div></summary><p>Yes. Audio is extracted and encoded at high quality (VBR ~190 kbps). Indistinguishable from the source for most listeners.</p></details>
-    <details><summary>Why does it take a moment to start? <div class="si"></div></summary><p>The first conversion loads a ~20 MB WebAssembly engine. This is a one-time load per session — subsequent conversions start instantly.</p></details>
-    <details><summary>What file size is supported? <div class="si"></div></summary><p>Up to 500 MB — processed entirely in your browser.</p></details>
+    <div class="content">
+    <h2>Why convert MP3 to WAV?</h2>
+    <p>WAV is an uncompressed format preferred by audio editors, DAWs, and professional workflows. Converting MP3 to WAV gives you a format universally compatible with audio software.</p>
+    <p>TurboConvert uses FFmpeg WASM to convert in your browser — no upload, no quality degradation beyond what was already in the MP3.</p>
   </div>
+
+      <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <details open><summary>Does converting MP3 to WAV restore quality? <div class="si"></div></summary><p>No — converting back to WAV does not recover quality already lost in MP3 compression. It produces a WAV container with the same audio data.</p></details>
+    <details><summary>Why would I need WAV if quality is the same? <div class="si"></div></summary><p>Many DAWs (Ableton, Pro Tools, Logic) and audio editors work natively with WAV. Some workflows require uncompressed containers.</p></details>
+    <details><summary>What bitrate is used? <div class="si"></div></summary><p>The original MP3 bitrate is preserved. The output WAV is PCM 16-bit at the source sample rate.</p></details>
+    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 500 MB are supported.</p></details>
+  </div>
+
+    <div class="related">
+    <h3>Related tools</h3>
+    <div class="related-links">
+      <a href="/wav-to-mp3" class="rl">WAV to MP3</a>
+      <a href="/mp4-to-mp3" class="rl">MP4 to MP3</a>
+      <a href="/mp3-to-mp4" class="rl">MP3 to MP4</a>
+      <a href="/compress-image" class="rl">Compress Image</a>
+      <a href="/pdf-to-jpg" class="rl">PDF to JPG</a>
+    </div>
+  </div>
+</div>
 <div style="display:flex;justify-content:center;margin:24px 0;">
   <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
     data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>

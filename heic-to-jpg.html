@@ -86,6 +86,15 @@
     .fl { display: flex; gap: 1.25rem; }
     .fl a { font-size: 0.73rem; color: var(--mid); text-decoration: none; }
     footer p { font-size: 0.7rem; color: var(--soft); }
+      .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+    .blog-tip-label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+    .blog-tip-link{font-size:.82rem;color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:-.01em;transition:opacity .15s}
+    .blog-tip-link:hover{opacity:.7}
+      .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+    .related h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
+    .related-links{display:flex;flex-wrap:wrap;gap:.5rem}
+    .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
+    .rl:hover{border-color:var(--ink);color:var(--ink)}
   </style>
 
   <!-- Open Graph -->
@@ -197,22 +206,40 @@
     data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
-<div class="features">
-    <div class="feat"><div class="feat-icon">📱</div><h4>iPhone compatible</h4><p>Supports all HEIC and HEIF files from iPhone and iPad.</p></div>
-    <div class="feat"><div class="feat-icon">🔒</div><h4>100% private</h4><p>Processed in your browser — never uploaded to any server.</p></div>
-    <div class="feat"><div class="feat-icon">⚡</div><h4>Instant</h4><p>Conversion takes just a few seconds.</p></div>
-    <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no paywall, no limits.</p></div>
+  <div class="blog-tip">
+    <span class="blog-tip-label">📖 Guide</span>
+    <a href="/blog/heic-to-jpg" class="blog-tip-link">How to Convert HEIC to JPG →</a>
   </div>
-  <div class="faq"><h2>Questions</h2>
-    <details open><summary>What is a HEIC file?</summary><p>HEIC (High Efficiency Image Container) is the default photo format used by iPhones since iOS 11. It produces smaller files than JPG but isn't supported by all apps and platforms.</p></details>
-    <details><summary>Is my photo uploaded to a server?</summary><p>Never. TurboConvert processes everything locally in your browser using the heic2any library. Your photo never leaves your device.</p></details>
-    <details><summary>What if my file has the .heif extension?</summary><p>TurboConvert supports both .heic and .heif files — they are the same format with different extensions.</p></details>
+    <div class="features">
+    <div class="feat"><div class="feat-icon">🔒</div><h4>Stays on your device</h4><p>Nothing is ever uploaded to a server.</p></div>
+    <div class="feat"><div class="feat-icon">⚡</div><h4>Under 10 seconds</h4><p>Fast processing for most files.</p></div>
+    <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no subscription, no paywall.</p></div>
+    <div class="feat"><div class="feat-icon">📱</div><h4>Works on any device</h4><p>Desktop, tablet, or mobile browser.</p></div>
+    <div class="feat"><div class="feat-icon">∞</div><h4>No file limits</h4><p>Convert as many files as you need.</p></div>
+    <div class="feat"><div class="feat-icon">🎯</div><h4>High quality output</h4><p>Clean, accurate results every time.</p></div>
   </div>
-  <div class="rel"><h3>Related tools</h3>
-    <div class="rlinks">
+    <div class="content">
+    <h2>Why convert HEIC to JPG?</h2>
+    <p>HEIC is Apple's high-efficiency format — great for storage, but not supported by most Windows apps, websites, and older devices. Converting to JPG makes your photos universally compatible.</p>
+    <p>TurboConvert uses libheif compiled to WebAssembly to decode HEIC natively in your browser — fast, private, no upload.</p>
+  </div>
+
+      <div class="faq">
+    <h2>Frequently asked questions</h2>
+    <details open><summary>What is a HEIC file? <div class="si"></div></summary><p>HEIC (High Efficiency Image Container) is Apple's photo format used on iPhone since iOS 11. It's half the size of JPG at the same quality — but not universally supported.</p></details>
+    <details><summary>Will I lose quality converting to JPG? <div class="si"></div></summary><p>Minimal loss. TurboConvert exports at high JPG quality (90+%). The difference is not visible to the naked eye.</p></details>
+    <details><summary>Can I convert multiple HEIC files? <div class="si"></div></summary><p>Currently one file at a time. Batch conversion is on the roadmap.</p></details>
+    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 50 MB are supported.</p></details>
+  </div>
+
+    <div class="related">
+    <h3>Related tools</h3>
+    <div class="related-links">
+      <a href="/jpg-to-png" class="rl">JPG to PNG</a>
+      <a href="/png-to-jpg" class="rl">PNG to JPG</a>
+      <a href="/webp-to-jpg" class="rl">WebP to JPG</a>
       <a href="/compress-image" class="rl">Compress Image</a>
       <a href="/jpg-to-pdf" class="rl">JPG to PDF</a>
-      <a href="/png-to-jpg" class="rl">PNG to JPG</a>
     </div>
   </div>
 </div>
