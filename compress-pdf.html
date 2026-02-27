@@ -64,34 +64,61 @@
     .dlbtn{background:var(--ink);color:#fff;padding:.6rem 1.6rem;border-radius:6px;font-size:.82rem;font-weight:500;border:none;cursor:pointer;transition:opacity .15s}
     .dlbtn:hover{opacity:.8}
     .again{display:block;margin-top:.6rem;font-size:.75rem;color:var(--soft);cursor:pointer;text-decoration:underline}
-    .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2.5rem 0}
-    .feat{background:var(--white);padding:1.1rem}.feat-i{font-size:.95rem;margin-bottom:.4rem}
+    
+    
     .feat h4{font-size:.8rem;font-weight:500;margin-bottom:.15rem}
     .feat p{font-size:.72rem;color:var(--mid);line-height:1.4;font-weight:300}
-    .faq{margin-top:3rem}.faq h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
-    details{border-top:1px solid var(--line);padding:1rem 0}details:last-child{border-bottom:1px solid var(--line)}
-    summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.84rem;gap:1rem}
-    .si{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:var(--soft)}
-    details[open] .si{background:var(--ink);color:#fff;border-color:var(--ink)}
-    details[open] .si::after{content:'−'}.si::after{content:'+'}
-    details p{margin-top:.55rem;font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300}
-    .rel{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
-    .rel h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
-    .rlinks{display:flex;flex-wrap:wrap;gap:.5rem}
-    .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
-    .rl:hover{border-color:var(--ink);color:var(--ink)}
+    
+    
+    
+    
+    details[open] 
+    
+    
+    
+    
+    
+    
+    
     footer{border-top:1px solid var(--line);padding:1.75rem 2.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:5rem}
     .fl a{font-size:.73rem;color:var(--mid);text-decoration:none;margin-left:1.25rem}
     footer p{font-size:.7rem;color:var(--soft)}
-      .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
-    .blog-tip-label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
-    .blog-tip-link{font-size:.82rem;color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:-.01em;transition:opacity .15s}
+      
+    
+    
     .blog-tip-link:hover{opacity:.7}
-      .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+      
+    
+    
+    
+    
+      .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2.5rem 0}
+    @media(max-width:480px){.features{grid-template-columns:1fr 1fr}}
+    .feat{background:var(--white);padding:1.1rem}
+    .feat-icon{font-size:.95rem;margin-bottom:.4rem}
+    .feat h4{font-size:.8rem;font-weight:500;letter-spacing:-.01em;margin-bottom:.15rem}
+    .feat p{font-size:.72rem;color:var(--mid);line-height:1.4;font-weight:300}
+    .content{margin-top:3rem}
+    .content h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:.75rem}
+    .content p{font-size:.85rem;color:var(--mid);line-height:1.75;font-weight:300;margin-bottom:.6rem}
+    .faq{margin-top:3rem}
+    .faq h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    details{border-top:1px solid var(--line);padding:1rem 0}
+    details:last-child{border-bottom:1px solid var(--line)}
+    summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.84rem;gap:1rem}
+    .si{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:var(--soft);transition:all .15s}
+    details[open] .si{background:var(--ink);color:#fff;border-color:var(--ink)}
+    details[open] .si::after{content:'−'}.si::after{content:'+'}
+    details p{margin-top:.55rem;font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300}
+    .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
     .related h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
     .related-links{display:flex;flex-wrap:wrap;gap:.5rem}
     .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
     .rl:hover{border-color:var(--ink);color:var(--ink)}
+    .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+    .blog-tip-label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+    .blog-tip-link{font-size:.82rem;color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:-.01em;transition:opacity .15s}
+    .blog-tip-link:hover{opacity:.7}
   </style>
 
   <style>
@@ -215,11 +242,12 @@
     <br/>
     <button class="dlbtn" id="dlbtn">⬇ Download compressed PDF</button>
     <span class="again" id="again">Compress another file</span>
-    <div class="blog-tip">
+  </div>
+  <div class="blog-tip">
     <span class="blog-tip-label">📖 Guide</span>
     <a href="/blog/how-to-compress-pdf" class="blog-tip-link">How to Compress a PDF →</a>
   </div>
-        <div class="features">
+  <div class="features">
     <div class="feat"><div class="feat-icon">🔒</div><h4>Stays on your device</h4><p>Nothing is ever uploaded to a server.</p></div>
     <div class="feat"><div class="feat-icon">⚡</div><h4>Under 10 seconds</h4><p>Fast processing for most files.</p></div>
     <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no subscription, no paywall.</p></div>
@@ -227,13 +255,11 @@
     <div class="feat"><div class="feat-icon">∞</div><h4>No file limits</h4><p>Convert as many files as you need.</p></div>
     <div class="feat"><div class="feat-icon">🎯</div><h4>High quality output</h4><p>Clean, accurate results every time.</p></div>
   </div>
-<div class="content">
+  <div class="content">
     <h2>Why compress PDFs?</h2>
     <p>PDF files can balloon in size due to embedded fonts, high-resolution images, and metadata. A compressed PDF loads faster, attaches without issues, and takes less storage — without losing readability.</p>
     <p>TurboConvert runs Ghostscript directly in your browser via WebAssembly, giving you real compression — not just a re-save.</p>
   </div>
-
-    
   <div class="faq">
     <h2>Frequently asked questions</h2>
     <details open><summary>How much smaller will my PDF be? <div class="si"></div></summary><p>Typically 30–70% reduction. PDFs with many images compress the most. Already-compressed PDFs may show less reduction.</p></details>
@@ -241,7 +267,6 @@
     <details><summary>Can I choose the compression level? <div class="si"></div></summary><p>Yes. TurboConvert offers Screen, eBook, Printer, and Prepress quality settings.</p></details>
     <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 200 MB are supported.</p></details>
   </div>
-
   <div class="related">
     <h3>Related tools</h3>
     <div class="related-links">
@@ -252,6 +277,10 @@
       <a href="/pdf-to-jpg" class="rl">PDF to JPG</a>
     </div>
   </div>
+<div style="display:flex;justify-content:center;margin:24px 0;">
+  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;" data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 <footer>
   <a href="/" style="display:inline-flex;align-items:center;gap:.4rem;text-decoration:none"><div style="width:18px;height:18px;"><svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#111110"/><rect x="5" y="8" width="18" height="3" rx="1.5" fill="white"/><rect x="11.5" y="11" width="3" height="7" rx="1.5" fill="white"/><path d="M14.5 17.5L18 21M18 21H14.5M18 21V17.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-text">Turbo<span class="dim">Convert</span></div></a>
   <div class="fl"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/contact">Contact</a></div>

@@ -58,31 +58,58 @@
     .dlbtn-sec{background:var(--white);color:var(--ink);border:1px solid var(--line);padding:.6rem 1.6rem;border-radius:6px;font-size:.82rem;font-weight:500;cursor:pointer;transition:border-color .15s}
     .dlbtn-sec:hover{border-color:var(--ink)}
     .again{display:block;margin-top:.75rem;font-size:.75rem;color:var(--soft);cursor:pointer;text-decoration:underline;text-align:center}
-    .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2.5rem 0}
-    .feat{background:var(--white);padding:1.1rem}.feat-i{font-size:.95rem;margin-bottom:.4rem}
+    
+    
     .feat h4{font-size:.8rem;font-weight:500;margin-bottom:.15rem}
     .feat p{font-size:.72rem;color:var(--mid);line-height:1.4;font-weight:300}
-    .faq{margin-top:3rem}.faq h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
-    details{border-top:1px solid var(--line);padding:1rem 0}details:last-child{border-bottom:1px solid var(--line)}
-    summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.84rem;gap:1rem}
-    .si{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:var(--soft)}
-    details[open] .si{background:var(--ink);color:#fff;border-color:var(--ink)}
-    details[open] .si::after{content:'−'}.si::after{content:'+'}
-    details p{margin-top:.55rem;font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300}
-    .rel{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
-    .rel h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
-    .rlinks{display:flex;flex-wrap:wrap;gap:.5rem}
-    .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
-    .rl:hover{border-color:var(--ink);color:var(--ink)}
+    
+    
+    
+    
+    details[open] 
+    
+    
+    
+    
+    
+    
+    
     footer{border-top:1px solid var(--line);padding:1.75rem 2.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;margin-top:5rem}
     .fl a{font-size:.73rem;color:var(--mid);text-decoration:none;margin-left:1.25rem}
     footer p{font-size:.7rem;color:var(--soft)}
-      .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
+      
+    
+    
+    
+    
+      
+    
+    
+    .blog-tip-link:hover{opacity:.7}
+      .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2.5rem 0}
+    @media(max-width:480px){.features{grid-template-columns:1fr 1fr}}
+    .feat{background:var(--white);padding:1.1rem}
+    .feat-icon{font-size:.95rem;margin-bottom:.4rem}
+    .feat h4{font-size:.8rem;font-weight:500;letter-spacing:-.01em;margin-bottom:.15rem}
+    .feat p{font-size:.72rem;color:var(--mid);line-height:1.4;font-weight:300}
+    .content{margin-top:3rem}
+    .content h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:.75rem}
+    .content p{font-size:.85rem;color:var(--mid);line-height:1.75;font-weight:300;margin-bottom:.6rem}
+    .faq{margin-top:3rem}
+    .faq h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:1.25rem}
+    details{border-top:1px solid var(--line);padding:1rem 0}
+    details:last-child{border-bottom:1px solid var(--line)}
+    summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.84rem;gap:1rem}
+    .si{width:17px;height:17px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:var(--soft);transition:all .15s}
+    details[open] .si{background:var(--ink);color:#fff;border-color:var(--ink)}
+    details[open] .si::after{content:'−'}.si::after{content:'+'}
+    details p{margin-top:.55rem;font-size:.8rem;color:var(--mid);line-height:1.7;font-weight:300}
+    .related{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line)}
     .related h3{font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
     .related-links{display:flex;flex-wrap:wrap;gap:.5rem}
     .rl{background:var(--white);border:1px solid var(--line);padding:.4rem .85rem;border-radius:6px;font-size:.76rem;color:var(--mid);text-decoration:none;transition:border-color .15s,color .15s}
     .rl:hover{border-color:var(--ink);color:var(--ink)}
-      .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+    .blog-tip{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 0;padding:.85rem 1.1rem;background:var(--white);border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
     .blog-tip-label{font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
     .blog-tip-link{font-size:.82rem;color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:-.01em;transition:opacity .15s}
     .blog-tip-link:hover{opacity:.7}
@@ -201,7 +228,8 @@
       <button class="dlbtn" id="dlAll">⬇ Download all JPGs</button>
     </div>
     <span class="again" id="again">Convert another PDF</span>
-          <div class="features">
+  </div>
+  <div class="features">
     <div class="feat"><div class="feat-icon">🔒</div><h4>Stays on your device</h4><p>Nothing is ever uploaded to a server.</p></div>
     <div class="feat"><div class="feat-icon">⚡</div><h4>Under 10 seconds</h4><p>Fast processing for most files.</p></div>
     <div class="feat"><div class="feat-icon">🆓</div><h4>Always free</h4><p>No signup, no subscription, no paywall.</p></div>
@@ -209,13 +237,11 @@
     <div class="feat"><div class="feat-icon">∞</div><h4>No file limits</h4><p>Convert as many files as you need.</p></div>
     <div class="feat"><div class="feat-icon">🎯</div><h4>High quality output</h4><p>Clean, accurate results every time.</p></div>
   </div>
-<div class="content">
+  <div class="content">
     <h2>Why convert PDF to JPG?</h2>
     <p>JPG images of your PDF pages are easy to preview, embed in presentations, share on social media, or use anywhere that doesn't accept PDF files.</p>
     <p>TurboConvert renders each PDF page to a high-resolution canvas using pdf.js — entirely in your browser, no upload needed.</p>
   </div>
-
-    
   <div class="faq">
     <h2>Frequently asked questions</h2>
     <details open><summary>One JPG per page? <div class="si"></div></summary><p>Yes — each page of your PDF becomes a separate JPG file, downloaded as a zip archive.</p></details>
@@ -223,7 +249,6 @@
     <details><summary>Can I convert a specific page only? <div class="si"></div></summary><p>Currently the full PDF is converted. Per-page selection is on the roadmap.</p></details>
     <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
   </div>
-
   <div class="related">
     <h3>Related tools</h3>
     <div class="related-links">
@@ -234,10 +259,8 @@
       <a href="/merge-pdf" class="rl">Merge PDF</a>
     </div>
   </div>
-</div>
 <div style="display:flex;justify-content:center;margin:24px 0;">
-  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;"
-    data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+  <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;" data-ad-client="ca-pub-6238323731269830" data-ad-slot="auto" data-ad-format="rectangle"></ins>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 <footer>
