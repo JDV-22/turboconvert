@@ -220,11 +220,17 @@
   </div>
 
       <div class="faq">
+    <h2>When to convert JPG to PNG</h2>
+    <p>PNG is a lossless format, meaning it stores every pixel without any quality loss. JPG is lossy — it achieves smaller file sizes by permanently removing fine detail. Converting JPG to PNG doesn't recover lost detail (what JPG removed is gone), but it prevents any further quality loss in subsequent saves or edits.</p>
+    <p>Convert JPG to PNG when you need transparency (PNG supports alpha channels; JPG does not), when you're editing an image repeatedly and don't want cumulative quality loss, or when you need sharp edges on text, logos, or screenshots (PNG handles these better than JPG).</p>
+    <h2>File size difference</h2>
+    <p>PNG files are typically larger than JPG for photographs, because PNG's lossless compression is less efficient on complex photographic content. For web use, this means JPG is usually better for photos and PNG is better for graphics, screenshots, and images with text. If file size is a concern after converting, use the Compress Image tool to optimise the PNG output.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Why convert JPG to PNG? <div class="si"></div></summary><p>PNG supports transparency and lossless compression — ideal for logos, screenshots, and images that need a clean background.</p></details>
-    <details><summary>Will I lose quality? <div class="si"></div></summary><p>No. PNG is lossless — no additional compression artifacts are introduced.</p></details>
-    <details><summary>Does this support transparency? <div class="si"></div></summary><p>JPG files have no transparency information. The output PNG will have a white or opaque background.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 50 MB are supported.</p></details>
+    <details open><summary>Does converting JPG to PNG improve image quality? <div class="si"></div></summary><p>No — converting to PNG prevents further quality loss in future saves, but it does not recover detail that JPG compression already removed. The visual quality of the PNG will be identical to the JPG source.</p></details>
+    <details><summary>Why is my PNG file larger than the original JPG? <div class="si"></div></summary><p>PNG is lossless and stores more data per pixel than JPG. For photographic images, PNG files are naturally larger. This is expected and normal — the trade-off is zero quality loss in future edits.</p></details>
+    <details><summary>Will the converted PNG have a transparent background? <div class="si"></div></summary><p>No — JPG files don't support transparency. The converted PNG will have the same white or coloured background as the original JPG. Transparency must be added manually in an image editor after conversion.</p></details>
+    <details><summary>Is my image uploaded to a server? <div class="si"></div></summary><p>No. Conversion runs entirely in your browser using the Canvas API. Your image never leaves your device.</p></details>
+    <details><summary>What's the best format for web images — JPG or PNG? <div class="si"></div></summary><p>JPG for photographs and complex images (smaller file size, good quality). PNG for screenshots, logos, graphics with text, and images needing transparency. WebP is the best of both but has slightly less universal support.</p></details>
   </div>
 
       <div class="related">

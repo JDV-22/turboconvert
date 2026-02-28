@@ -243,11 +243,19 @@
     <p>TurboConvert renders each PDF page to a high-resolution canvas using pdf.js — entirely in your browser, no upload needed.</p>
   </div>
   <div class="faq">
+    <h2>Why convert PDF pages to JPG?</h2>
+    <p>Converting PDF pages to JPG images makes them viewable on any device without a PDF reader, embeddable in presentations and websites, shareable on platforms that don't accept PDF (Instagram, most messaging apps), and easier to preview as thumbnails in file managers.</p>
+    <p>It's particularly useful for extracting specific pages as standalone images — a chart, a diagram, or a signed contract page — without sharing the entire document.</p>
+    <h2>Resolution and quality</h2>
+    <p>TurboConvert renders each PDF page at high resolution (150 DPI by default) for clear, sharp output. Text remains legible and images retain their detail. The output JPG is suitable for screen viewing, web use, and standard printing. For large-format printing, consider using a higher DPI setting if available.</p>
+    <h2>Converting all pages vs. specific pages</h2>
+    <p>For multi-page PDFs, TurboConvert converts each page to a separate JPG file, packaged as a ZIP download. If you only need specific pages, use the Split PDF tool first to extract those pages, then convert the resulting PDF to JPG.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>One JPG per page? <div class="si"></div></summary><p>Yes — each page of your PDF becomes a separate JPG file, downloaded as a zip archive.</p></details>
-    <details><summary>What resolution is the output? <div class="si"></div></summary><p>Pages are rendered at 150 DPI by default — sharp enough for screen use and most printing.</p></details>
-    <details><summary>Can I convert a specific page only? <div class="si"></div></summary><p>Currently the full PDF is converted. Per-page selection is on the roadmap.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>Will converting a PDF to JPG reduce quality? <div class="si"></div></summary><p>PDF vector content (text, shapes) is rendered to pixels during conversion — at sufficient resolution (150+ DPI), the result is sharp and clear. Images already embedded in the PDF retain their original quality.</p></details>
+    <details><summary>Can I convert just one page of a PDF to JPG? <div class="si"></div></summary><p>Yes — use the Split PDF tool first to extract the page you need, then convert the single-page PDF to JPG. Alternatively, the PDF to JPG tool lets you select which pages to convert.</p></details>
+    <details><summary>Is my PDF uploaded when converting to JPG? <div class="si"></div></summary><p>No. Conversion runs entirely in your browser using PDF.js and the Canvas API. Your file never leaves your device.</p></details>
+    <details><summary>Can I use PDF to JPG to extract images from a PDF? <div class="si"></div></summary><p>The tool renders each page as a JPG image (including all content on that page). For extracting specific embedded images from within a page, you would need a dedicated PDF image extraction tool.</p></details>
+    <details><summary>What's the output resolution of the JPG files? <div class="si"></div></summary><p>Pages are rendered at 150 DPI by default, producing clear, sharp images suitable for web use and standard printing. Higher resolution output results in larger file sizes.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

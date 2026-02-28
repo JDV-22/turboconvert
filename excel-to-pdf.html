@@ -220,11 +220,17 @@
   </div>
 
       <div class="faq">
+    <h2>Why convert Excel to PDF?</h2>
+    <p>An Excel spreadsheet (XLSX) displays differently depending on the version of Excel, the screen size, and the printer settings of the device opening it. Rows and columns shift, formulas may be exposed, and the layout can break completely on different systems. Converting to PDF locks in the visual layout — what you see is what the recipient sees, on every device.</p>
+    <p>PDF is the standard for sharing financial reports, invoices, budgets, and data summaries where the visual presentation matters as much as the numbers. It also prevents accidental editing of the source data.</p>
+    <h2>Print area and page layout</h2>
+    <p>Before converting, it's worth setting the print area in Excel (Page Layout → Print Area → Set Print Area) to ensure only the relevant data is included in the PDF. Adjust column widths and row heights so the data fits cleanly on the page. Use Page Layout → Fit to → 1 page wide to avoid wide tables being split across multiple pages.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Will my spreadsheet formatting be preserved? <div class="si"></div></summary><p>Yes — borders, colours, fonts, and cell widths are preserved in the output PDF.</p></details>
-    <details><summary>Can I convert multi-sheet workbooks? <div class="si"></div></summary><p>Yes. Each sheet is converted to a separate page in the PDF.</p></details>
-    <details><summary>Do I need Excel installed? <div class="si"></div></summary><p>No. TurboConvert converts XLSX entirely in your browser.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 50 MB are supported.</p></details>
+    <details open><summary>Will formulas be visible in the converted PDF? <div class="si"></div></summary><p>No — the PDF shows the calculated values, not the formulas. This is the expected behaviour and makes PDFs safe to share without exposing your spreadsheet logic.</p></details>
+    <details><summary>Can I convert a multi-sheet Excel file to PDF? <div class="si"></div></summary><p>TurboConvert converts the active or selected sheet. To convert multiple sheets, you can convert each sheet separately or use Microsoft Excel's built-in Print to PDF with "Entire Workbook" selected.</p></details>
+    <details><summary>Is my spreadsheet uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs entirely in your browser. Your Excel file never leaves your device — nothing is uploaded or stored anywhere.</p></details>
+    <details><summary>What happens to charts and graphs when converting to PDF? <div class="si"></div></summary><p>Charts and graphs are rendered as images in the PDF output, preserving their visual appearance. They are not interactive in the PDF as they are in Excel.</p></details>
+    <details><summary>What's the maximum file size for Excel to PDF conversion? <div class="si"></div></summary><p>Files up to 100 MB are supported. Large spreadsheets with many rows or embedded images may take longer to process.</p></details>
   </div>
 
       <div class="related">

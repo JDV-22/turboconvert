@@ -261,11 +261,20 @@
     <p>TurboConvert runs Ghostscript directly in your browser via WebAssembly, giving you real compression — not just a re-save.</p>
   </div>
   <div class="faq">
+    <h2>How PDF compression works</h2>
+    <p>Most oversized PDFs contain high-resolution images embedded at print quality — 300 DPI or higher. For screen reading, 72–150 DPI is entirely sufficient. PDF compression works by re-encoding those embedded images at a lower resolution, reducing their size dramatically without changing the text or document structure.</p>
+    <p>TurboConvert uses Ghostscript compiled to WebAssembly — the industry-standard PDF processing engine — running entirely in your browser. A 30 MB scanned contract typically compresses to 2–5 MB with no visible quality loss at screen resolution.</p>
+    <h2>When compression works best — and when it doesn't</h2>
+    <p>Compression is most effective on PDFs containing scanned pages, photos, or images exported from design tools at print quality. A 50-page scanned report can go from 60 MB to under 5 MB. Text-only PDFs (generated directly from Word or similar) have very little image data to compress — savings are typically only 10–20% for these.</p>
+    <p>If your PDF is large despite having no images, the size is likely caused by embedded fonts or revision history. Re-saving via browser Print to PDF (Ctrl+P → Save as PDF) often strips this overhead and reduces the file by 20–40% without any compression tool.</p>
+    <h2>Choosing the right compression level</h2>
+    <p>For email attachments and web sharing, Maximum compression (72 DPI) gives the smallest file size — perfectly readable on any screen. For documents that might be printed, Balanced compression (150 DPI) preserves enough resolution for standard home printing. Avoid compressing a PDF that has already been compressed — each generation of lossy compression degrades image quality further.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>How much smaller will my PDF be? <div class="si"></div></summary><p>Typically 30–70% reduction. PDFs with many images compress the most. Already-compressed PDFs may show less reduction.</p></details>
-    <details><summary>Will quality be affected? <div class="si"></div></summary><p>Slightly — images inside the PDF are downsampled. Text and vector graphics remain sharp.</p></details>
-    <details><summary>Can I choose the compression level? <div class="si"></div></summary><p>Yes. TurboConvert offers Screen, eBook, Printer, and Prepress quality settings.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 200 MB are supported.</p></details>
+    <details open><summary>How much smaller will my PDF be after compression? <div class="si"></div></summary><p>For image-heavy PDFs (scans, presentations, photo-rich reports), expect 40–80% reduction. For text-only PDFs, savings are typically 10–20%. Results vary based on content type and the original image resolution.</p></details>
+    <details><summary>Will compression reduce text quality? <div class="si"></div></summary><p>No. Text in PDFs is stored as vector data (not images) and is unaffected by compression. Only embedded raster images are re-encoded. Text remains sharp at any zoom level.</p></details>
+    <details><summary>Is my PDF uploaded to a server when I compress it? <div class="si"></div></summary><p>No. TurboConvert runs Ghostscript in your browser via WebAssembly. Your file never leaves your device — there is no upload, no server processing, and nothing stored anywhere.</p></details>
+    <details><summary>Can I compress a PDF that's already been compressed? <div class="si"></div></summary><p>Technically yes, but each round of lossy compression degrades image quality further. If your PDF was already compressed, the gains will be minimal and quality may suffer. It's best to compress from the original high-quality source.</p></details>
+    <details><summary>What is the maximum file size for compression? <div class="si"></div></summary><p>TurboConvert supports PDF files up to 100 MB. For very large files, compression may take 20–30 seconds — this is normal as Ghostscript processes each page in your browser.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

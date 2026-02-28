@@ -220,11 +220,19 @@
   </div>
 
       <div class="faq">
+    <h2>Why PDF to Excel conversion is difficult</h2>
+    <p>PDFs store tables as a visual layout — rows and columns are implied by the position of text on the page, not stored as structured data. Unlike a native Excel file where every cell has a defined row and column, a PDF table is just text at specific coordinates. The converter has to infer the table structure from these positions, which works well for simple tables but struggles with merged cells, irregular spacing, or complex multi-level headers.</p>
+    <p>For best results, use PDFs that were originally generated from Excel or a reporting tool (not scanned). The table data is cleaner and the positions are more consistent, making accurate structure detection much more reliable.</p>
+    <h2>After conversion: essential cleanup steps</h2>
+    <p>Even a good conversion usually requires some cleanup in Excel. Numbers extracted from PDFs are often stored as text — select the column, then use Data → Text to Columns to convert them to numbers that can be used in formulas. Check for empty rows inserted between data rows, and verify that decimal points and thousand separators are correct (these vary by locale and occasionally get misread).</p>
+    <h2>Alternative for simple tables: copy and paste</h2>
+    <p>For PDFs with selectable text and a single simple table, the fastest approach is often to open the PDF in your browser, select the table content, copy it (Ctrl+C), and paste directly into a Google Sheets or Excel cell. This often preserves basic column structure without any tool.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>What kind of PDFs work best? <div class="si"></div></summary><p>PDFs with clearly structured tables and consistent spacing give the best results. Scanned PDFs may produce less accurate output.</p></details>
-    <details><summary>Will formulas be preserved? <div class="si"></div></summary><p>No — only values are extracted. Formulas and computed cells are not preserved in static PDF files.</p></details>
-    <details><summary>How many pages can I convert? <div class="si"></div></summary><p>There is no page limit. The entire PDF is processed.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>Can I convert a scanned PDF to Excel? <div class="si"></div></summary><p>Scanned PDFs (images without selectable text) are very difficult to convert accurately without OCR software. TurboConvert extracts selectable text only — for scanned documents, use a dedicated OCR tool first to make the text selectable.</p></details>
+    <details><summary>Why do numbers appear as text in my converted Excel file? <div class="si"></div></summary><p>Numbers from PDFs are extracted as text strings. To convert them to numeric values in Excel, select the column and use Data → Text to Columns, or multiply by 1 to force numeric conversion.</p></details>
+    <details><summary>Is my PDF uploaded to a server? <div class="si"></div></summary><p>No. Conversion runs entirely in your browser. Your file never leaves your device — nothing is uploaded or stored anywhere.</p></details>
+    <details><summary>What's the maximum file size for PDF to Excel conversion? <div class="si"></div></summary><p>Files up to 100 MB are supported. The conversion time varies based on the number of pages and the complexity of the tables.</p></details>
+    <details><summary>Can I convert a multi-page PDF with tables on every page? <div class="si"></div></summary><p>Yes — TurboConvert processes all pages. Each table is extracted and placed in the spreadsheet, with page breaks between sections. Review the output carefully to ensure tables from different pages are correctly separated.</p></details>
   </div>
 
       <div class="related">

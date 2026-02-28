@@ -250,11 +250,20 @@
     <p>TurboConvert uses pdf.js to extract text and structure, then builds a clean DOCX file — entirely in your browser.</p>
   </div>
   <div class="faq">
+    <h2>How PDF to Word conversion works</h2>
+    <p>PDFs store content as a fixed layout: text at exact coordinates, fonts embedded as files, images placed at precise positions. Word documents store content as a flow: paragraphs, styles, and structure that reflow based on the page. Converting between them requires reconstructing the document's structure from its visual appearance.</p>
+    <p>TurboConvert uses PDF.js to extract the text and layout from your PDF, then reconstructs a DOCX file using docx.js — entirely in your browser. For PDFs with clean, single-column layouts, the conversion is accurate. For complex multi-column layouts or tables, some manual cleanup may be needed.</p>
+    <h2>What converts well</h2>
+    <p>Text content, headings, paragraphs, and basic formatting (bold, italic) convert reliably. Images are extracted and embedded in the DOCX. Single-column documents with a clear hierarchy come out cleanest. PDFs originally created from Word documents convert with the highest accuracy.</p>
+    <p>Complex tables, text in unusual orientations, heavily formatted layouts, and PDFs that were originally scanned (no selectable text) are harder to convert accurately. Scanned PDFs require OCR software to extract text — TurboConvert extracts existing selectable text only.</p>
+    <h2>After conversion: what to check</h2>
+    <p>After downloading your DOCX, open it in Word or Google Docs. Check that headings are correctly styled (use the Styles panel to apply Heading 1, Heading 2 etc. for proper structure), that tables are intact and aligned, and that images are in the expected positions. For contracts or legal documents, always cross-reference the DOCX against the original PDF before use.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>How accurate is the conversion? <div class="si"></div></summary><p>Text, paragraphs, and basic formatting are extracted accurately. Complex layouts may be simplified.</p></details>
-    <details><summary>Will images be included? <div class="si"></div></summary><p>Text is extracted with high fidelity. Image extraction from PDFs is limited in browser-based processing.</p></details>
-    <details><summary>Can I convert password-protected PDFs? <div class="si"></div></summary><p>Password-protected PDFs are not currently supported. Remove the password first.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>How accurate is the PDF to Word conversion? <div class="si"></div></summary><p>For PDFs with clean single-column text layouts, accuracy is very high. Complex tables, multi-column layouts, and heavily formatted documents may need manual cleanup. PDFs originally created from Word convert with the best results.</p></details>
+    <details><summary>Can I convert a scanned PDF to Word? <div class="si"></div></summary><p>TurboConvert extracts selectable text from PDFs. Scanned PDFs (images without selectable text) require OCR software to convert — the tool will produce a DOCX with no text content for these files.</p></details>
+    <details><summary>Is my PDF uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs entirely in your browser. Your document never leaves your device — nothing is uploaded or stored anywhere.</p></details>
+    <details><summary>Will my PDF's images be included in the Word document? <div class="si"></div></summary><p>Yes — images embedded in the PDF are extracted and included in the DOCX output. Their position and size may need minor adjustment depending on the original layout.</p></details>
+    <details><summary>Can I edit the Word document after conversion? <div class="si"></div></summary><p>Yes — the output is a standard DOCX file fully editable in Microsoft Word, Apple Pages, Google Docs, or LibreOffice Writer.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

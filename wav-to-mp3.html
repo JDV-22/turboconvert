@@ -243,11 +243,17 @@
     <p>TurboConvert uses FFmpeg compiled to WebAssembly to convert entirely in your browser. No upload, adjustable bitrate.</p>
   </div>
   <div class="faq">
+    <h2>WAV vs MP3: the essential difference</h2>
+    <p>WAV is an uncompressed audio format — every sample of sound is stored with no data removed. This makes WAV ideal for recording and editing: there's no quality ceiling from previous compression, and the file can be processed repeatedly without degradation. The trade-off is file size: a 3-minute stereo WAV at CD quality is around 30 MB.</p>
+    <p>MP3 uses psychoacoustic compression — it removes audio frequencies that the human ear is least likely to notice, achieving file sizes 8–10× smaller than WAV with minimal perceptible quality loss. At 192 kbps, most listeners cannot distinguish MP3 from WAV in blind tests.</p>
+    <h2>When to keep WAV and when to convert</h2>
+    <p>Keep WAV for recording masters, audio editing projects, and archiving. Convert to MP3 for sharing, streaming, podcast publishing, uploading to music platforms, and everyday listening. The rule: record and edit in WAV, distribute as MP3. Never discard the WAV original.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>What bitrate is the output MP3? <div class="si"></div></summary><p>TurboConvert uses 192kbps by default — transparent quality for most listening scenarios.</p></details>
-    <details><summary>How much smaller will the MP3 be? <div class="si"></div></summary><p>WAV files are typically 8–10× larger than MP3 at 192kbps. A 50 MB WAV becomes around 5–6 MB.</p></details>
-    <details><summary>Will there be any quality loss? <div class="si"></div></summary><p>MP3 uses lossy compression — some audio data is discarded. At 192kbps, the difference is inaudible to most listeners.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 500 MB are supported.</p></details>
+    <details open><summary>Does converting WAV to MP3 reduce audio quality? <div class="si"></div></summary><p>Yes, but minimally at standard bitrates. At 192 kbps or higher, the difference is imperceptible to most listeners including trained audio engineers in blind tests. Always keep the original WAV as a master copy.</p></details>
+    <details><summary>What bitrate should I use for WAV to MP3 conversion? <div class="si"></div></summary><p>192 kbps is the sweet spot for music and high-quality audio. 128 kbps is standard for podcasts and voice recordings. TurboConvert uses a high-quality default bitrate suitable for most uses.</p></details>
+    <details><summary>Is my audio file uploaded to a server? <div class="si"></div></summary><p>No. TurboConvert uses FFmpeg compiled to WebAssembly — running entirely in your browser. Your audio never leaves your device.</p></details>
+    <details><summary>What is the maximum WAV file size supported? <div class="si"></div></summary><p>TurboConvert supports WAV files up to 100 MB — more than enough for most recordings. A 100 MB WAV is approximately 9 minutes of stereo audio at CD quality.</p></details>
+    <details><summary>Can I convert other audio formats to MP3? <div class="si"></div></summary><p>The WAV to MP3 tool is optimised for WAV input. For MP4/video files, use the MP4 to MP3 tool. For M4A files, the WAV to MP3 tool also handles this format.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

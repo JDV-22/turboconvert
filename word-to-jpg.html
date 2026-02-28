@@ -148,11 +148,17 @@
   </div>
 
       <div class="faq">
+    <h2>Why convert a Word document to JPG?</h2>
+    <p>Converting a Word document (DOCX) to JPG images makes each page viewable as a standard image — no Word, no PDF reader, no special software needed. It's useful for sharing document content on platforms that don't accept DOCX or PDF (social media, messaging apps), creating thumbnail previews of documents, or embedding document pages in websites and presentations.</p>
+    <p>Each page of the Word document becomes a separate JPG image. The output preserves the visual appearance of the page — fonts, images, layout — exactly as it would appear when printed.</p>
+    <h2>How the conversion works</h2>
+    <p>TurboConvert first converts the DOCX to PDF using mammoth.js and pdf-lib in your browser, then renders each PDF page as a JPG image using the Canvas API. The entire process runs locally — nothing is uploaded to any server. The result is a ZIP file containing one JPG per page.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>How do I convert Word to JPG for free? <div class="si"></div></summary><p>Upload your DOCX file above, click "Convert to JPG", and download your image. Free, no account required.</p></details>
-    <details><summary>Will fonts and formatting be preserved? <div class="si"></div></summary><p>Text, headings, bold/italic, lists, and tables are preserved. Complex Office-specific formatting may be simplified.</p></details>
-    <details><summary>Can I convert .doc files? <div class="si"></div></summary><p>Yes, both .doc and .docx formats are supported.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>Will the JPG look exactly like my Word document? <div class="si"></div></summary><p>The output closely matches the visual appearance of the document. Standard fonts and layouts render accurately. Custom fonts not embedded in the DOCX may be substituted, causing minor visual differences.</p></details>
+    <details><summary>Can I convert just one page of a Word document to JPG? <div class="si"></div></summary><p>TurboConvert converts all pages to individual JPG files. To get just one page, open the ZIP download and use only the image for the page you need.</p></details>
+    <details><summary>Is my Word document uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs entirely in your browser. Your document never leaves your device — nothing is uploaded or stored anywhere.</p></details>
+    <details><summary>What resolution are the output JPG files? <div class="si"></div></summary><p>Pages are rendered at 150 DPI, producing clear, sharp images suitable for screen viewing, web use, and standard printing.</p></details>
+    <details><summary>Can I convert a password-protected Word document? <div class="si"></div></summary><p>No — password-protected DOCX files cannot be processed. Remove the password protection in Word first (Review → Protect Document → Remove Protection), then convert.</p></details>
   </div>
 
       <div class="related">

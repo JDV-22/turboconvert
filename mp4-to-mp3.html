@@ -246,11 +246,20 @@
     <p>TurboConvert uses FFmpeg compiled to WebAssembly to extract audio directly in your browser. No upload, no account.</p>
   </div>
   <div class="faq">
+    <h2>Why extract audio from a video?</h2>
+    <p>Extracting the audio track from a video as an MP3 file is useful in many situations: saving a music performance, extracting a podcast recorded as video, creating a ringtone from a clip, grabbing a voiceover for use in another project, or simply keeping the audio version of a video for listening without needing to play the full video file.</p>
+    <p>MP3 is the universal audio format — compatible with every device, music player, and streaming platform. A 10-minute MP4 video of 150 MB becomes a 9 MB MP3 — dramatically smaller and easier to share.</p>
+    <h2>Audio quality from video extraction</h2>
+    <p>The quality of the extracted MP3 depends on the audio quality in the original video file. If the source video had high-quality stereo audio at 192 kbps or higher, the extracted MP3 will sound excellent. If the video was recorded at low quality (conference calls, screen recordings), the audio quality ceiling is set by the source — no extraction tool can add quality that wasn't there originally.</p>
+    <p>TurboConvert uses FFmpeg compiled to WebAssembly to extract the audio stream directly — the same professional tool used in video production workflows — running entirely in your browser.</p>
+    <h2>Supported video formats</h2>
+    <p>MP4 is the primary format, but MOV, AVI, MKV, and most other common video formats are also supported. The tool detects the format automatically from the file you upload.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Will the audio quality change? <div class="si"></div></summary><p>No quality is lost during extraction. The MP3 is encoded from the original audio stream at 192kbps by default.</p></details>
-    <details><summary>Can I extract audio from any video format? <div class="si"></div></summary><p>TurboConvert supports MP4, MOV, and most common video containers via FFmpeg WASM.</p></details>
-    <details><summary>How long does conversion take? <div class="si"></div></summary><p>Most videos convert in under 30 seconds. Longer videos may take a minute or two.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 500 MB are supported.</p></details>
+    <details open><summary>Does extracting MP3 from MP4 reduce audio quality? <div class="si"></div></summary><p>If the original video contains an MP3 or AAC audio stream, extraction is effectively lossless — the audio data is copied directly. If re-encoding is needed, quality loss is minimal at standard bitrates.</p></details>
+    <details><summary>Can I extract audio from YouTube videos? <div class="si"></div></summary><p>TurboConvert processes files from your device only — it does not download or process online videos. Download the video file first (where permitted by the platform's terms of service), then extract the audio using TurboConvert.</p></details>
+    <details><summary>What video formats does the MP4 to MP3 converter support? <div class="si"></div></summary><p>MP4, MOV, AVI, MKV, and most common video formats are supported. Upload your file and TurboConvert detects the format automatically.</p></details>
+    <details><summary>Is my video uploaded to a server? <div class="si"></div></summary><p>No. FFmpeg runs in your browser via WebAssembly. Your video file never leaves your device — nothing is uploaded or sent to any server.</p></details>
+    <details><summary>What is the maximum video file size? <div class="si"></div></summary><p>TurboConvert supports video files up to 500 MB — large enough for most use cases including long recordings and HD videos.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

@@ -262,11 +262,19 @@
     <p>TurboConvert merges PDFs client-side using pdf-lib. No file size cap imposed by a server, no data sent anywhere.</p>
   </div>
   <div class="faq">
+    <h2>When to merge PDF files</h2>
+    <p>Merging PDFs is useful whenever you need to combine separate documents into a single, coherent file. Common scenarios include combining a cover letter with a CV, assembling a multi-section report from separate chapter files, compiling invoices or receipts for accounting, or creating a single presentation document from multiple sources.</p>
+    <p>A merged PDF is easier to share (one attachment instead of several), simpler to archive, and more professional when presenting to clients or employers.</p>
+    <h2>How page order works</h2>
+    <p>TurboConvert merges PDFs in the order you add them to the upload zone. Drag to reorder files before merging if needed. The output contains all pages from the first PDF, followed by all pages from the second, and so on. Individual pages cannot be reordered within a PDF at this stage — if you need to reorder pages within a document, use the Split PDF tool first to extract individual pages, then merge in the desired order.</p>
+    <h2>File size after merging</h2>
+    <p>The merged PDF file size is approximately the sum of all input files. If the result is too large for email (over 25 MB) or sharing, run it through the Compress PDF tool after merging to reduce the size without visible quality loss.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>How many PDFs can I merge at once? <div class="si"></div></summary><p>There is no hard limit — merge as many PDFs as needed. Performance depends on total file size and your device.</p></details>
-    <details><summary>Can I reorder pages before merging? <div class="si"></div></summary><p>You can drag to reorder files before merging. Per-page reordering is on the roadmap.</p></details>
-    <details><summary>Will bookmarks and links be preserved? <div class="si"></div></summary><p>Basic PDF structure is preserved. Complex interactive elements may not transfer.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Individual files up to 200 MB are supported.</p></details>
+    <details open><summary>How many PDFs can I merge at once? <div class="si"></div></summary><p>There is no limit on the number of files. Add as many PDFs as needed — TurboConvert processes all of them in your browser without any upload.</p></details>
+    <details><summary>Can I reorder pages when merging? <div class="si"></div></summary><p>You can reorder the files before merging by dragging them in the upload zone. Each file's pages are included in full, in order. For page-level reordering within a document, split the PDF into individual pages first, then merge in the order you need.</p></details>
+    <details><summary>Are my PDFs uploaded to a server? <div class="si"></div></summary><p>No. Merging runs entirely in your browser using pdf-lib compiled to WebAssembly. Your files never leave your device — nothing is uploaded or stored anywhere.</p></details>
+    <details><summary>What happens to bookmarks and links when I merge PDFs? <div class="si"></div></summary><p>Internal bookmarks from each PDF are preserved in the merged output. Cross-document links (links that pointed to a specific page in a separate file) will not function correctly after merging, as the page references change.</p></details>
+    <details><summary>How do I merge PDFs on Mac for free? <div class="si"></div></summary><p>Use TurboConvert in any browser on Mac — no software installation required. Alternatively, macOS Preview has a built-in merge function: open one PDF, show the Thumbnail panel, then drag pages from another PDF into the panel and save.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

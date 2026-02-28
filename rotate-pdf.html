@@ -258,11 +258,19 @@
     <p>TurboConvert uses pdf-lib to rotate pages directly in your browser — your original file is never sent to a server.</p>
   </div>
   <div class="faq">
+    <h2>Why PDF pages end up sideways</h2>
+    <p>Pages end up rotated in a PDF for a few common reasons: scanning a document in the wrong orientation, saving a photo as PDF in portrait mode when the image is landscape, exporting from software that applied a rotation inconsistently, or receiving a document where the sender's printer orientation settings were wrong.</p>
+    <p>The rotation is stored as metadata in the PDF — the actual page content is unchanged. Rotating it back is a lossless operation that simply updates that metadata.</p>
+    <h2>Rotate all pages or selected pages</h2>
+    <p>TurboConvert lets you rotate all pages at once (useful for a fully sideways document) or rotate specific pages individually. You can rotate 90° clockwise, 90° counter-clockwise, or 180°. Multiple rotation passes are also possible if a page needs more than one 90° adjustment.</p>
+    <h2>Saving the rotation permanently</h2>
+    <p>Some PDF viewers display a rotation that isn't permanently saved to the file — if you close and reopen the PDF, it appears sideways again. TurboConvert writes the rotation permanently into the PDF file itself, so it opens correctly in every viewer without any manual adjustment.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Can I rotate individual pages? <div class="si"></div></summary><p>Yes — you can choose which pages to rotate and by how much (90°, 180°, 270°).</p></details>
-    <details><summary>Is the rotation permanent? <div class="si"></div></summary><p>Yes — the output PDF has the rotation baked in, so it opens correctly on any device.</p></details>
-    <details><summary>Will the content be affected? <div class="si"></div></summary><p>No — only the page orientation changes. Text, images, and links are untouched.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 200 MB are supported.</p></details>
+    <details open><summary>Can I rotate just one page in a PDF? <div class="si"></div></summary><p>Yes — select the specific page number to rotate and leave the rest unchanged. You can also rotate different pages by different amounts in a single operation.</p></details>
+    <details><summary>Does rotating a PDF reduce image quality? <div class="si"></div></summary><p>No. PDF rotation is a lossless metadata operation — no image re-encoding occurs. The visual content of the page is completely unchanged.</p></details>
+    <details><summary>Will the rotation be saved permanently? <div class="si"></div></summary><p>Yes. TurboConvert writes the rotation into the PDF file itself. The downloaded file will open in the correct orientation in every PDF viewer, without any manual rotation needed.</p></details>
+    <details><summary>Is my PDF uploaded to a server? <div class="si"></div></summary><p>No. Rotation runs entirely in your browser using pdf-lib. Your file never leaves your device.</p></details>
+    <details><summary>Can I rotate a scanned PDF? <div class="si"></div></summary><p>Yes — scanned PDFs (where pages are images) rotate exactly the same way as any other PDF. The scanned image is rotated as part of the page, with no quality loss.</p></details>
   </div>
   <div class="related">
     <h3>Related tools</h3>

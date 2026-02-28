@@ -185,11 +185,17 @@
   </div>
 
       <div class="faq">
+    <h2>Why convert MP3 to WAV?</h2>
+    <p>Professional audio software — DAWs like Logic Pro, Pro Tools, Ableton, and Audacity — work best with uncompressed audio. Importing an MP3 into some of these tools causes them to transcode it to WAV internally anyway. Converting to WAV beforehand gives you explicit control over the format and ensures compatibility with any audio pipeline.</p>
+    <p>Other common reasons: a client or platform specifying WAV delivery, preparing audio for video editing software that requires uncompressed audio tracks, or archiving audio at a format that won't require re-encoding in future workflows.</p>
+    <h2>What to expect: no quality gain, but no further loss</h2>
+    <p>Converting MP3 to WAV does not recover quality that MP3 compression already removed — that data is permanently gone. The WAV file will be much larger but will sound identical to the MP3 source. The benefit is that the WAV can now be processed and re-saved repeatedly without any further quality degradation, whereas re-encoding MP3 to MP3 degrades quality each time.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Does converting MP3 to WAV restore quality? <div class="si"></div></summary><p>No — converting back to WAV does not recover quality already lost in MP3 compression. It produces a WAV container with the same audio data.</p></details>
-    <details><summary>Why would I need WAV if quality is the same? <div class="si"></div></summary><p>Many DAWs (Ableton, Pro Tools, Logic) and audio editors work natively with WAV. Some workflows require uncompressed containers.</p></details>
-    <details><summary>What bitrate is used? <div class="si"></div></summary><p>The original MP3 bitrate is preserved. The output WAV is PCM 16-bit at the source sample rate.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 500 MB are supported.</p></details>
+    <details open><summary>Does converting MP3 to WAV improve audio quality? <div class="si"></div></summary><p>No — converting to WAV does not recover the quality that MP3 compression removed. The WAV will sound identical to the MP3 but will be much larger. The benefit is preventing further quality loss in future processing.</p></details>
+    <details><summary>Why is the WAV file so much larger than the MP3? <div class="si"></div></summary><p>WAV is uncompressed — it stores every audio sample without compression. A 3-minute MP3 at 192 kbps (~4 MB) becomes a ~30 MB WAV at CD quality. This is expected and normal.</p></details>
+    <details><summary>Is my audio uploaded to a server? <div class="si"></div></summary><p>No. TurboConvert uses FFmpeg in your browser via WebAssembly. Your file never leaves your device.</p></details>
+    <details><summary>What sample rate and bit depth is the WAV output? <div class="si"></div></summary><p>The output matches the source MP3's sample rate (typically 44.1 kHz) at 16-bit depth — standard CD quality, compatible with all professional audio software.</p></details>
+    <details><summary>Can I use the WAV file in professional audio software after conversion? <div class="si"></div></summary><p>Yes — the output is a standard PCM WAV file compatible with all DAWs and audio editors including Logic Pro, Ableton, Pro Tools, Audacity, and Adobe Audition.</p></details>
   </div>
 
     <div class="related">
