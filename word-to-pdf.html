@@ -220,11 +220,20 @@
   </div>
 
       <div class="faq">
+    <h2>Why convert Word to PDF?</h2>
+    <p>A Word document (DOCX) looks different depending on the version of Microsoft Word, the operating system, and the fonts installed on the device opening it. Margins shift, fonts substitute, and layout breaks — especially when sharing with people using different software.</p>
+    <p>PDF solves this by embedding everything — fonts, layout, images — into a fixed format that looks identical on every device. It's the standard for contracts, CVs, invoices, reports, and any document that needs to look exactly as intended when received.</p>
+    <h2>How TurboConvert converts DOCX to PDF</h2>
+    <p>TurboConvert uses mammoth.js to parse the Word document structure and pdf-lib to generate the PDF — both running in your browser as WebAssembly. No version of Microsoft Office is required, and your document never leaves your device.</p>
+    <p>Standard formatting including headings, paragraphs, bold, italic, lists, and embedded images converts reliably. Very complex layouts with custom styles or advanced table formatting may need minor review after conversion.</p>
+    <h2>Other ways to convert Word to PDF</h2>
+    <p>If you have Microsoft Word installed, you can also go to File → Save As → PDF directly — this gives the highest fidelity conversion since Word knows its own format perfectly. On Mac, any application can print to PDF using File → Print → Save as PDF. Google Docs can also import DOCX files and export them as PDF via File → Download → PDF Document.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Will fonts and formatting be preserved? <div class="si"></div></summary><p>Yes — headings, paragraphs, bold, italic, and lists are preserved. Complex Office-specific layouts may be simplified.</p></details>
-    <details><summary>Do I need Microsoft Word installed? <div class="si"></div></summary><p>No. TurboConvert converts DOCX entirely in your browser — no software required.</p></details>
-    <details><summary>Can I convert .doc files? <div class="si"></div></summary><p>Yes, both .doc and .docx formats are supported.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>Will fonts and layout be preserved in the PDF? <div class="si"></div></summary><p>Standard fonts and layouts convert accurately. Custom or uncommon fonts may be substituted if they're not embedded in the DOCX file. For critical documents, review the PDF after conversion.</p></details>
+    <details><summary>Do I need Microsoft Word installed to use this tool? <div class="si"></div></summary><p>No. TurboConvert converts DOCX to PDF entirely in your browser using JavaScript libraries. Microsoft Office is not required on any device.</p></details>
+    <details><summary>Is my Word document uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs locally in your browser. Your document never leaves your device — there is no upload and no server processing.</p></details>
+    <details><summary>Can I convert a password-protected Word document? <div class="si"></div></summary><p>Password-protected DOCX files cannot be converted until the password is removed. Open the file in Word first, remove the protection under Review → Protect Document, then convert.</p></details>
+    <details><summary>What's the maximum file size for Word to PDF conversion? <div class="si"></div></summary><p>Files up to 100 MB are supported. Most Word documents are well under this limit — even those with many embedded images.</p></details>
   </div>
 
       <div class="related">

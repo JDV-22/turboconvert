@@ -234,11 +234,20 @@
   </div>
 
       <div class="faq">
+    <h2>Why image compression matters</h2>
+    <p>A photo taken on a modern smartphone is typically 3–8 MB. That's fine for printing or archiving, but oversized for email attachments, website uploads, and social media. Large images slow down web pages, hit attachment limits, and consume unnecessary storage on phones and computers.</p>
+    <p>Image compression reduces file size by encoding the visual data more efficiently. At standard compression settings, the quality difference is invisible to the human eye — you get a file 50–90% smaller with no perceptible loss in sharpness or colour accuracy.</p>
+    <h2>Lossy vs lossless compression</h2>
+    <p>JPG compression is lossy — it permanently removes fine detail that the human eye is unlikely to notice, achieving large size reductions. PNG compression is lossless — it reorganises data without removing any, resulting in smaller savings but zero quality loss. For photos, JPG compression at 80–85% quality is the standard approach. For graphics, logos, or images with text, PNG lossless is preferable.</p>
+    <p>TurboConvert uses the browser's native canvas engine to re-encode your image at optimised quality settings. JPG and WebP output give the best compression ratios; PNG output prioritises lossless quality.</p>
+    <h2>Target sizes for common use cases</h2>
+    <p>For email attachments, aim for under 1 MB per image. For web pages, 100–300 KB per image is a good target for fast loading. For WhatsApp and social media, under 1 MB is ideal. For printing at A4 or larger, keep images above 1 MB to preserve sharpness at high resolution.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>Which formats are supported? <div class="si"></div></summary><p>JPG, PNG, and WebP images are supported. HEIC requires the dedicated HEIC to JPG converter.</p></details>
-    <details><summary>How much will my image be compressed? <div class="si"></div></summary><p>Typically 50–90% reduction depending on the original quality and format. Photos compress more than graphics.</p></details>
-    <details><summary>Will the dimensions change? <div class="si"></div></summary><p>No. Only the file size changes — the pixel dimensions stay identical.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 50 MB are supported.</p></details>
+    <details open><summary>Which image formats does TurboConvert compress? <div class="si"></div></summary><p>JPG, PNG, and WebP are all supported. Upload any of these formats and download the compressed result in the same format or as JPG for maximum compression.</p></details>
+    <details><summary>How much smaller will my image be after compression? <div class="si"></div></summary><p>Typically 50–90% smaller for JPG photos. PNG files compress less — usually 20–50% — since PNG is already a compressed format. Results vary depending on the image content.</p></details>
+    <details><summary>Will compressing an image reduce its resolution? <div class="si"></div></summary><p>No — TurboConvert preserves the original pixel dimensions. Only the file size is reduced, not the width or height of the image. If you need to resize the image as well, adjust the dimensions in the tool settings.</p></details>
+    <details><summary>Is my image uploaded to a server when compressed? <div class="si"></div></summary><p>No. Compression runs entirely in your browser using the Canvas API. Your images never leave your device — there is no upload and no server involved.</p></details>
+    <details><summary>Can I compress multiple images at once? <div class="si"></div></summary><p>TurboConvert currently processes one image at a time. For batch compression of many images, you can process them sequentially — each conversion takes only a few seconds.</p></details>
   </div>
 
       <div class="related">

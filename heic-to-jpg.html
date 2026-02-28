@@ -225,11 +225,20 @@
   </div>
 
       <div class="faq">
+    <h2>Why iPhones use HEIC — and why it causes problems</h2>
+    <p>Apple introduced HEIC (High Efficiency Image Container) with iOS 11 in 2017. It uses the HEVC codec to store photos at roughly half the file size of JPEG with equivalent visual quality — a meaningful difference when you're taking thousands of photos on a phone with limited storage.</p>
+    <p>The problem is compatibility. Windows doesn't support HEIC natively without installing a codec from the Microsoft Store. Most web platforms, older Android devices, and many photo editing apps don't support it either. This means HEIC photos often appear as blank icons or fail to upload entirely.</p>
+    <h2>How TurboConvert converts HEIC to JPG</h2>
+    <p>TurboConvert uses libheif compiled to WebAssembly — the same open-source library used by professional image tools — running entirely in your browser. This means your photos are decoded and re-encoded to JPG locally, with no upload to any server. A photo that's private stays private.</p>
+    <p>The conversion preserves the full image resolution and produces a standard JPG compatible with every device, platform, and app. EXIF metadata (camera settings, date taken) is preserved where possible.</p>
+    <h2>How to stop iPhone saving photos as HEIC</h2>
+    <p>If you'd rather avoid the conversion step entirely, you can change your iPhone's camera format. Go to Settings → Camera → Formats, and select <strong>Most Compatible</strong> instead of High Efficiency. Your iPhone will then save photos as JPEG directly. The trade-off is slightly larger photo files.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>What is a HEIC file? <div class="si"></div></summary><p>HEIC (High Efficiency Image Container) is Apple's photo format used on iPhone since iOS 11. It's half the size of JPG at the same quality — but not universally supported.</p></details>
-    <details><summary>Will I lose quality converting to JPG? <div class="si"></div></summary><p>Minimal loss. TurboConvert exports at high JPG quality (90+%). The difference is not visible to the naked eye.</p></details>
-    <details><summary>Can I convert multiple HEIC files? <div class="si"></div></summary><p>Currently one file at a time. Batch conversion is on the roadmap.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 50 MB are supported.</p></details>
+    <details open><summary>What is a HEIC file and why can't Windows open it? <div class="si"></div></summary><p>HEIC is Apple's photo format, introduced in iOS 11. Windows doesn't support it natively. To open HEIC files on Windows, either convert them to JPG using TurboConvert, or install the HEIF Image Extensions codec from the Microsoft Store.</p></details>
+    <details><summary>Does converting HEIC to JPG reduce image quality? <div class="si"></div></summary><p>There is a small quality reduction, since JPG uses lossy compression. However, at standard quality settings the difference is invisible in normal use. The converted JPG will be fully sharp and usable for printing, sharing, and editing.</p></details>
+    <details><summary>Can I convert multiple HEIC files at once? <div class="si"></div></summary><p>TurboConvert currently processes one file at a time. For batch conversion of many HEIC photos, you can also use the built-in Photos app on Mac (File → Export → Export as JPG) or iCloud.com to download photos directly as JPG.</p></details>
+    <details><summary>Are my photos uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs entirely in your browser. Your photos never leave your device — there is no upload, no server processing, and no storage of your images anywhere.</p></details>
+    <details><summary>How do I convert HEIC to JPG on Windows? <div class="si"></div></summary><p>Use TurboConvert's HEIC to JPG tool — it works in any modern browser on Windows without any software installation. Open the tool, drop your HEIC file, and download the JPG. The conversion takes a few seconds.</p></details>
   </div>
 
     <div class="related">

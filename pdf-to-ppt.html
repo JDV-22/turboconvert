@@ -220,11 +220,21 @@
   </div>
 
       <div class="faq">
+    <h2>How PDF to PowerPoint conversion works</h2>
+    <p>PDF files store content as a fixed visual layout — text positions, images, and fonts are embedded at exact coordinates on the page. PowerPoint, by contrast, stores content as editable objects: text boxes, shapes, and image layers that can be moved, resized, and reformatted freely.</p>
+    <p>TurboConvert uses pdf.js to parse the PDF structure directly in your browser, then reconstructs each page as a PowerPoint slide using the pptxgenjs library. The entire process runs locally — your file never leaves your device.</p>
+    <h2>What converts well — and what doesn't</h2>
+    <p>Text content, headings, and body paragraphs convert accurately in most cases. Images embedded in the PDF are extracted and placed on the corresponding slide. Simple single-column layouts come out cleanest.</p>
+    <p>Complex multi-column layouts, tables, and custom fonts may need manual adjustment after conversion. Charts and graphs rendered as vector graphics in the PDF are typically simplified to static images in the PPTX output.</p>
+    <p>For best results, use PDFs that were originally created from a presentation tool (PowerPoint, Keynote, Google Slides) rather than word processors or design software.</p>
+    <h2>After conversion: quick cleanup tips</h2>
+    <p>Once you have the PPTX file, open it in PowerPoint or Google Slides. Apply a theme (Design → Themes in PowerPoint) to give all slides a consistent look. If text appears in unexpected positions, select it and use the alignment tools to reposition. For slides with complex layouts, it's often faster to keep the text and rebuild the visual structure around it.</p>
     <h2>Frequently asked questions</h2>
-    <details open><summary>How accurate is the conversion? <div class="si"></div></summary><p>Text and layout are extracted faithfully. Complex graphical elements like charts are simplified. Best results with text-heavy PDFs.</p></details>
-    <details><summary>Can I edit the output in PowerPoint? <div class="si"></div></summary><p>Yes — the PPTX output is fully editable in PowerPoint, Keynote, or Google Slides.</p></details>
-    <details><summary>How many pages can I convert? <div class="si"></div></summary><p>There is no page limit. The entire PDF is processed.</p></details>
-    <details><summary>Is there a file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported.</p></details>
+    <details open><summary>How accurate is the PDF to PowerPoint conversion? <div class="si"></div></summary><p>Text and layout are extracted faithfully for most PDFs. Complex graphical elements like charts are simplified to images. Best results come from PDFs originally created from presentation software.</p></details>
+    <details><summary>Can I edit the slides after conversion? <div class="si"></div></summary><p>Yes — the PPTX output is fully editable in Microsoft PowerPoint, Apple Keynote, and Google Slides. Text, images, and layout elements can all be modified.</p></details>
+    <details><summary>Is there a page or file size limit? <div class="si"></div></summary><p>Files up to 100 MB are supported. There is no page limit — the entire PDF is converted, with each page becoming one slide.</p></details>
+    <details><summary>Does my PDF get uploaded to a server? <div class="si"></div></summary><p>No. The conversion runs entirely in your browser using WebAssembly and JavaScript libraries. Your file never leaves your device, and nothing is sent to any server.</p></details>
+    <details><summary>What if the converted slides look different from the original PDF? <div class="si"></div></summary><p>This is normal for complex PDFs. The text content is usually accurate — formatting and positioning may need minor adjustments. Use the converted file as a starting point rather than expecting pixel-perfect output.</p></details>
   </div>
 
       <div class="related">
