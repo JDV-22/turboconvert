@@ -58,7 +58,7 @@ Your iPhone shows the approximate size of one minute of video for each format un
 [Compress Video](/compress-video) re-encodes the video with FFmpeg, right in your browser — the file isn't uploaded.
 
 1. Open [Compress Video](/compress-video) and click **Choose file** (MP4, MOV, WebM, MKV, AVI… up to 1 GB).
-2. Set **Max resolution**: *Keep original*, **1080p**, **720p** (default) or **480p**.
+2. Set **Max resolution**: *Original*, **1080p**, **720p** (default) or **480p**.
 3. Choose the **Compression**: *Strong — smallest file*, *Recommended — good quality* or *Light — best quality*.
 4. Click **Convert** and wait; the compressed MP4 downloads automatically.
 
