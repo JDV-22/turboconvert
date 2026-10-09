@@ -195,8 +195,9 @@ export function initTool(root: HTMLElement): void {
 
   const errorMessage = (e: unknown, name: string): string => {
     if (e instanceof UserError) {
-      if (e.code === 'password') return s.errPassword;
-      return `${fill(s.errGeneric, { name })} ${e.message}`;
+      if (e.code === 'password') return cfg.engine === 'pdf-unlock' ? s.errWrongPassword : s.errPassword;
+      if ((e.code === 'options' || e.code === 'empty') && e.message) return e.message;
+      return `${fill(s.errGeneric, { name })} ${e.message}`.trim();
     }
     const msg = e instanceof Error ? e.message : String(e);
     if (/password|encrypt/i.test(msg)) return s.errPassword;
@@ -300,6 +301,7 @@ export function initTool(root: HTMLElement): void {
         const size = el('span', 'ta-size', fmtBytes(o.blob.size));
         if (cfg.compare && idx === 0 && r.outputs.length === 1) {
           const saved = 1 - outBytes / r.inBytes;
+          if (saved <= 0.005) size.textContent = `${fmtBytes(o.blob.size)} · ${s.bigger}`;
           if (saved > 0.005) {
             const badge = el('span', 'ta-saved', fill(s.saved, { pct: `${Math.round(saved * 100)}%` }));
             size.textContent = `${fmtBytes(r.inBytes)} → ${fmtBytes(outBytes)} `;

@@ -77,6 +77,7 @@ const en = {
   'tool.errSize': '“{name}” is larger than {max}.',
   'tool.errGeneric': 'Something went wrong while converting “{name}”.',
   'tool.errPassword': 'This PDF is password-protected. Unlock it first.',
+  'tool.errWrongPassword': 'Wrong password. Check it and try again.',
   'tool.retry': 'Try again',
   'tool.howTo': 'How to {name}',
   'tool.faq': 'Questions & answers',

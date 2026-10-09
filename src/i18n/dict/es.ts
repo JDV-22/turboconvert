@@ -78,6 +78,7 @@ const es: Record<UIKey, string> = {
   'tool.errSize': '«{name}» pesa más de {max}.',
   'tool.errGeneric': 'Algo salió mal al convertir «{name}».',
   'tool.errPassword': 'Este PDF está protegido con contraseña. Desbloquéalo primero.',
+  'tool.errWrongPassword': 'Contraseña incorrecta. Revísala e inténtalo de nuevo.',
   'tool.retry': 'Reintentar',
   'tool.howTo': 'Cómo {name}',
   'tool.faq': 'Preguntas y respuestas',

@@ -77,6 +77,7 @@ const de: Record<UIKey, string> = {
   'tool.errSize': '„{name}“ ist größer als {max}.',
   'tool.errGeneric': 'Beim Umwandeln von „{name}“ ist ein Fehler aufgetreten.',
   'tool.errPassword': 'Dieses PDF ist passwortgeschützt. Entsperren Sie es zuerst.',
+  'tool.errWrongPassword': 'Falsches Passwort. Bitte prüfen Sie es und versuchen Sie es erneut.',
   'tool.retry': 'Erneut versuchen',
   'tool.howTo': '{name}: So geht’s',
   'tool.faq': 'Fragen & Antworten',
