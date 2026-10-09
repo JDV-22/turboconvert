@@ -5,3 +5,4 @@ public/vendor/
 test-results/
 playwright-report/
 .vercel
+.claude/worktrees/

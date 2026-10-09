@@ -1,0 +1,122 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from './Icon.astro';
+import Faq from './Faq.astro';
+import ToolCard from './ToolCard.astro';
+import AdSlot from './AdSlot.astro';
+import { render } from 'astro:content';
+import { useT } from '@/i18n/ui';
+import { localePath, type Locale } from '@/i18n/locales';
+import { postAlternates, postHref, readingMinutes, getPosts, type Post } from '@/data/blog';
+import { getTool } from '@/data/catalog';
+import { pageHref } from '@/data/pages';
+import { SITE } from '@/config/site';
+
+interface Props { post: Post; locale: Locale }
+const { post, locale } = Astro.props;
+const d = post.data;
+const t = useT(locale);
+const { Content, headings } = await render(post);
+const href = postHref(post);
+const alternates = await postAlternates(post);
+const tool = d.tool ? await getTool(locale, d.tool) : undefined;
+const more = (await getPosts(locale)).filter((p) => p.id !== post.id && (p.data.category === d.category || p.data.tool === d.tool)).slice(0, 3);
+const fmt = (x: Date) => x.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+const toc = headings.filter((h) => h.depth === 2);
+const jsonLd: object[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.h1 ?? d.title,
+    description: d.description,
+    datePublished: d.published.toISOString(),
+    dateModified: d.updated.toISOString(),
+    inLanguage: locale,
+    mainEntityOfPage: `${SITE.url}${href}`,
+    author: { '@type': 'Organization', name: 'TurboConvert', url: `${SITE.url}${pageHref('about', locale)}` },
+    publisher: { '@id': `${SITE.url}/#org` },
+    image: `${SITE.url}/og/default.png`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('crumb.home'), item: `${SITE.url}${localePath(locale) === '/' ? '/' : localePath(locale)}` },
+      { '@type': 'ListItem', position: 2, name: t('nav.blog'), item: `${SITE.url}${pageHref('blog', locale)}` },
+      { '@type': 'ListItem', position: 3, name: d.h1 ?? d.title, item: `${SITE.url}${href}` },
+    ],
+  },
+];
+if (d.faq.length) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  });
+}
+---
+<Base locale={locale} title={d.title} description={d.description} path={href} alternates={alternates} jsonLd={jsonLd} ogType="article" current="blog">
+  <article class="wrap-narrow post">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol>
+      <li><a href={localePath(locale)}>{t('crumb.home')}</a></li>
+      <li><a href={pageHref('blog', locale)}>{t('nav.blog')}</a></li>
+    </ol></nav>
+    <h1>{d.h1 ?? d.title}</h1>
+    <p class="lead">{d.description}</p>
+    <p class="meta">{t('blog.updated')} <time datetime={d.updated.toISOString()}>{fmt(d.updated)}</time> · {t('blog.minutes', { n: readingMinutes(post.body) })} · {t('blog.by')} <a href={pageHref('about', locale)}>TurboConvert</a></p>
+
+    {tool && (
+      <a class="cta" href={tool.href} data-cat={tool.tool.category}>
+        <span class="cat-icon" data-cat={tool.tool.category}><Icon name={tool.tool.category} /></span>
+        <span><strong>{tool.copy.data.h1}</strong><span>{t('tool.rate')}</span></span>
+        <span class="btn btn-primary btn-sm">{t('blog.tryTool')} <Icon name="arrow" /></span>
+      </a>
+    )}
+
+    {toc.length > 2 && (
+      <nav class="toc" aria-label="Contents">
+        <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+      </nav>
+    )}
+
+    <div class="prose"><Content /></div>
+
+    <AdSlot name="article" />
+
+    {d.faq.length > 0 && (
+      <section class="post-faq"><h2>{t('tool.faq')}</h2><Faq items={d.faq} /></section>
+    )}
+
+    {tool && (
+      <a class="cta" href={tool.href} data-cat={tool.tool.category}>
+        <span class="cat-icon" data-cat={tool.tool.category}><Icon name={tool.tool.category} /></span>
+        <span><strong>{tool.copy.data.h1}</strong><span>{tool.copy.data.lead}</span></span>
+        <span class="btn btn-primary btn-sm">{t('blog.tryTool')} <Icon name="arrow" /></span>
+      </a>
+    )}
+  </article>
+  {more.length > 0 && (
+    <section class="wrap section">
+      <div class="section-head"><h2>{t('nav.blog')}</h2></div>
+      <div class="more">{more.map((p) => <a class="tool-card" href={postHref(p)}><span><h3>{p.data.h1 ?? p.data.title}</h3><p>{p.data.description}</p></span></a>)}</div>
+    </section>
+  )}
+</Base>
+<style>
+  .post { padding-block: 28px 16px; }
+  h1 { font-size: clamp(30px, 4.6vw, 46px); letter-spacing: -0.035em; margin: 18px 0 12px; }
+  .meta { font-size: 14px; color: var(--muted); margin-top: 14px; }
+  .meta a { color: inherit; }
+  .cta { display: flex; align-items: center; gap: 14px; margin: 28px 0; padding: 16px 18px; border-radius: var(--radius); background: var(--c-soft, var(--accent-soft)); border: 1px solid var(--line); text-decoration: none; }
+  .cta > span:nth-child(2) { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  .cta > span:nth-child(2) span { font-size: 14px; color: var(--muted); }
+  .cta .cat-icon { background: var(--surface); }
+  @media (max-width: 560px) { .cta { flex-wrap: wrap; } .cta .btn { width: 100%; } }
+  .toc { margin: 8px 0 32px; padding: 16px 20px; border-left: 3px solid var(--line-strong); }
+  .toc ol { padding-left: 1.2em; display: grid; gap: 6px; }
+  .toc a { color: var(--ink-2); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  .post-faq { margin-top: 48px; }
+  .post-faq h2 { font-size: 26px; margin-bottom: 12px; }
+  .more { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+</style>

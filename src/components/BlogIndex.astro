@@ -1,0 +1,45 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from './Icon.astro';
+import { useT } from '@/i18n/ui';
+import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { getPosts, postHref, readingMinutes } from '@/data/blog';
+import { pageHref } from '@/data/pages';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const posts = await getPosts(locale);
+const path = pageHref('blog', locale);
+const alternates = PUBLISHED_LOCALES.map((l) => ({ locale: l, href: pageHref('blog', l) }));
+const title = locale === 'fr' ? 'Guides et tutoriels PDF, images, vidéo — TurboConvert' : 'Guides & Tutorials for PDF, Images and Video — TurboConvert';
+const description = t('blog.lead');
+const fmt = (d: Date) => d.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<Base locale={locale} title={title} description={description.length >= 110 ? description : `${description} Free tools, no upload.`} path={path} alternates={alternates} current="blog">
+  <section class="wrap blog-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href={localePath(locale)}>{t('crumb.home')}</a></li><li><span aria-current="page">{t('nav.blog')}</span></li></ol></nav>
+    <h1>{t('blog.title')}</h1>
+    <p class="lead">{t('blog.lead')}</p>
+  </section>
+  <section class="wrap posts">
+    {posts.map((p) => (
+      <a class="post-card" href={postHref(p)} data-cat={p.data.category === 'general' ? undefined : p.data.category}>
+        {p.data.category !== 'general' && <span class="cat-icon sm" data-cat={p.data.category}><Icon name={p.data.category} /></span>}
+        <h2>{p.data.h1 ?? p.data.title}</h2>
+        <p>{p.data.description}</p>
+        <span class="meta">{fmt(p.data.updated)} · {t('blog.minutes', { n: readingMinutes(p.body) })}</span>
+      </a>
+    ))}
+  </section>
+</Base>
+<style>
+  .blog-head { padding-block: 28px 24px; }
+  .blog-head h1 { font-size: clamp(30px, 4.6vw, 48px); letter-spacing: -0.035em; margin: 18px 0 10px; }
+  .posts { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; padding-bottom: 40px; }
+  .post-card { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); text-decoration: none; transition: box-shadow .15s, border-color .15s; }
+  .post-card:hover { box-shadow: var(--shadow); border-color: var(--line-strong); }
+  .post-card h2 { font-size: 18px; letter-spacing: -0.015em; }
+  .post-card p { color: var(--muted); font-size: 14.5px; flex: 1; }
+  .meta { font-size: 13px; color: var(--muted); }
+</style>

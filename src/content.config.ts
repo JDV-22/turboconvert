@@ -27,7 +27,7 @@ const blog = defineCollection({
     title: z.string().max(70),
     description: z.string().min(110).max(160),
     h1: z.string().optional(),
-    slug: z.string(),
+    permalink: z.string(), // URL slug ('slug' is reserved by the glob loader)
     published: z.coerce.date(),
     updated: z.coerce.date(),
     tool: z.string().optional(), // related tool id for CTA

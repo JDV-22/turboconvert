@@ -1,0 +1,88 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from './Icon.astro';
+import ToolCard from './ToolCard.astro';
+import { useT } from '@/i18n/ui';
+import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { getTools, categoryHref } from '@/data/catalog';
+import { CATEGORIES, CATEGORY_SLUGS, type Category } from '@/data/tools';
+import { HUB_COPY } from '@/data/hub-copy';
+import { pageHref, PAGES } from '@/data/pages';
+import { SITE } from '@/config/site';
+
+interface Props { category: Category | 'all'; locale: Locale }
+const { category, locale } = Astro.props;
+const t = useT(locale);
+const copy = (HUB_COPY[locale] ?? HUB_COPY.en)![category];
+const tools = await getTools(locale);
+const list = category === 'all' ? tools : tools.filter((e) => e.tool.category === category);
+const path = category === 'all' ? pageHref('tools', locale) : categoryHref(category, locale)!;
+const alternates = PUBLISHED_LOCALES.map((l) => {
+  const slug = category === 'all' ? (PAGES.tools as Record<string, string>)[l] : CATEGORY_SLUGS[category][l];
+  return slug ? { locale: l, href: localePath(l, slug) } : null;
+}).filter((a): a is { locale: Locale; href: string } => !!a);
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: copy.h1,
+    url: `${SITE.url}${path}`,
+    description: copy.description,
+    inLanguage: locale,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: list.map((e, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${e.href}`, name: e.copy.data.name })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('crumb.home'), item: `${SITE.url}${localePath(locale) === '/' ? '/' : localePath(locale)}` },
+      { '@type': 'ListItem', position: 2, name: copy.h1, item: `${SITE.url}${path}` },
+    ],
+  },
+];
+const groups = category === 'all' ? CATEGORIES : [category];
+---
+<Base locale={locale} title={copy.title} description={copy.description} path={path} alternates={alternates} jsonLd={jsonLd} current={category === 'all' ? undefined : category}>
+  <section class="hub-hero" data-cat={category === 'all' ? undefined : category}>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href={localePath(locale)}>{t('crumb.home')}</a></li><li><span aria-current="page">{copy.h1}</span></li></ol></nav>
+      <div class="hub-title">
+        {category !== 'all' && <span class="cat-icon lg" data-cat={category}><Icon name={category} /></span>}
+        <div><h1>{copy.h1}</h1><p class="lead">{copy.lead}</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="wrap hub-list">
+    {groups.map((g) => {
+      const items = list.filter((e) => e.tool.category === g);
+      return items.length > 0 && (
+        <div class="hub-group">
+          {category === 'all' && <h2><a href={categoryHref(g, locale)}>{t(`cat.${g}.title`)}</a></h2>}
+          <div class="tool-grid">{items.map((e) => <ToolCard entry={e} />)}</div>
+        </div>
+      );
+    })}
+  </section>
+  {copy.body && <section class="wrap-narrow section"><div class="prose" set:html={copy.body} /></section>}
+  {category !== 'all' && (
+    <section class="wrap other-cats">
+      {CATEGORIES.filter((c) => c !== category && tools.some((e) => e.tool.category === c)).map((c) => (
+        <a class="btn" href={categoryHref(c, locale)} data-cat={c}><span class="cat-icon sm" data-cat={c}><Icon name={c} /></span>{t(`cat.${c}.title`)}</a>
+      ))}
+    </section>
+  )}
+</Base>
+<style>
+  .hub-hero { padding-block: 28px 28px; background: radial-gradient(1100px 360px at 50% -140px, var(--c-soft, var(--accent-soft)), transparent 70%); }
+  .hub-title { display: flex; gap: 16px; align-items: center; margin-top: 18px; }
+  .hub-title h1 { font-size: clamp(30px, 4.6vw, 48px); letter-spacing: -0.035em; }
+  .hub-title .lead { margin-top: 8px; max-width: 640px; }
+  .hub-group + .hub-group { margin-top: 40px; }
+  .hub-group h2 { font-size: 22px; margin-bottom: 14px; }
+  .hub-group h2 a { text-decoration: none; }
+  .other-cats { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding-block: 8px 24px; }
+  .other-cats .btn { padding-left: 6px; }
+</style>

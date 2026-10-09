@@ -1,0 +1,233 @@
+---
+import Base from '@/layouts/Base.astro';
+import Icon from './Icon.astro';
+import ToolCard from './ToolCard.astro';
+import Faq from './Faq.astro';
+import { useT } from '@/i18n/ui';
+import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { getTools, categoryHref } from '@/data/catalog';
+import { CATEGORIES } from '@/data/tools';
+import { HOME_COPY } from '@/data/home-copy';
+import { SITE } from '@/config/site';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const c = HOME_COPY[locale] ?? HOME_COPY.en!;
+const tools = await getTools(locale);
+const popular = tools.filter((e) => e.tool.popular).slice(0, 12);
+const count = tools.length;
+const alternates = PUBLISHED_LOCALES.map((l) => ({ locale: l, href: localePath(l) }));
+const detector = tools.map((e) => ({ id: e.tool.id, n: e.copy.data.name, h: e.href, c: e.tool.category, a: e.tool.accept, p: !!e.tool.popular }));
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+    name: SITE.name,
+    url: `${SITE.url}${localePath(locale) === '/' ? '/' : localePath(locale)}`,
+    inLanguage: locale,
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: c.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+const why = [
+  { icon: 'shield', t: t('home.why1.t'), d: t('home.why1.d') },
+  { icon: 'gift', t: t('home.why2.t'), d: t('home.why2.d') },
+  { icon: 'zap', t: t('home.why3.t'), d: t('home.why3.d') },
+  { icon: 'code', t: t('home.why4.t'), d: t('home.why4.d') },
+];
+---
+<Base locale={locale} title={c.title} description={c.description} path={localePath(locale)} alternates={alternates} jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="badge"><span class="dot"></span>{t('home.badge')}</p>
+      <h1>{t('home.h1a')}<br /><span>{t('home.h1b')}</span></h1>
+      <p class="lead hero-lead">{t('home.lead', { count })}</p>
+
+      <div class="detector" data-detector data-state="idle">
+        <input type="file" data-detector-input hidden />
+        <button class="detector-drop" type="button" data-detector-pick>
+          <span class="detector-icon"><Icon name="upload" /></span>
+          <span class="detector-text">
+            <strong>{t('home.drop')}</strong>
+            <span>{t('home.dropHint')}</span>
+          </span>
+        </button>
+        <div class="detector-results" data-detector-results hidden>
+          <p class="detector-title" data-detector-title></p>
+          <div class="detector-list" data-detector-list></div>
+        </div>
+        <script type="application/json" data-detector-tools set:html={JSON.stringify(detector)} />
+        <script type="application/json" data-detector-strings set:html={JSON.stringify({ title: t('home.suggestions'), none: t('home.noSuggestion') })} />
+      </div>
+
+      <ul class="cats" aria-label={t('nav.tools')}>
+        {CATEGORIES.map((cat) => {
+          const href = categoryHref(cat, locale);
+          const n = tools.filter((e) => e.tool.category === cat).length;
+          return href && n > 0 && (
+            <li><a href={href} data-cat={cat}><span class="cat-icon sm" data-cat={cat}><Icon name={cat} /></span>{t(`cat.${cat}.title`)} <span class="n">{n}</span></a></li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="popular">
+    <div class="section-head"><h2 id="popular">{t('home.popular')}</h2></div>
+    <div class="tool-grid">{popular.map((e) => <ToolCard entry={e} />)}</div>
+  </section>
+
+  <section class="why-band" aria-labelledby="why">
+    <div class="wrap section">
+      <div class="section-head"><h2 id="why">{t('home.why')}</h2></div>
+      <div class="why-grid">
+        {why.map((w) => (
+          <div class="why">
+            <span class="why-icon"><Icon name={w.icon} /></span>
+            <h3>{w.t}</h3>
+            <p>{w.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="proof">
+        <Icon name="wifiOff" />
+        <div>
+          <h3>{t('home.proof.t')}</h3>
+          <p>{t('home.proof.d')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="all">
+    <div class="section-head"><h2 id="all">{t('home.allTools')}</h2></div>
+    {CATEGORIES.map((cat) => {
+      const list = tools.filter((e) => e.tool.category === cat);
+      const href = categoryHref(cat, locale);
+      return list.length > 0 && (
+        <div class="cat-block">
+          <h3><a href={href}>{t(`cat.${cat}.title`)}</a></h3>
+          <div class="tool-grid">{list.map((e) => <ToolCard entry={e} />)}</div>
+        </div>
+      );
+    })}
+  </section>
+
+  <section class="wrap-narrow section" aria-labelledby="hfaq">
+    <h2 id="hfaq" class="faq-h">{t('home.faq')}</h2>
+    <Faq items={c.faq} />
+    <div class="prose home-prose" set:html={c.body} />
+  </section>
+</Base>
+
+<script>
+  import { saveHandoff } from '@/scripts/runtime/handoff';
+  import { track } from '@/scripts/runtime/analytics';
+
+  interface Item { id: string; n: string; h: string; c: string; a: string[]; p: boolean }
+  const root = document.querySelector<HTMLElement>('[data-detector]');
+  if (root) {
+    const tools: Item[] = JSON.parse(root.querySelector('[data-detector-tools]')!.textContent!);
+    const str = JSON.parse(root.querySelector('[data-detector-strings]')!.textContent!);
+    const input = root.querySelector<HTMLInputElement>('[data-detector-input]')!;
+    const results = root.querySelector<HTMLElement>('[data-detector-results]')!;
+    const title = root.querySelector<HTMLElement>('[data-detector-title]')!;
+    const list = root.querySelector<HTMLElement>('[data-detector-list]')!;
+    let picked: File[] = [];
+
+    const ext = (f: File) => (f.name.includes('.') ? f.name.split('.').pop()!.toLowerCase() : '');
+    const show = (files: File[]) => {
+      picked = files;
+      const e = ext(files[0]);
+      const matches = tools.filter((t) => t.a.includes(e)).sort((a, b) => Number(b.p) - Number(a.p));
+      list.innerHTML = '';
+      title.textContent = matches.length ? str.title.replace('{ext}', e.toUpperCase()) : str.none.replace('{ext}', e);
+      for (const m of matches.slice(0, 12)) {
+        const a = document.createElement('a');
+        a.href = m.h;
+        a.className = 'chip';
+        a.dataset.cat = m.c;
+        a.textContent = m.n;
+        a.addEventListener('click', async (ev) => {
+          ev.preventDefault();
+          track('home_pick', { tool: m.id, ext: e });
+          try { await saveHandoff(picked); } catch { /* still navigate */ }
+          window.location.href = m.h;
+        });
+        list.append(a);
+      }
+      results.hidden = false;
+      root.dataset.state = 'picked';
+      track('home_drop', { ext: e || 'none', matches: matches.length });
+    };
+
+    root.querySelector('[data-detector-pick]')!.addEventListener('click', () => input.click());
+    input.addEventListener('change', () => { if (input.files?.length) show(Array.from(input.files)); input.value = ''; });
+    window.addEventListener('dragover', (e) => { if (e.dataTransfer?.types.includes('Files')) { e.preventDefault(); root.classList.add('is-dragging'); } });
+    window.addEventListener('dragleave', (e) => { if (!e.relatedTarget) root.classList.remove('is-dragging'); });
+    window.addEventListener('drop', (e) => {
+      if (!e.dataTransfer?.files.length) return;
+      e.preventDefault();
+      root.classList.remove('is-dragging');
+      show(Array.from(e.dataTransfer.files));
+    });
+  }
+</script>
+
+<style>
+  .hero { padding-block: clamp(40px, 7vw, 84px) 20px; background: radial-gradient(900px 420px at 50% -160px, var(--accent-soft), transparent 70%); text-align: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 520; color: var(--ink-2); padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
+  .hero h1 { font-size: clamp(36px, 6.6vw, 68px); letter-spacing: -0.045em; line-height: 1.02; margin-top: 22px; font-weight: 700; }
+  .hero h1 span { color: var(--muted); font-weight: 600; }
+  .hero-lead { max-width: 620px; margin: 20px auto 0; }
+
+  .detector { max-width: 760px; margin: 34px auto 0; position: relative; }
+  .detector-drop {
+    width: 100%; display: flex; align-items: center; gap: 18px; text-align: left;
+    padding: 22px 24px; border-radius: var(--radius-l); cursor: pointer;
+    background: var(--surface); border: 2px dashed var(--line-strong); box-shadow: var(--shadow);
+    transition: border-color .15s, transform .15s;
+  }
+  .detector-drop:hover, .detector.is-dragging .detector-drop { border-color: var(--accent); transform: translateY(-1px); }
+  .detector-icon { width: 54px; height: 54px; flex: none; border-radius: 15px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); }
+  .detector-icon :global(svg) { width: 26px; height: 26px; }
+  .detector-text { display: flex; flex-direction: column; gap: 4px; }
+  .detector-text strong { font-size: 17.5px; font-weight: 620; letter-spacing: -0.01em; }
+  .detector-text span { font-size: 13.5px; color: var(--muted); }
+  .detector-results { margin-top: 14px; padding: 16px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); text-align: left; }
+  .detector-title { font-weight: 600; margin-bottom: 10px; }
+  .detector-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .detector-list :global(.chip) { display: inline-flex; padding: 9px 15px; border-radius: 999px; border: 1px solid var(--line-strong); text-decoration: none; font-weight: 550; font-size: 14.5px; background: var(--bg); }
+  .detector-list :global(.chip:hover) { border-color: var(--c); background: var(--c-soft); }
+
+  .cats { list-style: none; padding: 0; margin: 28px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .cats a { display: inline-flex; align-items: center; gap: 9px; padding: 6px 14px 6px 6px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); text-decoration: none; font-weight: 550; font-size: 14.5px; }
+  .cats a:hover { border-color: var(--c); }
+  .cats .n { color: var(--muted); font-weight: 450; font-size: 13px; }
+
+  .why-band { background: var(--bg-soft); border-block: 1px solid var(--line); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .why { padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .why-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 14px; }
+  .why-icon :global(svg) { width: 22px; height: 22px; }
+  .why h3 { font-size: 17px; margin-bottom: 6px; }
+  .why p { color: var(--muted); font-size: 15px; }
+  .proof { margin-top: 16px; display: flex; gap: 16px; align-items: flex-start; padding: 22px; border-radius: var(--radius); background: var(--ink); color: var(--bg); }
+  .proof :global(svg) { width: 28px; height: 28px; flex: none; opacity: .8; }
+  .proof h3 { font-size: 17px; margin-bottom: 6px; }
+  .proof p { opacity: .8; font-size: 15px; }
+
+  .cat-block + .cat-block { margin-top: 36px; }
+  .cat-block h3 { font-size: 19px; margin-bottom: 14px; }
+  .cat-block h3 a { text-decoration: none; }
+  .cat-block h3 a:hover { text-decoration: underline; }
+  .faq-h { font-size: clamp(24px, 3.2vw, 34px); margin-bottom: 16px; }
+  .home-prose { margin-top: 48px; }
+</style>

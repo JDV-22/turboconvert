@@ -1,0 +1,11 @@
+---
+import ToolPage from '@/layouts/ToolPage.astro';
+import HubPage from '@/components/HubPage.astro';
+import { slugPaths, type SlugProps } from '@/components/SlugRoute';
+
+export function getStaticPaths() {
+  return slugPaths('en');
+}
+const p = Astro.props as SlugProps;
+---
+{p.kind === 'tool' ? <ToolPage entry={p.entry} locale="en" /> : <HubPage category={p.category} locale="en" />}
