@@ -12,7 +12,7 @@ const t = useT(locale);
 const formats = formatList(tool.accept);
 const maxLabel = formatMb(tool.maxMb);
 const acceptAttr = tool.accept.map((e) => `.${e}`).join(',');
-const engineSize: Record<string, string> = { ffmpeg: '≈ 31 MB', 'pdf-compress': '≈ 16 MB', ocr: '≈ 5 MB', 'image-convert': '≈ 1.5 MB' };
+const engineSize: Record<string, string> = { ffmpeg: '≈ 10 MB', 'pdf-compress': '≈ 16 MB', ocr: '≈ 5 MB', 'image-convert': '≈ 2 MB' };
 const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
 const compare = ['pdf-compress', 'image-compress', 'image-resize'].includes(tool.engine) || tool.id === 'compress-video';
 const keys = [

@@ -30,7 +30,8 @@ const year = new Date().getFullYear();
       </div>
       {cols.map((col) => {
         const list = tools.filter((e) => col.cat.includes(e.tool.category)).sort((a, b) => Number(!!b.tool.popular) - Number(!!a.tool.popular)).slice(0, 9);
-        const hub = categoryHref(col.cat[0], locale);
+        const firstCat = col.cat.find((c) => tools.some((e) => e.tool.category === c));
+        const hub = firstCat ? categoryHref(firstCat, locale) : undefined;
         return list.length > 0 && (
           <div>
             <h3>{hub ? <a href={hub}>{col.title}</a> : col.title}</h3>

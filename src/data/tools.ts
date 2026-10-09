@@ -590,7 +590,7 @@ export const TOOLS: ToolDef[] = [
     related: ['mov-to-mp4', 'mp4-to-mp3', 'video-to-mp3'],
   },
   {
-    id: 'gif-to-mp4', category: 'video', engine: 'ffmpeg', params: { preset: 'gif-to-mp4' }, accept: ['gif'], multiple: true, mode: 'each',
+    id: 'gif-to-mp4', category: 'video', engine: 'ffmpeg', params: { preset: 'to-mp4' }, accept: ['gif'], multiple: true, mode: 'each',
     maxMb: 200, heavy: true, from: 'GIF', to: 'MP4',
     slugs: { en: 'gif-to-mp4', fr: 'gif-en-mp4' },
     related: ['video-to-gif', 'compress-video'],

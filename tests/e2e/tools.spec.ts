@@ -37,7 +37,7 @@ for (const tool of TOOLS) {
     for (const [name, value] of Object.entries(setup.options ?? {})) {
       await page.fill(`[data-options] [name="${name}"]`, value);
     }
-    if (tool.id === 'organize-pdf') await page.waitForSelector('.org-page img');
+    if (tool.engine === 'pdf-organize') await page.waitForSelector('.org-page img');
     await page.click('[data-convert]');
     await expect(page.locator('[data-tool-app]')).toHaveAttribute('data-state', 'done', { timeout: 170_000 });
     await expect(page.locator('[data-done-icon]')).toHaveAttribute('data-ok', 'true');
