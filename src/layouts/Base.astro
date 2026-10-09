@@ -74,6 +74,9 @@ const orgLd = {
     <script>
       import { initConsent } from '@/scripts/runtime/consent';
       initConsent((window as unknown as { __GA_ID: string }).__GA_ID);
+      if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+      }
     </script>
   </body>
 </html>
