@@ -378,7 +378,7 @@ export const TOOLS: ToolDef[] = [
       imageFormat('original', ['original', 'jpg', 'png', 'webp']),
     ],
     slugs: { en: 'resize-image', fr: 'redimensionner-image' },
-    related: ['compress-image', 'crop-image', 'jpg-to-png'],
+    related: ['compress-image', 'jpg-to-webp', 'jpg-to-png'],
   },
   {
     id: 'heic-to-jpg', category: 'image', engine: 'image-convert', params: { to: 'jpg' }, accept: ['heic', 'heif'], multiple: true, mode: 'each',
