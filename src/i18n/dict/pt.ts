@@ -110,6 +110,8 @@ const pt: Record<UIKey, string> = {
   'opt.keepFormat': 'Igual ao original',
   'opt.keepOriginal': 'Original',
   'opt.compression': 'Compressão',
+  'opt.maxSize': 'Tamanho máximo',
+  'opt.noLimit': 'Sem limite',
   'opt.compression.strong': 'Forte — arquivo menor',
   'opt.compression.recommended': 'Recomendada — boa qualidade',
   'opt.compression.light': 'Leve — melhor qualidade',

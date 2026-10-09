@@ -14,7 +14,7 @@ const maxLabel = formatMb(tool.maxMb);
 const acceptAttr = tool.accept.map((e) => `.${e}`).join(',');
 const engineSize: Record<string, string> = { ffmpeg: '≈ 31 MB', 'pdf-compress': '≈ 16 MB', ocr: '≈ 5 MB', 'image-convert': '≈ 1.5 MB' };
 const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
-const compare = ['compress-pdf', 'compress-image', 'compress-video', 'resize-image'].includes(tool.id);
+const compare = ['pdf-compress', 'image-compress', 'image-resize'].includes(tool.engine) || tool.id === 'compress-video';
 const keys = [
   'tool.convert', 'tool.convertN', 'tool.working', 'tool.loadingEngine', 'tool.done', 'tool.doneN', 'tool.failed', 'tool.download',
   'tool.saved', 'tool.bigger', 'tool.errWrongPassword', 'tool.errType', 'org.hint', 'org.rotate', 'org.delete', 'org.restore', 'org.left', 'org.right', 'org.loading', 'org.none', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',

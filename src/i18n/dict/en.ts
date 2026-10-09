@@ -111,6 +111,8 @@ const en = {
   'opt.keepFormat': 'Same as input',
   'opt.keepOriginal': 'Original',
   'opt.compression': 'Compression',
+  'opt.maxSize': 'Maximum file size',
+  'opt.noLimit': 'No limit',
   'opt.compression.strong': 'Strong — smallest file',
   'opt.compression.recommended': 'Recommended — good quality',
   'opt.compression.light': 'Light — best quality',

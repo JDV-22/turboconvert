@@ -109,6 +109,8 @@ const de: Record<UIKey, string> = {
   'opt.keepFormat': 'Wie das Original',
   'opt.keepOriginal': 'Original',
   'opt.compression': 'Komprimierung',
+  'opt.maxSize': 'Maximale Dateigröße',
+  'opt.noLimit': 'Keine Begrenzung',
   'opt.compression.strong': 'Stark – kleinste Datei',
   'opt.compression.recommended': 'Empfohlen – gute Qualität',
   'opt.compression.light': 'Leicht – beste Qualität',

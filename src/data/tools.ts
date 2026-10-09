@@ -83,6 +83,16 @@ const resizeMax: OptionDef = {
   id: 'maxWidth', type: 'number', label: 'opt.maxWidth', default: '', min: 1, max: 20000, placeholder: 'opt.keepOriginal',
 };
 
+const targetSize: OptionDef = {
+  id: 'target', type: 'select', label: 'opt.maxSize', default: '',
+  choices: [
+    { value: '', label: 'opt.noLimit' },
+    { value: '100', label: '100 KB' }, { value: '200', label: '200 KB' }, { value: '300', label: '300 KB' },
+    { value: '500', label: '500 KB' }, { value: '1024', label: '1 MB' }, { value: '2048', label: '2 MB' },
+    { value: '5120', label: '5 MB' }, { value: '10240', label: '10 MB' }, { value: '20480', label: '20 MB' },
+  ],
+};
+
 const IMG_IN = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'avif', 'heic', 'heif', 'tif', 'tiff', 'svg', 'ico'];
 const VIDEO_IN = ['mp4', 'mov', 'webm', 'mkv', 'avi', 'm4v', 'wmv', 'flv', '3gp', 'mpeg', 'mpg', 'ts'];
 const AUDIO_IN = ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'oga', 'flac', 'opus', 'wma', 'aiff', 'aif', 'amr'];
@@ -99,7 +109,7 @@ export const TOOLS: ToolDef[] = [
         { value: 'ebook', label: 'opt.compression.recommended' },
         { value: 'printer', label: 'opt.compression.light' },
       ],
-    }],
+    }, targetSize],
     slugs: { en: 'compress-pdf', fr: 'compresser-pdf' },
     related: ['merge-pdf', 'split-pdf', 'pdf-to-jpg', 'compress-image'],
   },
@@ -650,6 +660,23 @@ export const TOOLS: ToolDef[] = [
     related: ['m4a-to-mp3', 'mp3-to-wav', 'audio-converter'],
   },
 ];
+
+// "Compress PDF to <size>" landing pages: same engine, size preselected.
+const PDF_SIZE_TARGETS: { kb: number; en: string; fr: string }[] = [
+  { kb: 100, en: '100kb', fr: '100-ko' },
+  { kb: 200, en: '200kb', fr: '200-ko' },
+  { kb: 500, en: '500kb', fr: '500-ko' },
+  { kb: 1024, en: '1mb', fr: '1-mo' },
+];
+for (const t of PDF_SIZE_TARGETS) {
+  TOOLS.push({
+    id: `compress-pdf-to-${t.en}`, category: 'pdf', engine: 'pdf-compress', accept: ['pdf'], multiple: true, mode: 'each',
+    maxMb: 200, heavy: true, from: 'PDF', to: 'PDF',
+    options: [{ ...targetSize, default: String(t.kb) }],
+    slugs: { en: `compress-pdf-to-${t.en}`, fr: `compresser-pdf-${t.fr}` },
+    related: ['compress-pdf', 'split-pdf', 'pdf-to-jpg', 'compress-image'],
+  });
+}
 
 export const TOOL_BY_ID = new Map(TOOLS.map((t) => [t.id, t]));
 

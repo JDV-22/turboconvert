@@ -6,7 +6,7 @@ const errors = [];
 page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 page.on('console', (m) => { if (m.type() === 'error') errors.push('console: ' + m.text()); });
 await page.goto('http://localhost:4321' + path);
-await page.screenshot({ path: '/tmp/claude-0/qa/before.png', fullPage: false });
+
 await page.setInputFiles('[data-input]', fixtures.split(','));
 await page.screenshot({ path: '/tmp/claude-0/qa/files.png' });
 const dl = page.waitForEvent('download', { timeout: 60000 }).catch(() => null);

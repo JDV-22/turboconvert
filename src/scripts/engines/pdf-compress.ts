@@ -45,9 +45,20 @@ function gsArgs(level: (typeof LEVELS)[string], showAnnots: boolean): string[] {
   ];
 }
 
-const run: Engine = async ({ files, options, progress, signal }) => {
+// Ladder used when the user asks for a maximum file size: from best quality
+// to smallest, stopping at the first result that fits.
+const LADDER = [
+  LEVELS.printer,
+  LEVELS.ebook,
+  { preset: 'screen', color: 96, gray: 96, mono: 300 },
+  { preset: 'screen', color: 72, gray: 72, mono: 200 },
+  { preset: 'screen', color: 50, gray: 50, mono: 150 },
+];
+
+const run: Engine = async ({ files, options, params, progress, signal }) => {
   const file = files[0];
-  const level = LEVELS[String(options.level ?? 'ebook')] ?? LEVELS.ebook;
+  let level = LEVELS[String(options.level ?? 'ebook')] ?? LEVELS.ebook;
+  const targetKb = Number(options.target || params.target || 0);
 
   let input: Blob = file;
   const gs = async (showAnnots: boolean, from: number, span: number): Promise<Uint8Array> => {
@@ -86,7 +97,30 @@ const run: Engine = async ({ files, options, progress, signal }) => {
     ({ doc: src } = await loadForRestore(await input.arrayBuffer()));
   }
   throwIfAborted(signal);
-  let data = await gs(!src, 0.02, src ? 0.83 : 0.96);
+  let data: Uint8Array;
+  if (targetKb > 0) {
+    // Start in the middle of the ladder, go up for quality or down for size.
+    const target = targetKb * 1024;
+    let i = 1;
+    level = LADDER[i];
+    data = await gs(!src, 0.02, 0.3);
+    if (data.length <= target * 0.45) {
+      level = LADDER[0];
+      const better = await gs(!src, 0.32, 0.3);
+      if (better.length <= target) data = better;
+      else level = LADDER[1];
+    } else {
+      while (data.length > target && i < LADDER.length - 1) {
+        i++;
+        level = LADDER[i];
+        const span = 0.6 / (LADDER.length - 1);
+        const smaller = await gs(!src, 0.3 + span * (i - 1), span);
+        if (smaller.length < data.length) data = smaller;
+      }
+    }
+  } else {
+    data = await gs(!src, 0.02, src ? 0.83 : 0.96);
+  }
   if (src) {
     let restored = null;
     try {
