@@ -16,7 +16,7 @@ const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
 const compare = ['compress-pdf', 'compress-image', 'compress-video', 'resize-image'].includes(tool.id);
 const keys = [
   'tool.convert', 'tool.convertN', 'tool.working', 'tool.loadingEngine', 'tool.done', 'tool.doneN', 'tool.failed', 'tool.download',
-  'tool.saved', 'tool.errType', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',
+  'tool.saved', 'tool.errType', 'org.hint', 'org.rotate', 'org.delete', 'org.restore', 'org.left', 'org.right', 'org.loading', 'org.none', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',
 ];
 const strings: Record<string, string> = { maxLabel };
 for (const k of keys) strings[k.replace('tool.', '')] = t(k);
@@ -48,6 +48,7 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
       {!tool.multiple && <button class="btn btn-sm" type="button" data-pick>{t('tool.chooseOne')}</button>}
       <button class="btn btn-sm btn-ghost" type="button" data-clear>{t('tool.clear')}</button>
     </div>
+    <div class="ta-custom" data-custom-ui></div>
     {tool.options && tool.options.length > 0 && (
       <form class="ta-options" data-options onsubmit="return false">
         <p class="ta-options-title">{t('tool.options')}</p>
@@ -180,6 +181,8 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
   .ta-result.is-error .ta-thumb { background: var(--err-soft); color: var(--err); }
   .ta-result.is-error .ta-size { color: var(--err); white-space: normal; }
 
+  .ta-custom:empty { display: none; }
+  .ta-custom { margin-top: 18px; }
   .ta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .ta-row-center { justify-content: center; margin-top: 20px; }
   .ta-options { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }

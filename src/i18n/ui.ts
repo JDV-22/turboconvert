@@ -86,6 +86,15 @@ const en = {
   'tool.rate': 'Free · No sign-up · No watermark',
   'tool.next': 'Continue with',
 
+  'org.hint': 'Drag pages to reorder them. Use the buttons to rotate or delete a page.',
+  'org.rotate': 'Rotate page {n}',
+  'org.delete': 'Delete page {n}',
+  'org.restore': 'Restore page {n}',
+  'org.left': 'Move page {n} left',
+  'org.right': 'Move page {n} right',
+  'org.loading': 'Loading pages…',
+  'org.none': 'All pages are deleted. Restore at least one page.',
+
   'opt.quality': 'Quality',
   'opt.format': 'Output format',
   'opt.bitrate': 'Audio quality',
@@ -266,6 +275,15 @@ const fr: Record<UIKey, string> = {
   'tool.otherTools': 'Autres outils {cat}',
   'tool.rate': 'Gratuit · Sans inscription · Sans filigrane',
   'tool.next': 'Continuer avec',
+
+  'org.hint': 'Glissez les pages pour les réordonner. Utilisez les boutons pour pivoter ou supprimer une page.',
+  'org.rotate': 'Pivoter la page {n}',
+  'org.delete': 'Supprimer la page {n}',
+  'org.restore': 'Restaurer la page {n}',
+  'org.left': 'Déplacer la page {n} vers la gauche',
+  'org.right': 'Déplacer la page {n} vers la droite',
+  'org.loading': 'Chargement des pages…',
+  'org.none': 'Toutes les pages sont supprimées. Restaurez au moins une page.',
 
   'opt.quality': 'Qualité',
   'opt.format': 'Format de sortie',

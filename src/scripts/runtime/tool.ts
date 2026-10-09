@@ -18,6 +18,13 @@ interface ToolConfig {
 
 const engines = import.meta.glob<{ default: Engine }>('../engines/*.ts');
 
+/** Optional per-engine custom UI (e.g. page thumbnails for organize-pdf). */
+export interface ToolUI {
+  update(files: File[]): void;
+  values(): OptionValues;
+}
+const uis = import.meta.glob<{ default: (host: HTMLElement, strings: Record<string, string>) => ToolUI }>('../ui/*.ts');
+
 function loadEngine(name: string): Promise<Engine> {
   const loader = engines[`../engines/${name}.ts`];
   if (!loader) return Promise.reject(new Error(`Unknown engine ${name}`));
@@ -72,6 +79,11 @@ export function initTool(root: HTMLElement): void {
   const optionsForm = root.querySelector<HTMLFormElement>('[data-options]');
 
   let files: File[] = [];
+  let customUI: ToolUI | null = null;
+  const uiLoader = uis[`../ui/${cfg.engine}.ts`];
+  const uiReady = uiLoader
+    ? uiLoader().then((m) => { customUI = m.default(root.querySelector<HTMLElement>('[data-custom-ui]')!, s); customUI.update(files); })
+    : Promise.resolve();
   let controller: AbortController | null = null;
   let lastResults: Result[] = [];
   const urls: string[] = [];
@@ -159,10 +171,11 @@ export function initTool(root: HTMLElement): void {
     convertBtn.disabled = n < cfg.minFiles;
     root.querySelector<HTMLElement>('[data-min-hint]')!.hidden = n >= cfg.minFiles;
     setState(n ? 'files' : 'empty');
+    customUI?.update(files);
   };
 
   const readOptions = (): OptionValues => {
-    const out: OptionValues = {};
+    const out: OptionValues = { ...(customUI?.values() ?? {}) };
     if (!optionsForm) return out;
     for (const elx of Array.from(optionsForm.elements) as HTMLInputElement[]) {
       if (!elx.name) continue;
@@ -192,6 +205,7 @@ export function initTool(root: HTMLElement): void {
 
   const convert = async () => {
     if (files.length < cfg.minFiles) return;
+    await uiReady;
     showError('');
     const options = readOptions();
     controller = new AbortController();
