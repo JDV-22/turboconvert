@@ -1,0 +1,11 @@
+---
+import ToolPage from '@/layouts/ToolPage.astro';
+import { getTools, type ToolEntry } from '@/data/catalog';
+
+export async function getStaticPaths() {
+  const tools = await getTools('en');
+  return tools.map((entry) => ({ params: { tool: entry.slug }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: ToolEntry };
+---
+<ToolPage entry={entry} locale="en" />

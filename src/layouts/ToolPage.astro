@@ -1,0 +1,147 @@
+---
+import Base from './Base.astro';
+import ToolApp from '@/components/ToolApp.astro';
+import Icon from '@/components/Icon.astro';
+import ToolCard from '@/components/ToolCard.astro';
+import Faq from '@/components/Faq.astro';
+import AdSlot from '@/components/AdSlot.astro';
+import { render } from 'astro:content';
+import { useT } from '@/i18n/ui';
+import { localePath, type Locale } from '@/i18n/locales';
+import { getTools, toolAlternates, categoryHref, type ToolEntry } from '@/data/catalog';
+import { SITE } from '@/config/site';
+
+interface Props { entry: ToolEntry; locale: Locale }
+const { entry, locale } = Astro.props;
+const { tool, copy } = entry;
+const d = copy.data;
+const t = useT(locale);
+const { Content } = await render(copy);
+const all = await getTools(locale);
+const alternates = await toolAlternates(tool.id);
+const related = (tool.related ?? []).map((id) => all.find((e) => e.tool.id === id)).filter((e): e is ToolEntry => !!e);
+const sameCat = all.filter((e) => e.tool.category === tool.category && e.tool.id !== tool.id && !related.includes(e)).slice(0, 8);
+const hub = categoryHref(tool.category, locale);
+const url = `${SITE.url}${entry.href}`;
+
+const crumbs = [
+  { name: t('crumb.home'), href: localePath(locale) },
+  ...(hub ? [{ name: t(`cat.${tool.category}.title`), href: hub }] : []),
+  { name: d.name, href: entry.href },
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: d.h1,
+    url,
+    description: d.description,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any (web browser)',
+    browserRequirements: 'Requires JavaScript and WebAssembly',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    publisher: { '@id': `${SITE.url}/#org` },
+    inLanguage: locale,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: `${SITE.url}${c.href === '/' ? '/' : c.href}` })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+<Base locale={locale} title={d.title} description={d.description} path={entry.href} alternates={alternates} jsonLd={jsonLd} current={tool.category}>
+  <div class="tool-hero" data-cat={tool.category}>
+    <div class="wrap-narrow">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>{crumbs.map((c, i) => <li>{i < crumbs.length - 1 ? <a href={c.href}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>)}</ol>
+      </nav>
+      <div class="tool-title">
+        <span class="cat-icon lg" data-cat={tool.category}><Icon name={tool.category} /></span>
+        <div>
+          <h1>{d.h1}</h1>
+          <p class="lead">{d.lead}</p>
+        </div>
+      </div>
+      <ToolApp tool={tool} locale={locale} what={d.what}>
+        {related.length > 0 && (
+          <div class="ta-next" slot="next">
+            <p>{t('tool.next')}</p>
+            <div>{related.slice(0, 4).map((r) => <a class="chip" href={r.href} data-cat={r.tool.category}><Icon name={r.tool.category} />{r.copy.data.name}</a>)}</div>
+          </div>
+        )}
+      </ToolApp>
+    </div>
+  </div>
+
+  <AdSlot name="toolBelow" />
+
+  <article class="tool-content wrap-narrow">
+    <section class="howto" aria-labelledby="howto">
+      <h2 id="howto">{t('tool.howTo', { name: d.howTo })}</h2>
+      <ol class="steps">
+        {d.steps.map((s, i) => <li><span class="step-n">{i + 1}</span><p set:html={s} /></li>)}
+      </ol>
+    </section>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {d.limits.length > 0 && (
+      <aside class="limits" aria-labelledby="limits">
+        <h2 id="limits"><Icon name="info" />{t('tool.limits')}</h2>
+        <ul>{d.limits.map((l) => <li set:html={l} />)}</ul>
+      </aside>
+    )}
+
+    <section aria-labelledby="faq">
+      <h2 id="faq" class="faq-title">{t('tool.faq')}</h2>
+      <Faq items={d.faq} />
+    </section>
+  </article>
+
+  {(related.length > 0 || sameCat.length > 0) && (
+    <section class="wrap section related" aria-labelledby="related">
+      <div class="section-head"><h2 id="related">{t('tool.related')}</h2>{hub && <a class="btn btn-sm" href={hub}>{t(`cat.${tool.category}.title`)} <Icon name="arrow" /></a>}</div>
+      <div class="tool-grid">
+        {[...related, ...sameCat].slice(0, 8).map((e) => <ToolCard entry={e} />)}
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .tool-hero { padding-block: 28px 8px; background: radial-gradient(1200px 380px at 50% -120px, var(--c-soft), transparent 70%); }
+  .tool-title { display: flex; gap: 16px; align-items: flex-start; margin: 18px 0 26px; }
+  .tool-title h1 { font-size: clamp(28px, 4.4vw, 44px); letter-spacing: -0.03em; }
+  .tool-title .lead { margin-top: 8px; }
+  @media (max-width: 560px) { .tool-title .cat-icon { display: none; } }
+
+  .ta-next { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; }
+  .ta-next p { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .ta-next > div { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; font-size: 14px; font-weight: 520; background: var(--surface); }
+  .chip:hover { border-color: var(--c); }
+  .chip :global(svg) { width: 16px; height: 16px; color: var(--c); }
+
+  .tool-content { padding-block: 56px 16px; display: grid; gap: 48px; }
+  .tool-content h2 { font-size: clamp(22px, 2.8vw, 28px); }
+  .steps { list-style: none; padding: 0; margin-top: 20px; display: grid; gap: 12px; }
+  .steps li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .step-n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--bg); display: grid; place-items: center; font-weight: 650; font-size: 14px; }
+  .steps p { padding-top: 3px; }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .limits { padding: 20px 22px; border-radius: var(--radius); background: var(--bg-soft); border: 1px solid var(--line); }
+  .limits h2 { display: flex; align-items: center; gap: 8px; font-size: 18px; margin-bottom: 10px; }
+  .limits h2 :global(svg) { width: 20px; height: 20px; color: var(--accent); }
+  .limits ul { padding-left: 1.2em; color: var(--ink-2); display: grid; gap: 6px; }
+  .faq-title { margin-bottom: 12px; }
+  .related { padding-top: 24px; }
+</style>

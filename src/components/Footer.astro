@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import { useT } from '@/i18n/ui';
+import { localePath, type Locale } from '@/i18n/locales';
+import { getTools, categoryHref } from '@/data/catalog';
+import { pageHref } from '@/data/pages';
+import { SITE } from '@/config/site';
+import type { Category } from '@/data/tools';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useT(locale);
+const tools = await getTools(locale);
+const cols: { cat: Category[]; title: string }[] = [
+  { cat: ['pdf'], title: t('cat.pdf.title') },
+  { cat: ['image'], title: t('cat.image.title') },
+  { cat: ['document', 'video', 'audio'], title: `${t('cat.document')}, ${t('cat.video')} & ${t('cat.audio')}` },
+];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="logo" href={localePath(locale)}>
+          <span class="logo-mark"><Icon name="logo" /></span>
+          <span><b>Turbo</b><span>Convert</span></span>
+        </a>
+        <p>{t('footer.about')}</p>
+      </div>
+      {cols.map((col) => {
+        const list = tools.filter((e) => col.cat.includes(e.tool.category)).sort((a, b) => Number(!!b.tool.popular) - Number(!!a.tool.popular)).slice(0, 9);
+        const hub = categoryHref(col.cat[0], locale);
+        return list.length > 0 && (
+          <div>
+            <h3>{hub ? <a href={hub}>{col.title}</a> : col.title}</h3>
+            <ul>{list.map((e) => <li><a href={e.href}>{e.copy.data.name}</a></li>)}</ul>
+          </div>
+        );
+      })}
+      <div>
+        <h3>{t('footer.company')}</h3>
+        <ul>
+          <li><a href={pageHref('tools', locale)}>{t('nav.tools')}</a></li>
+          <li><a href={pageHref('blog', locale)}>{t('nav.blog')}</a></li>
+          <li><a href={pageHref('about', locale)}>{t('nav.about')}</a></li>
+          <li><a href={pageHref('contact', locale)}>{t('footer.contact')}</a></li>
+          <li><a href={pageHref('privacy', locale)}>{t('footer.privacy')}</a></li>
+          <li><a href={pageHref('terms', locale)}>{t('footer.terms')}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} {SITE.name}. {t('footer.rights')}</span>
+      <button class="linklike" type="button" data-consent-open hidden>{t('footer.cookies')}</button>
+    </div>
+  </div>
+</footer>

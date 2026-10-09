@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+import { useT } from '@/i18n/ui';
+import { localePath, LOCALE_META, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { getTools, categoryHref } from '@/data/catalog';
+import { CATEGORIES } from '@/data/tools';
+import { pageHref } from '@/data/pages';
+import type { Alternate } from './Seo.astro';
+
+interface Props { locale: Locale; alternates?: Alternate[]; current?: string }
+const { locale, alternates = [], current } = Astro.props;
+const t = useT(locale);
+const tools = await getTools(locale);
+const searchIndex = tools.map((e) => ({
+  n: e.copy.data.name,
+  h: e.href,
+  c: e.tool.category,
+  k: `${e.tool.id} ${e.tool.from} ${e.tool.to} ${e.tool.accept.join(' ')} ${e.copy.data.h1}`.toLowerCase(),
+}));
+const blogHref = pageHref('blog', locale);
+const langOptions = PUBLISHED_LOCALES.map((l) => ({
+  locale: l,
+  label: LOCALE_META[l].label,
+  href: alternates.find((a) => a.locale === l)?.href ?? localePath(l),
+}));
+---
+<a class="skip-link" href="#main">{t('nav.skip')}</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href={localePath(locale)} aria-label="TurboConvert">
+      <span class="logo-mark"><Icon name="logo" /></span>
+      <span><b>Turbo</b><span>Convert</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      {CATEGORIES.map((c) => {
+        const href = categoryHref(c, locale);
+        return href && tools.some((e) => e.tool.category === c) && (
+          <a href={href} aria-current={current === c ? 'page' : undefined}>{t(`cat.${c}`)}</a>
+        );
+      })}
+      <a href={blogHref} aria-current={current === 'blog' ? 'page' : undefined}>{t('nav.blog')}</a>
+    </nav>
+    <div class="header-right">
+      <button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
+        <Icon name="search" />
+        <span class="label">{t('nav.search')}</span>
+        <kbd>/</kbd>
+      </button>
+      {PUBLISHED_LOCALES.length > 1 && (
+        <label class="lang-switch">
+          <span class="sr-only">{t('nav.language')}</span>
+          <select data-lang-switch>
+            {langOptions.map((o) => (
+              <option value={o.href} selected={o.locale === locale}>{o.locale.toUpperCase()}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      <button class="btn btn-ghost menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav">
+        <span class="sr-only">{t('nav.menu')}</span><Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" hidden aria-label="Mobile">
+  {CATEGORIES.map((c) => {
+    const list = tools.filter((e) => e.tool.category === c);
+    return list.length > 0 && (
+      <>
+        <h3>{t(`cat.${c}.title`)}</h3>
+        {list.map((e) => <a href={e.href}>{e.copy.data.name}</a>)}
+      </>
+    );
+  })}
+  <h3>TurboConvert</h3>
+  <a href={blogHref}>{t('nav.blog')}</a>
+  <a href={pageHref('about', locale)}>{t('nav.about')}</a>
+</nav>
+
+<dialog class="search-dialog" data-search-dialog aria-label={t('nav.search')}>
+  <div class="s-head">
+    <Icon name="search" />
+    <input type="search" placeholder={t('nav.searchPlaceholder')} autocomplete="off" spellcheck="false" data-search-input aria-label={t('nav.search')} />
+    <button class="btn btn-ghost btn-sm" type="button" data-search-close aria-label="Close"><Icon name="x" /></button>
+  </div>
+  <ul class="s-list" data-search-list role="listbox"></ul>
+  <p class="s-empty" data-search-empty hidden>{t('nav.noResults')}</p>
+</dialog>
+<script type="application/json" id="search-index" set:html={JSON.stringify(searchIndex)} />
+
+<script>
+  import { initHeader } from '@/scripts/runtime/header';
+  initHeader();
+</script>

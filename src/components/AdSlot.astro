@@ -1,0 +1,20 @@
+---
+import { ADS } from '@/config/site';
+
+// Reserved-height ad container. Renders nothing until ads are enabled and the
+// slot has a real ad unit ID, so no empty boxes or layout shift.
+interface Props { name: keyof typeof ADS.slots; minHeight?: number }
+const { name, minHeight = 280 } = Astro.props;
+const slotId = ADS.slots[name];
+const show = ADS.enabled && !!slotId;
+---
+{show && (
+  <div class="wrap ad-wrap" style={`min-height:${minHeight + 20}px`}>
+    <ins class="adsbygoogle ad-slot" style={`display:block;min-height:${minHeight}px`} data-label="Advertisement"
+      data-ad-client={ADS.client} data-ad-slot={slotId} data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}
+<style>
+  .ad-wrap { margin-block: 48px 8px; }
+</style>

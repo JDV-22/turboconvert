@@ -1,0 +1,237 @@
+---
+import Icon from './Icon.astro';
+import { useT } from '@/i18n/ui';
+import type { Locale } from '@/i18n/locales';
+import type { ToolDef } from '@/data/tools';
+import { formatList, formatMb } from '@/data/catalog';
+
+interface Props { tool: ToolDef; locale: Locale; what: string }
+const { tool, locale, what } = Astro.props;
+const t = useT(locale);
+const formats = formatList(tool.accept);
+const maxLabel = formatMb(tool.maxMb);
+const acceptAttr = tool.accept.map((e) => `.${e}`).join(',');
+const engineSize: Record<string, string> = { ffmpeg: '≈ 31 MB', 'pdf-compress': '≈ 16 MB', ocr: '≈ 15 MB', 'image-convert': '≈ 1.5 MB' };
+const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
+const compare = ['compress-pdf', 'compress-image', 'compress-video', 'resize-image'].includes(tool.id);
+const keys = [
+  'tool.convert', 'tool.convertN', 'tool.working', 'tool.loadingEngine', 'tool.done', 'tool.doneN', 'tool.failed', 'tool.download',
+  'tool.saved', 'tool.errType', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',
+];
+const strings: Record<string, string> = { maxLabel };
+for (const k of keys) strings[k.replace('tool.', '')] = t(k);
+const config = {
+  id: tool.id, engine: tool.engine, params: tool.params ?? {}, accept: tool.accept, multiple: tool.multiple,
+  mode: tool.mode, minFiles: tool.minFiles ?? 1, maxMb: tool.maxMb, compare, formats, s: strings,
+};
+const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
+---
+<section class="tool-app" data-tool-app data-state="empty" data-cat={tool.category} aria-live="polite">
+  <script type="application/json" data-config set:html={JSON.stringify(config)} />
+  <input type="file" data-input accept={acceptAttr} multiple={tool.multiple} hidden />
+
+  <!-- 1. Empty: drop zone -->
+  <div class="ta-panel ta-drop" data-drop role="button" tabindex="0" aria-label={tool.multiple ? t('tool.choose') : t('tool.chooseOne')}>
+    <div class="ta-drop-icon"><Icon name="upload" /></div>
+    <p class="ta-drop-title">{tool.multiple ? t('tool.dropTitleMulti') : t('tool.dropTitle', { what })}</p>
+    <button class="btn btn-primary btn-lg" type="button" data-pick tabindex="-1">
+      <Icon name="file" />{tool.multiple ? t('tool.choose') : t('tool.chooseOne')}
+    </button>
+    <p class="ta-hint">{t('tool.dropHint', { formats, max: maxLabel })}</p>
+  </div>
+
+  <!-- 2. Files selected: list + options -->
+  <div class="ta-panel ta-files">
+    <ul class="ta-list" data-file-list></ul>
+    <div class="ta-row">
+      {tool.multiple && <button class="btn btn-sm" type="button" data-pick>+ {t('tool.addMore')}</button>}
+      {!tool.multiple && <button class="btn btn-sm" type="button" data-pick>{t('tool.chooseOne')}</button>}
+      <button class="btn btn-sm btn-ghost" type="button" data-clear>{t('tool.clear')}</button>
+    </div>
+    {tool.options && tool.options.length > 0 && (
+      <form class="ta-options" data-options onsubmit="return false">
+        <p class="ta-options-title">{t('tool.options')}</p>
+        <div class="ta-fields">
+          {tool.options.map((o) => {
+            const id = `opt-${tool.id}-${o.id}`;
+            return (
+              <div class="ta-field" data-field={o.id}>
+                {o.type === 'checkbox' ? (
+                  <label class="ta-check"><input type="checkbox" name={o.id} id={id} checked={o.default} /> {label(o.label)}</label>
+                ) : (
+                  <>
+                    <label for={id}>
+                      {label(o.label)}
+                      {o.type === 'range' && <output for={id} />}
+                    </label>
+                    {o.type === 'select' && (
+                      <select name={o.id} id={id}>
+                        {o.choices.map((c) => <option value={c.value} selected={c.value === o.default}>{label(c.label)}</option>)}
+                      </select>
+                    )}
+                    {o.type === 'range' && (
+                      <input type="range" name={o.id} id={id} min={o.min} max={o.max} step={o.step} value={o.default} data-unit={o.unit ?? ''} />
+                    )}
+                    {o.type === 'number' && (
+                      <input type="number" name={o.id} id={id} min={o.min} max={o.max} value={o.default} placeholder={o.placeholder ? label(o.placeholder) : undefined} inputmode="numeric" />
+                    )}
+                    {o.type === 'text' && (
+                      <input type={o.id.toLowerCase().includes('password') ? 'password' : 'text'} name={o.id} id={id} value={o.default} placeholder={o.placeholder ? label(o.placeholder) : undefined} autocomplete="off" />
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </form>
+    )}
+    <div class="ta-error" data-error hidden role="alert"></div>
+    <div class="ta-cta">
+      <button class="btn btn-primary btn-lg" type="button" data-convert>{t('tool.convert')}</button>
+      <p class="ta-min" data-min-hint hidden>{t('tool.minFiles', { n: tool.minFiles ?? 1 })}</p>
+    </div>
+  </div>
+
+  <!-- 3. Working -->
+  <div class="ta-panel ta-working">
+    <div class="ta-spinner" aria-hidden="true"></div>
+    <p class="ta-status" data-status>{t('tool.working')}</p>
+    <div class="ta-bar" data-bar role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+    {tool.heavy && <p class="ta-hint">{t('tool.heavyNote', { size: heavySize })}</p>}
+    <button class="btn btn-sm btn-ghost" type="button" data-cancel>{t('tool.cancel')}</button>
+  </div>
+
+  <!-- 4. Done -->
+  <div class="ta-panel ta-done">
+    <div class="ta-done-head">
+      <span class="ta-done-icon" data-done-icon><Icon name="check" /></span>
+      <h2 data-done-title>{t('tool.done')}</h2>
+    </div>
+    <ul class="ta-list" data-results></ul>
+    <div class="ta-row ta-row-center">
+      <button class="btn btn-primary" type="button" data-zip hidden><Icon name="download" />{t('tool.downloadAll')}</button>
+      <button class="btn" type="button" data-again><Icon name="refresh" />{t('tool.again')}</button>
+    </div>
+    <slot name="next" />
+  </div>
+
+  <div class="ta-dropveil" aria-hidden="true"><Icon name="upload" /><span>{tool.multiple ? t('tool.dropTitleMulti') : t('tool.dropTitle', { what })}</span></div>
+</section>
+<p class="ta-trust"><Icon name="lock" /> {t('tool.privacyNote')} <span class="sep">·</span> {t('tool.rate')}</p>
+
+<script>
+  import { initTool } from '@/scripts/runtime/tool';
+  document.querySelectorAll<HTMLElement>('[data-tool-app]').forEach(initTool);
+</script>
+
+<style is:global>
+  .tool-app {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+    min-height: 300px;
+  }
+  .ta-panel { display: none; padding: clamp(20px, 4vw, 36px); }
+  .tool-app[data-state='empty'] .ta-drop,
+  .tool-app[data-state='files'] .ta-files,
+  .tool-app[data-state='working'] .ta-working,
+  .tool-app[data-state='done'] .ta-done { display: block; }
+
+  .ta-drop {
+    display: none; text-align: center; cursor: pointer;
+    margin: 10px; border: 2px dashed var(--line-strong); border-radius: calc(var(--radius-l) - 6px);
+    padding: clamp(36px, 7vw, 64px) 20px; transition: background-color .15s, border-color .15s;
+  }
+  .tool-app[data-state='empty'] .ta-drop { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .ta-drop:hover { border-color: var(--c); background: color-mix(in srgb, var(--c-soft) 55%, transparent); }
+  .ta-drop-icon { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--c-soft); color: var(--c); }
+  .ta-drop-icon svg { width: 30px; height: 30px; }
+  .ta-drop-title { font-size: clamp(18px, 2.2vw, 21px); font-weight: 600; letter-spacing: -0.01em; }
+  .ta-hint { font-size: 13.5px; color: var(--muted); }
+
+  .ta-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .ta-file, .ta-result {
+    display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg);
+  }
+  .ta-thumb {
+    width: 44px; height: 44px; flex: none; border-radius: 9px; overflow: hidden;
+    display: grid; place-items: center; position: relative;
+    background: var(--c-soft); color: var(--c);
+  }
+  .ta-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ta-thumb svg { width: 24px; height: 24px; opacity: .45; }
+  .ta-thumb b { position: absolute; font-size: 9.5px; font-weight: 700; letter-spacing: .02em; bottom: 5px; }
+  .ta-meta { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+  .ta-name { font-weight: 560; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ta-size { font-size: 13px; color: var(--muted); }
+  .ta-saved { display: inline-block; font-weight: 600; color: var(--ok); background: var(--ok-soft); padding: 0 7px; border-radius: 999px; }
+  .ta-file-actions { display: flex; gap: 2px; }
+  .icon-btn {
+    width: 36px; height: 36px; display: grid; place-items: center; border-radius: 9px;
+    border: 0; background: transparent; color: var(--muted); cursor: pointer;
+  }
+  .icon-btn:hover:not(:disabled) { background: var(--bg-soft); color: var(--ink); }
+  .icon-btn:disabled { opacity: .3; cursor: default; }
+  .icon-btn svg { width: 18px; height: 18px; }
+  .ta-result.is-error .ta-thumb { background: var(--err-soft); color: var(--err); }
+  .ta-result.is-error .ta-size { color: var(--err); white-space: normal; }
+
+  .ta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .ta-row-center { justify-content: center; margin-top: 20px; }
+  .ta-options { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .ta-options-title { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .ta-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 18px; }
+  .ta-field[hidden] { display: none; }
+  .ta-field label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 550; margin-bottom: 6px; }
+  .ta-field output { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .ta-field select, .ta-field input[type='text'], .ta-field input[type='number'], .ta-field input[type='password'] {
+    width: 100%; height: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface);
+  }
+  .ta-field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 18px) 19px, calc(100% - 13px) 19px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 32px; }
+  .ta-field input[type='range'] { width: 100%; accent-color: var(--accent); height: 28px; }
+  .ta-check { display: flex !important; gap: 8px; align-items: center; justify-content: flex-start !important; cursor: pointer; }
+
+  .ta-error {
+    display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; padding: 12px 14px;
+    background: var(--err-soft); color: var(--err); border-radius: var(--radius-s); font-size: 14.5px;
+  }
+  .ta-error[hidden] { display: none; }
+  .ta-error svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+  .ta-cta { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .ta-cta .btn { width: min(100%, 360px); }
+  .ta-min { font-size: 13.5px; color: var(--muted); }
+
+  .tool-app[data-state='working'] .ta-working { display: flex; flex-direction: column; align-items: center; gap: 14px; padding-block: 56px; text-align: center; }
+  .ta-status { font-weight: 560; }
+  .ta-bar { width: min(100%, 420px); height: 8px; border-radius: 99px; background: var(--bg-soft); overflow: hidden; }
+  .ta-bar span { display: block; height: 100%; width: var(--p, 0%); background: var(--accent); border-radius: inherit; transition: width .25s ease; }
+  .ta-spinner { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--bg-soft); border-top-color: var(--accent); animation: ta-spin .8s linear infinite; }
+  @keyframes ta-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .ta-spinner { animation-duration: 2.4s; } }
+
+  .ta-done-head { display: flex; align-items: center; gap: 12px; justify-content: center; margin-bottom: 18px; }
+  .ta-done-head h2 { font-size: 22px; }
+  .ta-done-icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--ok-soft); color: var(--ok); }
+  .ta-done-icon[data-ok='false'] { background: var(--err-soft); color: var(--err); }
+  .ta-done-icon svg { width: 20px; height: 20px; }
+
+  .ta-dropveil {
+    display: none; position: absolute; inset: 0; z-index: 5; border-radius: inherit;
+    border: 2px dashed var(--accent); background: color-mix(in srgb, var(--accent-soft) 92%, transparent);
+    flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--accent); font-weight: 600;
+  }
+  .ta-dropveil svg { width: 36px; height: 36px; }
+  .tool-app.is-dragging:not([data-state='working']) .ta-dropveil { display: flex; }
+
+  .ta-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-size: 13.5px; color: var(--muted); text-align: center; }
+  .ta-trust svg { width: 15px; height: 15px; color: var(--ok); }
+  @media (max-width: 560px) {
+    .ta-trust .sep { display: none; }
+    .ta-result { flex-wrap: wrap; }
+    .ta-result .btn { width: 100%; }
+  }
+</style>

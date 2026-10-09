@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import type { ToolEntry } from '@/data/catalog';
+
+interface Props { entry: ToolEntry }
+const { entry } = Astro.props;
+---
+<a class="tool-card" href={entry.href} data-cat={entry.tool.category}>
+  <span class="cat-icon" data-cat={entry.tool.category}><Icon name={entry.tool.category} /></span>
+  <span>
+    <h3>{entry.copy.data.name}</h3>
+    <p>{entry.copy.data.lead.split(/(?<=\.)\s/)[0]}</p>
+  </span>
+</a>

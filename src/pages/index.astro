@@ -1,0 +1,9 @@
+---
+import Base from '@/layouts/Base.astro';
+import ToolCard from '@/components/ToolCard.astro';
+import { getTools } from '@/data/catalog';
+const tools = await getTools('en');
+---
+<Base locale="en" title="TurboConvert" description="Free online file converter that runs in your browser. PDF, images, documents, audio and video. No upload, no sign-up." path="/">
+  <div class="wrap section"><h1>TurboConvert</h1><div class="tool-grid">{tools.map((e) => <ToolCard entry={e} />)}</div></div>
+</Base>

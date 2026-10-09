@@ -1,0 +1,79 @@
+---
+import '@/styles/global.css';
+import Seo, { type Alternate } from '@/components/Seo.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { LOCALE_META, type Locale } from '@/i18n/locales';
+import { useT } from '@/i18n/ui';
+import { ADS, ANALYTICS, SITE } from '@/config/site';
+import { pageHref } from '@/data/pages';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  path: string;
+  alternates?: Alternate[];
+  jsonLd?: object[];
+  noindex?: boolean;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  current?: string;
+  /** Pages without ads: legal, contact, 404… */
+  noAds?: boolean;
+}
+const props = Astro.props;
+const { locale, alternates = [], noAds } = props;
+const t = useT(locale);
+const showAds = ADS.enabled && !noAds;
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#org`,
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/icon-512.png`,
+  email: SITE.email,
+};
+---
+<!doctype html>
+<html lang={LOCALE_META[locale].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0d10" media="(prefers-color-scheme: dark)" />
+    <Seo {...props} jsonLd={[orgLd, ...(props.jsonLd ?? [])]} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    {ANALYTICS.vercel && <script defer src="/_vercel/insights/script.js" is:inline></script>}
+    {showAds && (
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS.client}`} crossorigin="anonymous" is:inline></script>
+    )}
+  </head>
+  <body>
+    <Header locale={locale} alternates={alternates} current={props.current} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    {ANALYTICS.ga4 && !ADS.enabled && (
+      <div class="consent" data-consent hidden role="dialog" aria-live="polite" aria-label="Cookies">
+        <p>{t('consent.text')} <a href={pageHref('privacy', locale)}>{t('consent.more')}</a></p>
+        <div class="actions">
+          <button class="btn btn-sm" type="button" data-consent-choice="denied">{t('consent.reject')}</button>
+          <button class="btn btn-sm btn-dark" type="button" data-consent-choice="granted">{t('consent.accept')}</button>
+        </div>
+      </div>
+    )}
+    <script define:vars={{ gaId: ANALYTICS.ga4 && !ADS.enabled ? ANALYTICS.ga4 : '' }} is:inline>
+      window.__GA_ID = gaId;
+    </script>
+    <script>
+      import { initConsent } from '@/scripts/runtime/consent';
+      initConsent((window as unknown as { __GA_ID: string }).__GA_ID);
+    </script>
+  </body>
+</html>
