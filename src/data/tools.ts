@@ -332,7 +332,7 @@ export const TOOLS: ToolDef[] = [
     related: ['excel-to-pdf', 'pdf-to-word', 'pdf-to-text'],
   },
   {
-    id: 'excel-to-pdf', category: 'document', engine: 'xlsx-to-pdf', accept: ['xlsx', 'xls', 'csv', 'ods'], multiple: true, mode: 'each',
+    id: 'excel-to-pdf', category: 'document', engine: 'xlsx-to-pdf', accept: ['xlsx', 'csv'], multiple: true, mode: 'each',
     maxMb: 100, from: 'XLSX', to: 'PDF',
     options: [{
       id: 'orientation', type: 'select', label: 'opt.orientation', default: 'auto',
