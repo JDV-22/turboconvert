@@ -6,3 +6,4 @@ test-results/
 playwright-report/
 .vercel
 .claude/worktrees/
+scripts/*.tmp.mjs
