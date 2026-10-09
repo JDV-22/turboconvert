@@ -10,7 +10,7 @@ interface Props { tool: ToolDef; locale: Locale; what: string }
 const { tool, locale, what } = Astro.props;
 const t = useT(locale);
 const formats = formatList(tool.accept);
-const maxLabel = formatMb(tool.maxMb);
+const maxLabel = locale === 'fr' ? formatMb(tool.maxMb).replace('MB', 'Mo').replace('GB', 'Go') : formatMb(tool.maxMb);
 const acceptAttr = tool.accept.map((e) => `.${e}`).join(',');
 const engineSize: Record<string, string> = { ffmpeg: '≈ 10 MB', 'pdf-compress': '≈ 16 MB', ocr: '≈ 5 MB', 'image-convert': '≈ 2 MB' };
 const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
@@ -131,10 +131,12 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
 <style is:global>
   .tool-app {
     position: relative;
-    background: var(--surface);
-    border: 1px solid var(--line);
+    background:
+      linear-gradient(var(--surface), var(--surface)) padding-box,
+      linear-gradient(135deg, color-mix(in srgb, var(--c) 45%, var(--line)), var(--line) 40%, color-mix(in srgb, var(--accent) 30%, var(--line))) border-box;
+    border: 1px solid transparent;
     border-radius: var(--radius-l);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-l), 0 30px 60px -40px color-mix(in srgb, var(--c) 45%, transparent);
     min-height: 300px;
   }
   .ta-panel { display: none; padding: clamp(20px, 4vw, 36px); }
@@ -150,7 +152,12 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
   }
   .tool-app[data-state='empty'] .ta-drop { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .ta-drop:hover { border-color: var(--c); background: color-mix(in srgb, var(--c-soft) 55%, transparent); }
-  .ta-drop-icon { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--c-soft); color: var(--c); }
+  .ta-drop-icon { width: 68px; height: 68px; border-radius: 20px; display: grid; place-items: center; background: var(--c-soft); color: var(--c); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 18%, transparent); transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+  .ta-drop:hover .ta-drop-icon { transform: translateY(-4px) scale(1.04); }
+  .ta-done-icon { animation: ta-pop .45s cubic-bezier(.2,1.6,.4,1) both; }
+  @keyframes ta-pop { from { transform: scale(.4); opacity: 0; } }
+  .ta-bar span { background: linear-gradient(90deg, var(--accent), #8b5cf6, #ff5d8f); background-size: 200% 100%; animation: ta-flow 1.6s linear infinite; }
+  @keyframes ta-flow { to { background-position: -200% 0; } }
   .ta-drop-icon svg { width: 30px; height: 30px; }
   .ta-drop-title { font-size: clamp(18px, 2.2vw, 21px); font-weight: 600; letter-spacing: -0.01em; }
   .ta-hint { font-size: 13.5px; color: var(--muted); }
