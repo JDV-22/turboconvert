@@ -10,6 +10,7 @@ declare global {
     va?: (event: string, props?: unknown) => void;
     gtag?: (...args: unknown[]) => void;
     dataLayer?: unknown[];
+    umami?: { track: (name: string, data?: Record<string, unknown>) => void };
   }
 }
 
@@ -18,6 +19,7 @@ export function track(name: string, props: Props = {}): void {
   for (const [k, v] of Object.entries(props)) if (v !== undefined) clean[k] = v;
   try { window.va?.('event', { name, data: clean }); } catch { /* ignore */ }
   try { window.gtag?.('event', name, clean); } catch { /* ignore */ }
+  try { window.umami?.track(name, clean); } catch { /* ignore */ }
   if (import.meta.env.DEV) console.debug('[track]', name, clean);
 }
 

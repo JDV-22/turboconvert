@@ -49,6 +49,7 @@ const orgLd = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     {ANALYTICS.vercel && <script defer src="/_vercel/insights/script.js" is:inline></script>}
+    {ANALYTICS.umamiWebsiteId && <script defer src="https://cloud.umami.is/script.js" data-website-id={ANALYTICS.umamiWebsiteId} data-do-not-track="true" is:inline></script>}
     {showAds && (
       <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS.client}`} crossorigin="anonymous" is:inline></script>
     )}

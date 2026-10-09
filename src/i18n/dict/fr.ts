@@ -85,6 +85,8 @@ const fr: Record<UIKey, string> = {
   'tool.otherTools': 'Autres outils {cat}',
   'tool.rate': 'Gratuit · Sans inscription · Sans filigrane',
   'tool.next': 'Continuer avec',
+  'tool.donate': 'TurboConvert est gratuit et peu chargé en publicité. S’il vous a fait gagner du temps,',
+  'tool.donateLink': 'offrez-nous un café ☕',
 
   'org.hint': 'Glissez les pages pour les réordonner. Utilisez les boutons pour pivoter ou supprimer une page.',
   'org.rotate': 'Pivoter la page {n}',

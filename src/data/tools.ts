@@ -275,6 +275,33 @@ export const TOOLS: ToolDef[] = [
     related: ['pdf-to-text', 'pdf-to-word', 'image-to-text'],
   },
 
+  {
+    id: 'delete-pdf-pages', category: 'pdf', engine: 'pdf-organize', accept: ['pdf'], multiple: false, mode: 'each',
+    maxMb: 200, from: 'PDF', to: 'PDF',
+    slugs: { en: 'delete-pdf-pages', fr: 'supprimer-pages-pdf' },
+    related: ['organize-pdf', 'split-pdf', 'merge-pdf'],
+  },
+  {
+    id: 'heic-to-pdf', category: 'pdf', engine: 'images-to-pdf', accept: ['heic', 'heif', 'jpg', 'jpeg', 'png'], multiple: true, mode: 'all',
+    maxMb: 100, heavy: true, from: 'HEIC', to: 'PDF',
+    options: [pageSize, margin],
+    slugs: { en: 'heic-to-pdf', fr: 'heic-en-pdf' },
+    related: ['heic-to-jpg', 'jpg-to-pdf', 'compress-pdf'],
+  },
+  {
+    id: 'tiff-to-pdf', category: 'pdf', engine: 'images-to-pdf', accept: ['tif', 'tiff', 'jpg', 'jpeg', 'png'], multiple: true, mode: 'all',
+    maxMb: 100, from: 'TIFF', to: 'PDF',
+    options: [pageSize, margin],
+    slugs: { en: 'tiff-to-pdf', fr: 'tiff-en-pdf' },
+    related: ['tiff-to-jpg', 'jpg-to-pdf', 'merge-pdf'],
+  },
+  {
+    id: 'flatten-pdf', category: 'pdf', engine: 'pdf-flatten', accept: ['pdf'], multiple: true, mode: 'each',
+    maxMb: 200, from: 'PDF', to: 'PDF',
+    slugs: { en: 'flatten-pdf', fr: 'aplatir-pdf' },
+    related: ['protect-pdf', 'compress-pdf', 'merge-pdf'],
+  },
+
   // ───────────────────── Documents (Office) ─────────────────────
   {
     id: 'pdf-to-word', category: 'document', engine: 'pdf-to-docx', accept: ['pdf'], multiple: true, mode: 'each',
@@ -429,6 +456,34 @@ export const TOOLS: ToolDef[] = [
     related: ['svg-to-png', 'resize-image'],
   },
 
+  {
+    id: 'image-to-text', category: 'image', engine: 'ocr', accept: ['jpg', 'jpeg', 'png', 'webp', 'bmp', 'gif'], multiple: false, mode: 'each',
+    maxMb: 50, heavy: true, from: 'IMG', to: 'TXT',
+    options: [{
+      id: 'lang', type: 'select', label: 'opt.ocrLanguage', default: 'eng',
+      choices: [
+        { value: 'eng', label: 'English' }, { value: 'fra', label: 'Français' }, { value: 'spa', label: 'Español' },
+        { value: 'deu', label: 'Deutsch' }, { value: 'por', label: 'Português' }, { value: 'ita', label: 'Italiano' },
+      ],
+    }],
+    slugs: { en: 'image-to-text', fr: 'image-en-texte' },
+    related: ['ocr-pdf', 'pdf-to-text', 'compress-image'],
+  },
+  {
+    id: 'jfif-to-jpg', category: 'image', engine: 'image-convert', params: { to: 'jpg' }, accept: ['jfif', 'jpe', 'jpg', 'jpeg'], multiple: true, mode: 'each',
+    maxMb: 100, from: 'JFIF', to: 'JPG',
+    options: [quality(95)],
+    slugs: { en: 'jfif-to-jpg', fr: 'jfif-en-jpg' },
+    related: ['webp-to-jpg', 'png-to-jpg', 'compress-image'],
+  },
+  {
+    id: 'tiff-to-jpg', category: 'image', engine: 'image-convert', params: { to: 'jpg' }, accept: ['tif', 'tiff'], multiple: true, mode: 'each',
+    maxMb: 100, from: 'TIFF', to: 'JPG',
+    options: [quality(92)],
+    slugs: { en: 'tiff-to-jpg', fr: 'tiff-en-jpg' },
+    related: ['tiff-to-pdf', 'png-to-jpg', 'compress-image'],
+  },
+
   // ───────────────────────── Video ─────────────────────────
   {
     id: 'mp4-to-mp3', category: 'video', engine: 'ffmpeg', params: { preset: 'extract-mp3' }, accept: VIDEO_IN, multiple: true, mode: 'each',
@@ -510,6 +565,27 @@ export const TOOLS: ToolDef[] = [
     related: ['mp4-to-mp3', 'wav-to-mp3'],
   },
 
+  {
+    id: 'video-to-mp3', category: 'video', engine: 'ffmpeg', params: { preset: 'extract-mp3' }, accept: VIDEO_IN, multiple: true, mode: 'each',
+    maxMb: 1024, heavy: true, from: 'VIDEO', to: 'MP3',
+    options: [mp3Bitrate],
+    slugs: { en: 'video-to-mp3', fr: 'video-en-mp3' },
+    related: ['mp4-to-mp3', 'mov-to-mp3', 'video-to-gif'],
+  },
+  {
+    id: 'mov-to-mp3', category: 'video', engine: 'ffmpeg', params: { preset: 'extract-mp3' }, accept: ['mov', 'm4v', 'qt'], multiple: true, mode: 'each',
+    maxMb: 1024, heavy: true, from: 'MOV', to: 'MP3',
+    options: [mp3Bitrate],
+    slugs: { en: 'mov-to-mp3', fr: 'mov-en-mp3' },
+    related: ['mov-to-mp4', 'mp4-to-mp3', 'video-to-mp3'],
+  },
+  {
+    id: 'gif-to-mp4', category: 'video', engine: 'ffmpeg', params: { preset: 'gif-to-mp4' }, accept: ['gif'], multiple: true, mode: 'each',
+    maxMb: 200, heavy: true, from: 'GIF', to: 'MP4',
+    slugs: { en: 'gif-to-mp4', fr: 'gif-en-mp4' },
+    related: ['video-to-gif', 'compress-video'],
+  },
+
   // ───────────────────────── Audio ─────────────────────────
   {
     id: 'wav-to-mp3', category: 'audio', engine: 'ffmpeg', params: { preset: 'to-mp3' }, accept: ['wav', 'aiff', 'aif'], multiple: true, mode: 'each',
@@ -566,6 +642,12 @@ export const TOOLS: ToolDef[] = [
     ],
     slugs: { en: 'trim-audio', fr: 'couper-audio' },
     related: ['audio-converter', 'wav-to-mp3'],
+  },
+  {
+    id: 'm4a-to-wav', category: 'audio', engine: 'ffmpeg', params: { preset: 'to-wav' }, accept: ['m4a', 'aac', 'mp4'], multiple: true, mode: 'each',
+    maxMb: 1024, heavy: true, from: 'M4A', to: 'WAV',
+    slugs: { en: 'm4a-to-wav', fr: 'm4a-en-wav' },
+    related: ['m4a-to-mp3', 'mp3-to-wav', 'audio-converter'],
   },
 ];
 

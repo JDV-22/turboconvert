@@ -4,6 +4,7 @@ import { useT } from '@/i18n/ui';
 import type { Locale } from '@/i18n/locales';
 import type { ToolDef } from '@/data/tools';
 import { formatList, formatMb } from '@/data/catalog';
+import { SITE } from '@/config/site';
 
 interface Props { tool: ToolDef; locale: Locale; what: string }
 const { tool, locale, what } = Astro.props;
@@ -115,6 +116,7 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
       <button class="btn" type="button" data-again><Icon name="refresh" />{t('tool.again')}</button>
     </div>
     <slot name="next" />
+    {SITE.donateUrl && <p class="ta-donate">{t('tool.donate')} <a href={SITE.donateUrl} target="_blank" rel="noopener" data-donate>{t('tool.donateLink')}</a></p>}
   </div>
 
   <div class="ta-dropveil" aria-hidden="true"><Icon name="upload" /><span>{tool.multiple ? t('tool.dropTitleMulti') : t('tool.dropTitle', { what })}</span></div>
@@ -230,6 +232,8 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
   .ta-dropveil svg { width: 36px; height: 36px; }
   .tool-app.is-dragging:not([data-state='working']) .ta-dropveil { display: flex; }
 
+  .ta-donate { margin-top: 18px; text-align: center; font-size: 14px; color: var(--muted); }
+  .ta-donate a { color: var(--accent); font-weight: 550; }
   .ta-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin-top: 14px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .ta-trust svg { width: 15px; height: 15px; color: var(--ok); }
   @media (max-width: 560px) {

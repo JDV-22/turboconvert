@@ -10,6 +10,9 @@ export const SITE = {
   country: 'France',
   founded: 2025,
   updated: '2026-10-09',
+  // Donation page (e.g. https://ko-fi.com/turboconvert). Shown discreetly after
+  // a successful conversion when set.
+  donateUrl: '',
 };
 
 export const ADS = {
@@ -26,10 +29,14 @@ export const ADS = {
 };
 
 export const ANALYTICS = {
-  // Vercel Web Analytics: enable it in the Vercel dashboard (free on Hobby).
-  vercel: true,
+  // Vercel Web Analytics — only when the build runs on Vercel (enable it in
+  // the Vercel dashboard). On other hosts, use Umami below.
+  vercel: typeof process !== 'undefined' && process.env.VERCEL === '1',
   // Google Analytics 4 measurement ID (G-XXXXXXX). Loaded only after consent.
   ga4: '',
+  // Umami Cloud (free, cookieless, CNIL-exempt when configured as such):
+  // cloud.umami.is → Add website → paste the Website ID here.
+  umamiWebsiteId: '',
   // Google Search Console HTML-tag verification token (optional, DNS also works).
   googleSiteVerification: '',
 };

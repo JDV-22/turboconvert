@@ -85,6 +85,8 @@ const en = {
   'tool.otherTools': 'More {cat} tools',
   'tool.rate': 'Free · No sign-up · No watermark',
   'tool.next': 'Continue with',
+  'tool.donate': 'TurboConvert is free and ad-light. If it saved you time,',
+  'tool.donateLink': 'buy us a coffee ☕',
 
   'org.hint': 'Drag pages to reorder them. Use the buttons to rotate or delete a page.',
   'org.rotate': 'Rotate page {n}',
