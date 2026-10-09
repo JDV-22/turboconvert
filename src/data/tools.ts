@@ -551,7 +551,7 @@ export const TOOLS: ToolDef[] = [
     options: [{
       id: 'format', type: 'select', label: 'opt.format', default: 'mp3', choices: [
         { value: 'mp3', label: 'MP3' }, { value: 'wav', label: 'WAV' }, { value: 'm4a', label: 'M4A (AAC)' },
-        { value: 'ogg', label: 'OGG (Vorbis)' }, { value: 'flac', label: 'FLAC' }, { value: 'opus', label: 'OPUS' },
+        { value: 'ogg', label: 'OGG (Vorbis)' }, { value: 'flac', label: 'FLAC' },
       ],
     }],
     slugs: { en: 'audio-converter', fr: 'convertisseur-audio' },
