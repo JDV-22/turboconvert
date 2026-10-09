@@ -77,7 +77,7 @@ const label = (s: string) => (s.startsWith('opt.') ? t(s) : s);
                       <input type="number" name={o.id} id={id} min={o.min} max={o.max} value={o.default} placeholder={o.placeholder ? label(o.placeholder) : undefined} inputmode="numeric" />
                     )}
                     {o.type === 'text' && (
-                      <input type={o.id.toLowerCase().includes('password') ? 'password' : 'text'} name={o.id} id={id} value={o.default} placeholder={o.placeholder ? label(o.placeholder) : undefined} autocomplete="off" />
+                      <input type={o.id.toLowerCase().includes('password') ? 'password' : 'text'} name={o.id} id={id} value={label(o.default)} placeholder={o.placeholder ? label(o.placeholder) : undefined} autocomplete="off" />
                     )}
                   </>
                 )}

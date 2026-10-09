@@ -228,7 +228,7 @@ export const TOOLS: ToolDef[] = [
     id: 'watermark-pdf', category: 'pdf', engine: 'pdf-watermark', accept: ['pdf'], multiple: true, mode: 'each',
     maxMb: 200, from: 'PDF', to: 'PDF',
     options: [
-      { id: 'text', type: 'text', label: 'opt.watermarkText', default: 'CONFIDENTIAL', placeholder: 'CONFIDENTIAL' },
+      { id: 'text', type: 'text', label: 'opt.watermarkText', default: 'opt.watermarkDefault', placeholder: 'opt.watermarkDefault' },
       { id: 'opacity', type: 'range', label: 'opt.opacity', default: 20, min: 5, max: 100, step: 5, unit: '%' },
       {
         id: 'layout', type: 'select', label: 'opt.layout', default: 'diagonal',
