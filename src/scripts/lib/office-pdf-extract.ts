@@ -93,7 +93,7 @@ const FONT_ALIASES: [RegExp, string][] = [
   [/^carlito/i, 'Calibri'],
   [/^caladea/i, 'Cambria'],
   [/^(cmmi|cmsy|cmex|msam|msbm)/i, 'Cambria Math'],
-  [/^symbolmt|^symbol$/i, 'Symbol'],
+  [/^symbolmt|^symbol$|^opensymbol/i, 'Symbol'],
   [/^(zapfdingbats|wingdings)/i, 'Wingdings'],
 ];
 
@@ -380,8 +380,10 @@ export async function extractPage(page: PDFPageProxy, pdfjs: typeof import('pdfj
       }
       if (best) { color = best.color === 'transparent' ? '000000' : best.color; mode = best.mode; }
     }
+    // standard characters drawn from a symbol font (bullets, arrows): use a text font in Office
+    const font = /symbol|wingding|dingbat/i.test(fi.family) && !/[\uF000-\uF0FF]/.test(it.str) ? { ...fi, family: fi.serif ? 'Times New Roman' : 'Arial' } : fi;
     runs.push({
-      str: it.str, x0, x1: x0 + width, base, size, font: fi, color,
+      str: it.str, x0, x1: x0 + width, base, size, font, color,
       invisible: (mode & 3) === 3 || mode === 7, rtl: it.dir === 'rtl',
     });
   }
