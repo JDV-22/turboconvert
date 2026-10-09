@@ -1,0 +1,24 @@
+---
+import Base from '@/layouts/Base.astro';
+import ToolCard from '@/components/ToolCard.astro';
+import { getTools } from '@/data/catalog';
+import { useT } from '@/i18n/ui';
+const t = useT('en');
+const popular = (await getTools('en')).filter((e) => e.tool.popular).slice(0, 8);
+---
+<Base locale="en" title="Page not found — TurboConvert" description="This page doesn't exist or has moved. Find the converter you need among TurboConvert's free, private file conversion tools." path="/404" noindex noAds>
+  <section class="wrap section nf">
+    <p class="code">404</p>
+    <h1>{t('notfound.title')}</h1>
+    <p class="lead">{t('notfound.lead')}</p>
+    <p><button class="btn btn-primary" type="button" data-search-open>{t('nav.search')}</button> <a class="btn" href="/">{t('crumb.home')}</a></p>
+    <div class="tool-grid">{popular.map((e) => <ToolCard entry={e} />)}</div>
+  </section>
+</Base>
+<style>
+  .nf { text-align: center; }
+  .code { font-size: 15px; font-weight: 700; color: var(--accent); letter-spacing: .1em; }
+  h1 { font-size: clamp(30px, 5vw, 48px); margin: 8px 0 12px; }
+  .lead { max-width: 520px; margin: 0 auto 24px; }
+  .tool-grid { margin-top: 40px; text-align: left; }
+</style>

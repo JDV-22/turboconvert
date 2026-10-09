@@ -14,7 +14,7 @@ interface Props {
   ogImage?: string;
   ogType?: 'website' | 'article';
 }
-const { title, description, path, locale, alternates = [], jsonLd = [], noindex, ogImage = '/og/default.png', ogType = 'website' } = Astro.props;
+const { title, description, path, locale, alternates = [], jsonLd = [], noindex, ogImage = locale === 'fr' ? '/og/default-fr.png' : '/og/default.png', ogType = 'website' } = Astro.props;
 const canonical = new URL(path, SITE.url).href.replace(/\/$/, '') || SITE.url;
 const canonicalFixed = path === '/' ? `${SITE.url}/` : canonical;
 const abs = (p: string) => (p.startsWith('http') ? p : new URL(p, SITE.url).href);
