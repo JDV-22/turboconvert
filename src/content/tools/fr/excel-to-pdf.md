@@ -7,7 +7,7 @@ lead: 'Transformez un classeur Excel ou un fichier CSV en PDF lisible, prêt à 
 what: 'votre fichier Excel'
 howTo: 'convertir un fichier Excel en PDF'
 steps:
-  - 'Cliquez sur <strong>Choisir des fichiers</strong> ou glissez vos classeurs dans le cadre : XLSX, XLS, CSV ou ODS, jusqu’à 100 Mo chacun.'
+  - 'Cliquez sur <strong>Choisir des fichiers</strong> ou glissez vos classeurs dans le cadre : XLSX ou CSV, jusqu’à 100 Mo chacun.'
   - 'Choisissez l’<strong>Orientation</strong> : « Automatique » (paysage pour les tableaux larges), « Portrait » ou « Paysage ».'
   - 'Cliquez sur <strong>Convertir</strong> : toutes les feuilles du classeur sont mises en page dans le PDF.'
   - 'Le PDF se télécharge automatiquement ; pour plusieurs fichiers, utilisez <strong>Tout télécharger (ZIP)</strong>.'
@@ -56,6 +56,6 @@ Un fichier Excel envoyé tel quel s’ouvre parfois mal (téléphone sans tableu
 
 - **Supprimez les colonnes et feuilles inutiles** avant la conversion : tout ce qui contient des données sera mis en page.
 - **Évitez les colonnes très larges** remplies de texte : le renvoi à la ligne fonctionne, mais un tableau aéré reste plus lisible.
-- **Formats acceptés** : `.xlsx` (Excel 2007 et suivants), `.csv`, ainsi que `.xls` et `.ods` (LibreOffice). Si un ancien fichier `.xls` pose problème, réenregistrez-le en `.xlsx`.
+- **Formats acceptés** : `.xlsx` (Excel 2007 et suivants) et `.csv`. Les anciens `.xls` et les `.ods` (LibreOffice) ne sont pas pris en charge : réenregistrez-les d’abord en `.xlsx`.
 
 Besoin de retravailler un tableau reçu en PDF ? Utilisez [PDF en Excel](/fr/pdf-en-excel). Pour vos autres documents bureautiques : [Word en PDF](/fr/word-en-pdf) et [PowerPoint en PDF](/fr/ppt-en-pdf). La conversion s’effectue dans votre navigateur, sans envoi de fichier ni compte.

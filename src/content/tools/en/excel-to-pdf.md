@@ -14,7 +14,7 @@ steps:
 limits:
   - Charts are not rendered in the PDF — the cell data around them is converted normally.
   - Cells show the values saved in the file. Formulas are not recalculated during conversion.
-  - XLSX and CSV give the most reliable results; older XLS and OpenDocument (ODS) files are accepted but may lose some formatting.
+  - Only XLSX and CSV files are supported. Save older XLS or OpenDocument (ODS) files as XLSX first (File → Save As in Excel or LibreOffice).
   - Maximum 100 MB per file.
 faq:
   - q: How do I convert an Excel file to PDF for free?
@@ -68,6 +68,6 @@ Your spreadsheet is read and converted inside your browser — salaries, client 
 
 **Empty pages in the PDF.** Cells that look empty can still contain spaces or formatting far below your data. Delete the unused rows and columns, save, and convert again.
 
-## XLSX, XLS, CSV or ODS?
+## XLSX or CSV?
 
-**XLSX** is the modern Excel format and the most reliable input. **CSV** is plain data with no formatting — ideal for exports from apps and databases. Older **XLS** and OpenDocument **ODS** files are accepted as well; if anything looks off, save them as XLSX first.
+**XLSX** is the modern Excel format and gives the most faithful result. **CSV** is plain data with no formatting — ideal for exports from apps and databases. Older **XLS** and OpenDocument **ODS** files are not supported: open them in Excel or LibreOffice and save them as XLSX first.

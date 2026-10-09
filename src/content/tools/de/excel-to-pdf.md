@@ -14,7 +14,7 @@ steps:
 limits:
   - 'Diagramme werden im PDF nicht dargestellt – die Zelldaten rundherum werden normal umgewandelt.'
   - 'Die Zellen zeigen die in der Datei gespeicherten Werte. Formeln werden bei der Umwandlung nicht neu berechnet.'
-  - 'XLSX und CSV liefern die zuverlässigsten Ergebnisse; ältere XLS- und OpenDocument-Dateien (ODS) werden akzeptiert, können aber Formatierung verlieren.'
+  - 'Unterstützt werden nur XLSX und CSV. Speichern Sie ältere XLS- oder OpenDocument-Dateien (ODS) zuerst als XLSX (Datei → Speichern unter in Excel oder LibreOffice).'
   - 'Maximal 100 MB pro Datei.'
 faq:
   - q: 'Wie kann ich eine Excel-Datei kostenlos in PDF umwandeln?'
@@ -65,6 +65,6 @@ Ihre Tabelle wird in Ihrem Browser gelesen und umgewandelt – Gehälter, Kunden
 
 **Leere Seiten im PDF.** Zellen, die leer aussehen, können weit unter Ihren Daten noch Leerzeichen oder Formatierungen enthalten. Löschen Sie die ungenutzten Zeilen und Spalten, speichern Sie und wandeln Sie erneut um.
 
-## XLSX, XLS, CSV oder ODS?
+## XLSX oder CSV?
 
-**XLSX** ist das moderne Excel-Format und die zuverlässigste Quelle. **CSV** enthält reine Daten ohne Formatierung – ideal für Exporte aus Apps und Datenbanken. Ältere **XLS**- und OpenDocument-**ODS**-Dateien werden ebenfalls akzeptiert; sieht etwas falsch aus, speichern Sie sie zuerst als XLSX.
+**XLSX** ist das moderne Excel-Format und liefert das genaueste Ergebnis. **CSV** enthält reine Daten ohne Formatierung – ideal für Exporte aus Apps und Datenbanken. Ältere **XLS**- und OpenDocument-**ODS**-Dateien werden nicht unterstützt: Öffnen Sie sie in Excel oder LibreOffice und speichern Sie sie als XLSX.
