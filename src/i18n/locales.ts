@@ -4,7 +4,7 @@ export const DEFAULT_LOCALE: Locale = 'en';
 
 // Locales that are actually published. A locale is only added here once its
 // UI strings and tool copy are fully translated (no half-translated pages).
-export const PUBLISHED_LOCALES: Locale[] = ['en', 'fr', 'es', 'pt', 'it'];
+export const PUBLISHED_LOCALES: Locale[] = ['en', 'fr', 'es', 'de', 'pt', 'it'];
 
 export const LOCALE_META: Record<Locale, { label: string; htmlLang: string; ogLocale: string }> = {
   en: { label: 'English', htmlLang: 'en', ogLocale: 'en_US' },
