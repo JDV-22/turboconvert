@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/ProsePage.astro
-title: Informativa sulla privacy — TurboConvert
-description: TurboConvert non riceve mai i file che converti. Scopri quali pochi dati tratta il sito, perché, per quanto tempo e come esercitare i tuoi diritti GDPR.
-h1: Informativa sulla privacy
+title: 'Informativa sulla privacy — TurboConvert'
+description: 'TurboConvert non riceve mai i file che converti. Scopri quali pochi dati tratta il sito, perché, per quanto tempo e come esercitare i tuoi diritti GDPR.'
+h1: 'Informativa sulla privacy'
 locale: it
 page: privacy
 updated: 2026-10-09

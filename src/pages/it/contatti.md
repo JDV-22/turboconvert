@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/ProsePage.astro
-title: Contatti TurboConvert — assistenza, suggerimenti e privacy
-description: Contatta il team di TurboConvert per un aiuto con una conversione, segnalare un bug, proporre uno strumento, esercitare i tuoi diritti GDPR o collaborare.
-h1: Contattaci
-lead: Leggiamo ogni messaggio e di solito rispondiamo entro due giorni lavorativi.
+title: 'Contatti TurboConvert — assistenza, suggerimenti e privacy'
+description: 'Contatta il team di TurboConvert per un aiuto con una conversione, segnalare un bug, proporre uno strumento, esercitare i tuoi diritti GDPR o collaborare.'
+h1: 'Contattaci'
+lead: 'Leggiamo ogni messaggio e di solito rispondiamo entro due giorni lavorativi.'
 locale: it
 page: contact
 ---

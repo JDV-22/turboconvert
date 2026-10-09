@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/ProsePage.astro
-title: Chi siamo — TurboConvert, il convertitore che non carica nulla
-description: Chi sviluppa TurboConvert, come le conversioni avvengono nel tuo browser senza caricare i file, quali motori open source usiamo e come si finanzia il sito.
-h1: Chi siamo
-lead: Un convertitore di file gratuito nato da un’idea semplice — i tuoi file non dovrebbero mai lasciare il tuo dispositivo.
+title: 'Chi siamo — TurboConvert, il convertitore che non carica nulla'
+description: 'Chi sviluppa TurboConvert, come le conversioni avvengono nel tuo browser senza caricare i file, quali motori open source usiamo e come si finanzia il sito.'
+h1: 'Chi siamo'
+lead: 'Un convertitore di file gratuito nato da un’idea semplice — i tuoi file non dovrebbero mai lasciare il tuo dispositivo.'
 locale: it
 page: about
 updated: 2026-10-09

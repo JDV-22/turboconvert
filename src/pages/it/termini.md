@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/ProsePage.astro
-title: Termini di utilizzo e note legali — TurboConvert
-description: I termini di utilizzo degli strumenti gratuiti di conversione di TurboConvert, che funzionano nel tuo browser: uso consentito, garanzie, responsabilità e note legali.
-h1: Termini di utilizzo
+title: 'Termini di utilizzo e note legali — TurboConvert'
+description: 'I termini di utilizzo degli strumenti di conversione gratuiti di TurboConvert, che funzionano nel browser: uso consentito, garanzie e note legali.'
+h1: 'Termini di utilizzo'
 locale: it
 page: terms
 updated: 2026-10-09
