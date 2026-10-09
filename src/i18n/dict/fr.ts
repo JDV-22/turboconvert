@@ -105,6 +105,7 @@ const fr: Record<UIKey, string> = {
   'opt.margin.small': 'Petite',
   'opt.margin.large': 'Grande',
   'opt.maxWidth': 'Largeur max (px)',
+  'opt.keepFormat': 'Identique à l’original',
   'opt.keepOriginal': 'Originale',
   'opt.compression': 'Compression',
   'opt.compression.strong': 'Forte — fichier le plus léger',

@@ -105,6 +105,7 @@ const en = {
   'opt.margin.small': 'Small',
   'opt.margin.large': 'Large',
   'opt.maxWidth': 'Max width (px)',
+  'opt.keepFormat': 'Same as input',
   'opt.keepOriginal': 'Original',
   'opt.compression': 'Compression',
   'opt.compression.strong': 'Strong — smallest file',

@@ -52,7 +52,7 @@ const quality = (def = 85): OptionDef => ({
 });
 const imageFormat = (def: string, formats = ['jpg', 'png', 'webp']): OptionDef => ({
   id: 'format', type: 'select', label: 'opt.format', default: def,
-  choices: formats.map((f) => ({ value: f, label: f.toUpperCase() })),
+  choices: formats.map((f) => ({ value: f, label: f === 'original' ? 'opt.keepFormat' : f.toUpperCase() })),
 });
 const mp3Bitrate: OptionDef = {
   id: 'bitrate', type: 'select', label: 'opt.bitrate', default: '192',
