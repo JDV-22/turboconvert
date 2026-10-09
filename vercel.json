@@ -60,12 +60,92 @@
     {
       "source": "/index",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/fr/index",
       "destination": "/fr",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/best-free-audio-converter",
+      "destination": "/audio-converter",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/heic-to-jpg",
+      "destination": "/heic-to-jpg",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-convert-jpg-to-png",
+      "destination": "/jpg-to-png",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-convert-png-to-jpg",
+      "destination": "/png-to-jpg",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-convert-webp-to-jpg",
+      "destination": "/webp-to-jpg",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-convert-word-to-pdf-free",
+      "destination": "/word-to-pdf",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-merge-pdf",
+      "destination": "/merge-pdf",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-reduce-image-size",
+      "destination": "/blog/how-to-compress-image-without-losing-quality",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-rotate-pdf",
+      "destination": "/rotate-pdf",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/how-to-split-pdf",
+      "destination": "/split-pdf",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/jpg-to-pdf",
+      "destination": "/jpg-to-pdf",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/mp4-to-mp3",
+      "destination": "/mp4-to-mp3",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/wav-to-mp3",
+      "destination": "/wav-to-mp3",
+      "statusCode": 301
+    },
+    {
+      "source": "/vs/ilovepdf",
+      "destination": "/blog/best-free-pdf-tools",
+      "statusCode": 301
+    },
+    {
+      "source": "/vs/pdf24",
+      "destination": "/blog/best-free-pdf-tools",
+      "statusCode": 301
+    },
+    {
+      "source": "/vs/smallpdf",
+      "destination": "/blog/best-free-pdf-tools",
+      "statusCode": 301
     }
   ]
 }

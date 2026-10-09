@@ -16,6 +16,6 @@ for (const h of cfg.headers ?? []) {
 const headersTxt = headers.map((h) => `${toCf(h.source)}\n${h.headers.map((x) => `  ${x.key}: ${x.value}`).join('\n')}`).join('\n\n');
 fs.writeFileSync('dist/_headers', `${headersTxt}\n`);
 
-const redirects = (cfg.redirects ?? []).map((r) => `${toCf(r.source)} ${toCf(r.destination)} ${r.permanent === false ? 302 : 301}`);
+const redirects = (cfg.redirects ?? []).map((r) => `${toCf(r.source)} ${toCf(r.destination)} ${r.statusCode ?? (r.permanent === false ? 302 : 301)}`);
 fs.writeFileSync('dist/_redirects', `${redirects.join('\n')}\n`);
 console.log(`postbuild: ${headers.length} header rules, ${redirects.length} redirects for Cloudflare Pages`);
