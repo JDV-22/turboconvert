@@ -106,21 +106,20 @@ export const MIME: Record<string, string> = {
   jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', avif: 'image/avif', gif: 'image/gif', bmp: 'image/bmp',
 };
 
-/** Draw an image to a canvas at the given size and encode it. */
-export async function encodeImage(
+/** Draw an image onto a new canvas at the given size (sharp step-down for big reductions). */
+export function renderToCanvas(
   img: DecodedImage,
-  format: 'jpg' | 'png' | 'webp',
-  opts: { width?: number; height?: number; quality?: number; background?: string } = {},
-): Promise<Blob> {
+  opts: { width?: number; height?: number; background?: string; alpha?: boolean } = {},
+): HTMLCanvasElement {
   const width = Math.max(1, Math.round(opts.width ?? img.width));
   const height = Math.max(1, Math.round(opts.height ?? img.height));
   if (width * height > MAX_PIXELS) throw new UserError('memory', `${width}×${height}px`);
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext('2d', { alpha: format !== 'jpg' })!;
-  if (format === 'jpg' || opts.background) {
-    ctx.fillStyle = opts.background ?? '#ffffff';
+  const ctx = canvas.getContext('2d', { alpha: opts.alpha ?? true })!;
+  if (opts.background) {
+    ctx.fillStyle = opts.background;
     ctx.fillRect(0, 0, width, height);
   }
   ctx.imageSmoothingEnabled = true;
@@ -139,15 +138,48 @@ export async function encodeImage(
       const sctx = step.getContext('2d')!;
       sctx.imageSmoothingQuality = 'high';
       sctx.drawImage(src as CanvasImageSource, 0, 0, w, h);
+      if (src instanceof HTMLCanvasElement && src !== img.source) src.width = src.height = 0;
       src = step;
     }
     ctx.drawImage(src as CanvasImageSource, 0, 0, width, height);
+    if (src instanceof HTMLCanvasElement && src !== img.source) src.width = src.height = 0;
   } else {
     ctx.drawImage(img.source as CanvasImageSource, 0, 0, width, height);
   }
-  const q = opts.quality !== undefined ? Math.min(1, Math.max(0.01, opts.quality / 100)) : undefined;
+  return canvas;
+}
+
+/** Encode a canvas; JPG/WebP quality is 1–100. */
+export async function canvasToBlob(canvas: HTMLCanvasElement, format: 'jpg' | 'png' | 'webp', quality?: number): Promise<Blob> {
+  const q = quality !== undefined ? Math.min(1, Math.max(0.01, quality / 100)) : undefined;
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, MIME[format], format === 'png' ? undefined : q));
-  canvas.width = canvas.height = 0;
   if (!blob) throw new UserError('memory', '');
+  // Safari cannot encode WebP from a canvas: toBlob silently returns a PNG.
+  // Fall back to libwebp compiled to wasm (lazy-loaded, ~100 KB brotli).
+  if (format === 'webp' && blob.type !== 'image/webp') return encodeWebpWasm(canvas, quality ?? 82);
   return blob;
+}
+
+async function encodeWebpWasm(canvas: HTMLCanvasElement, quality: number): Promise<Blob> {
+  const { default: encode } = await import('@jsquash/webp/encode');
+  const data = canvas.getContext('2d')!.getImageData(0, 0, canvas.width, canvas.height);
+  const buf = await encode(data, { quality: Math.min(100, Math.max(1, quality)) });
+  return new Blob([buf], { type: 'image/webp' });
+}
+
+/** Draw an image to a canvas at the given size and encode it. */
+export async function encodeImage(
+  img: DecodedImage,
+  format: 'jpg' | 'png' | 'webp',
+  opts: { width?: number; height?: number; quality?: number; background?: string } = {},
+): Promise<Blob> {
+  const canvas = renderToCanvas(img, {
+    width: opts.width, height: opts.height, alpha: format !== 'jpg',
+    background: format === 'jpg' ? opts.background ?? '#ffffff' : opts.background,
+  });
+  try {
+    return await canvasToBlob(canvas, format, opts.quality);
+  } finally {
+    canvas.width = canvas.height = 0;
+  }
 }
