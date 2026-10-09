@@ -2,10 +2,10 @@ import type { APIRoute } from 'astro';
 import { execSync } from 'node:child_process';
 import { SITE } from '@/config/site';
 import { LOCALE_META, PUBLISHED_LOCALES, localePath, type Locale } from '@/i18n/locales';
-import { getTools, toolAlternates, categoryHref } from '@/data/catalog';
-import { CATEGORIES, CATEGORY_SLUGS } from '@/data/tools';
+import { getTools, toolAlternates, categoryHref, categorySlug } from '@/data/catalog';
+import { CATEGORIES } from '@/data/tools';
 import { getPosts, postAlternates, postHref } from '@/data/blog';
-import { PAGES, pageHref, pageAlternates, type PageId } from '@/data/pages';
+import { PAGES, pageHref, pageAlternates, pageSlug, type PageId } from '@/data/pages';
 
 type Alt = { locale: Locale; href: string };
 interface Url { loc: string; alternates: Alt[]; lastmod?: string }
@@ -38,11 +38,11 @@ export const GET: APIRoute = async () => {
     for (const c of CATEGORIES) {
       const href = categoryHref(c, l);
       if (!href || !(await getTools(l)).some((e) => e.tool.category === c)) continue;
-      const alts = PUBLISHED_LOCALES.map((x) => (CATEGORY_SLUGS[c][x] ? { locale: x, href: localePath(x, CATEGORY_SLUGS[c][x]) } : null)).filter((a): a is Alt => !!a);
+      const alts = PUBLISHED_LOCALES.map((x) => { const s = categorySlug(c, x); return s ? { locale: x, href: localePath(x, s) } : null; }).filter((a): a is Alt => !!a);
       urls.push({ loc: href, alternates: alts, lastmod: SITE.updated });
     }
     for (const id of Object.keys(PAGES) as PageId[]) {
-      if (!(PAGES[id] as Partial<Record<Locale, string>>)[l]) continue;
+      if (!pageSlug(id, l)) continue;
       urls.push({ loc: pageHref(id, l), alternates: pageAlternates(id), lastmod: SITE.updated });
     }
     for (const p of await getPosts(l)) {

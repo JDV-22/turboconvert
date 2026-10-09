@@ -1,4 +1,5 @@
-import { localePath, type Locale } from '@/i18n/locales';
+import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { pack } from '@/i18n/packs';
 
 // Static (non-tool) pages and their localized slugs.
 export const PAGES = {
@@ -12,11 +13,17 @@ export const PAGES = {
 
 export type PageId = keyof typeof PAGES;
 
+export function pageSlug(id: PageId, locale: Locale): string | undefined {
+  return (PAGES[id] as Partial<Record<Locale, string>>)[locale] ?? pack(locale)?.slugs.pages[id];
+}
+
 export function pageHref(id: PageId, locale: Locale): string {
-  const slugs = PAGES[id] as Partial<Record<Locale, string>>;
-  return localePath(locale, slugs[locale] ?? slugs.en);
+  return localePath(locale, pageSlug(id, locale) ?? (PAGES[id] as Record<string, string>).en);
 }
 
 export function pageAlternates(id: PageId): { locale: Locale; href: string }[] {
-  return (Object.entries(PAGES[id]) as [Locale, string][]).map(([locale, slug]) => ({ locale, href: localePath(locale, slug) }));
+  return PUBLISHED_LOCALES.flatMap((locale) => {
+    const slug = pageSlug(id, locale);
+    return slug ? [{ locale, href: localePath(locale, slug) }] : [];
+  });
 }

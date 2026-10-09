@@ -1,0 +1,16 @@
+---
+import BlogPost from '@/components/BlogPost.astro';
+import { getPosts, type Post } from '@/data/blog';
+import { PUBLISHED_LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/locales';
+
+export async function getStaticPaths() {
+  const out = [];
+  for (const locale of PUBLISHED_LOCALES.filter((l) => l !== DEFAULT_LOCALE)) {
+    for (const post of await getPosts(locale)) out.push({ params: { locale, slug: post.data.permalink }, props: { post } });
+  }
+  return out;
+}
+const locale = Astro.params.locale as Locale;
+const { post } = Astro.props as { post: Post };
+---
+<BlogPost post={post} locale={locale} />

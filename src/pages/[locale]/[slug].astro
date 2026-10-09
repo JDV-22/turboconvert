@@ -1,0 +1,17 @@
+---
+import ToolPage from '@/layouts/ToolPage.astro';
+import HubPage from '@/components/HubPage.astro';
+import { slugPaths, type SlugProps } from '@/components/SlugRoute';
+import { PUBLISHED_LOCALES, DEFAULT_LOCALE, type Locale } from '@/i18n/locales';
+
+export async function getStaticPaths() {
+  const out = [];
+  for (const locale of PUBLISHED_LOCALES.filter((l) => l !== DEFAULT_LOCALE)) {
+    for (const p of await slugPaths(locale)) out.push({ params: { locale, slug: p.params.slug }, props: p.props });
+  }
+  return out;
+}
+const locale = Astro.params.locale as Locale;
+const p = Astro.props as SlugProps;
+---
+{p.kind === 'tool' ? <ToolPage entry={p.entry} locale={locale} /> : <HubPage category={p.category} locale={locale} />}

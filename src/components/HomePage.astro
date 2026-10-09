@@ -8,12 +8,13 @@ import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
 import { getTools, categoryHref } from '@/data/catalog';
 import { CATEGORIES } from '@/data/tools';
 import { HOME_COPY } from '@/data/home-copy';
+import { pack } from '@/i18n/packs';
 import { SITE } from '@/config/site';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useT(locale);
-const c = HOME_COPY[locale] ?? HOME_COPY.en!;
+const c = HOME_COPY[locale] ?? pack(locale)?.home ?? HOME_COPY.en!;
 const tools = await getTools(locale);
 const popular = tools.filter((e) => e.tool.popular).slice(0, 12);
 const count = tools.length;

@@ -4,21 +4,22 @@ import Icon from './Icon.astro';
 import ToolCard from './ToolCard.astro';
 import { useT } from '@/i18n/ui';
 import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
-import { getTools, categoryHref } from '@/data/catalog';
-import { CATEGORIES, CATEGORY_SLUGS, type Category } from '@/data/tools';
+import { getTools, categoryHref, categorySlug } from '@/data/catalog';
+import { CATEGORIES, type Category } from '@/data/tools';
 import { HUB_COPY } from '@/data/hub-copy';
-import { pageHref, PAGES } from '@/data/pages';
+import { pageHref, pageSlug } from '@/data/pages';
+import { pack } from '@/i18n/packs';
 import { SITE } from '@/config/site';
 
 interface Props { category: Category | 'all'; locale: Locale }
 const { category, locale } = Astro.props;
 const t = useT(locale);
-const copy = (HUB_COPY[locale] ?? HUB_COPY.en)![category];
+const copy = (HUB_COPY[locale] ?? pack(locale)?.hubs ?? HUB_COPY.en)![category];
 const tools = await getTools(locale);
 const list = category === 'all' ? tools : tools.filter((e) => e.tool.category === category);
 const path = category === 'all' ? pageHref('tools', locale) : categoryHref(category, locale)!;
 const alternates = PUBLISHED_LOCALES.map((l) => {
-  const slug = category === 'all' ? (PAGES.tools as Record<string, string>)[l] : CATEGORY_SLUGS[category][l];
+  const slug = category === 'all' ? pageSlug('tools', l) : categorySlug(category, l);
   return slug ? { locale: l, href: localePath(l, slug) } : null;
 }).filter((a): a is { locale: Locale; href: string } => !!a);
 const jsonLd = [

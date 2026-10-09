@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { TOOLS, CATEGORY_SLUGS, type ToolDef, type Category } from './tools';
 import { localePath, PUBLISHED_LOCALES, type Locale } from '@/i18n/locales';
+import { pack } from '@/i18n/packs';
 
 // A tool is published in a locale only when its engine exists and its copy
 // for that locale has been written. This keeps half-done tools off the site.
@@ -23,7 +24,7 @@ export async function getTools(locale: Locale): Promise<ToolEntry[]> {
     for (const loc of PUBLISHED_LOCALES) {
       const list: ToolEntry[] = [];
       for (const tool of TOOLS) {
-        const slug = tool.slugs[loc];
+        const slug = toolSlugFor(tool, loc);
         const copy = all.find((e) => e.id === `${loc}/${tool.id}`);
         if (!slug || !copy || !ENGINES.has(tool.engine)) continue;
         list.push({ tool, copy, slug, href: localePath(loc, slug) });
@@ -48,8 +49,16 @@ export async function toolAlternates(id: string): Promise<{ locale: Locale; href
   return out;
 }
 
+export function toolSlugFor(tool: ToolDef, locale: Locale): string | undefined {
+  return tool.slugs[locale] ?? pack(locale)?.slugs.tools[tool.id];
+}
+
+export function categorySlug(cat: Category, locale: Locale): string | undefined {
+  return CATEGORY_SLUGS[cat][locale] ?? pack(locale)?.slugs.categories[cat];
+}
+
 export function categoryHref(cat: Category, locale: Locale): string | undefined {
-  const s = CATEGORY_SLUGS[cat][locale];
+  const s = categorySlug(cat, locale);
   return s ? localePath(locale, s) : undefined;
 }
 
