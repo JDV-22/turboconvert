@@ -19,6 +19,11 @@ export const ADS = {
   // Keep false until AdSense approves the site. When true, ad slots render
   // with reserved heights and the AdSense loader is added once per page.
   enabled: false,
+  // Load the AdSense script + account meta tag on every page even while no ad
+  // units are shown: needed for the AdSense site review and for Google's
+  // consent message (Privacy & messaging). Shows no ads unless Auto ads are
+  // switched on in the AdSense dashboard.
+  loader: true,
   client: 'ca-pub-6238323731269830',
   // Real ad unit IDs created in AdSense → Ads → By ad unit.
   slots: {
