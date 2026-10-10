@@ -93,6 +93,16 @@ const targetSize: OptionDef = {
   ],
 };
 
+const imageTarget: OptionDef = {
+  id: 'target', type: 'select', label: 'opt.maxSize', default: '',
+  choices: [
+    { value: '', label: 'opt.noLimit' },
+    { value: '20', label: '20 KB' }, { value: '50', label: '50 KB' }, { value: '100', label: '100 KB' },
+    { value: '200', label: '200 KB' }, { value: '500', label: '500 KB' }, { value: '1024', label: '1 MB' },
+    { value: '2048', label: '2 MB' },
+  ],
+};
+
 const IMG_IN = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'avif', 'heic', 'heif', 'tif', 'tiff', 'svg', 'ico'];
 const VIDEO_IN = ['mp4', 'mov', 'webm', 'mkv', 'avi', 'm4v', 'wmv', 'flv', '3gp', 'mpeg', 'mpg', 'ts'];
 const AUDIO_IN = ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'oga', 'flac', 'opus', 'wma', 'aiff', 'aif', 'amr'];
@@ -368,7 +378,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: 'compress-image', category: 'image', engine: 'image-compress', accept: ['jpg', 'jpeg', 'png', 'webp', 'avif', 'bmp'], multiple: true, mode: 'each',
     maxMb: 100, popular: true, from: 'IMG', to: 'IMG',
-    options: [quality(75), resizeMax],
+    options: [quality(75), resizeMax, imageTarget],
     slugs: { en: 'compress-image', fr: 'compresser-image' },
     related: ['resize-image', 'jpg-to-webp', 'compress-pdf'],
   },
@@ -677,6 +687,40 @@ for (const t of PDF_SIZE_TARGETS) {
     related: ['compress-pdf', 'split-pdf', 'pdf-to-jpg', 'compress-image'],
   });
 }
+
+// "Compress image to <size>" landing pages.
+const IMG_SIZE_TARGETS: { kb: number; en: string; fr: string }[] = [
+  { kb: 20, en: '20kb', fr: '20-ko' },
+  { kb: 50, en: '50kb', fr: '50-ko' },
+  { kb: 100, en: '100kb', fr: '100-ko' },
+  { kb: 200, en: '200kb', fr: '200-ko' },
+];
+for (const t of IMG_SIZE_TARGETS) {
+  TOOLS.push({
+    id: `compress-image-to-${t.en}`, category: 'image', engine: 'image-compress',
+    accept: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'bmp', 'avif'], multiple: true, mode: 'each',
+    maxMb: 100, from: 'IMG', to: 'IMG',
+    options: [{ ...imageTarget, default: String(t.kb) }],
+    slugs: { en: `compress-image-to-${t.en}`, fr: `compresser-image-${t.fr}` },
+    related: ['compress-image', 'resize-image', 'heic-to-jpg', 'compress-pdf'],
+  });
+}
+
+// Destination pages (FR): limits verified October 2026 and stated on the page.
+TOOLS.push(
+  {
+    id: 'compress-pdf-caf', category: 'pdf', engine: 'pdf-compress', params: { target: 2048 }, accept: ['pdf'], multiple: true, mode: 'each',
+    maxMb: 200, heavy: true, from: 'PDF', to: 'PDF',
+    slugs: { fr: 'compresser-pdf-caf' },
+    related: ['compress-pdf', 'compress-image', 'jpg-to-pdf', 'merge-pdf'],
+  },
+  {
+    id: 'compress-pdf-ants', category: 'pdf', engine: 'pdf-compress', params: { target: 950 }, accept: ['pdf'], multiple: true, mode: 'each',
+    maxMb: 200, heavy: true, from: 'PDF', to: 'PDF',
+    slugs: { fr: 'compresser-pdf-ants' },
+    related: ['compress-pdf', 'compress-image-to-200kb', 'jpg-to-pdf', 'split-pdf'],
+  },
+);
 
 export const TOOL_BY_ID = new Map(TOOLS.map((t) => [t.id, t]));
 

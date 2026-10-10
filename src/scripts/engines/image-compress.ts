@@ -105,9 +105,61 @@ async function compressPng(canvas: HTMLCanvasElement, q: number, signal: AbortSi
   return new Blob([png], { type: 'image/png' });
 }
 
-const run: Engine = async ({ files, options, progress, signal }) => {
+/**
+ * Size-target mode ("compress to 50 KB"): binary-search the JPEG/WebP quality,
+ * then downscale step by step if even low quality doesn't fit. Keeps the
+ * sharpest result under the limit. PNG/BMP inputs are saved as JPG (a palette
+ * PNG can't reach small targets for photos).
+ */
+async function compressToTarget(file: File, targetBytes: number, signal: AbortSignal, progress: (r: number) => void): Promise<Blob> {
+  const ext = extOf(file.name);
+  const format: 'jpg' | 'webp' = ext === 'webp' || ext === 'avif' ? 'webp' : 'jpg';
+  const img = await decodeImage(file);
+  let width = img.width;
+  let height = img.height;
+  let best: Blob | null = null;
+  let smallest: Blob | null = null;
+  for (let round = 0; round < 8 && !best; round++) {
+    throwIfAborted(signal);
+    const canvas = renderToCanvas(img, { width, height, alpha: format !== 'jpg', background: format === 'jpg' ? '#ffffff' : undefined });
+    try {
+      let lo = 30, hi = 92;
+      for (let i = 0; i < 6 && lo <= hi; i++) {
+        const q = Math.round((lo + hi) / 2);
+        const blob = await canvasToBlob(canvas, format, q);
+        if (!smallest || blob.size < smallest.size) smallest = blob;
+        if (blob.size <= targetBytes) { best = blob; lo = q + 1; } else hi = q - 1;
+        progress(Math.min(0.95, 0.1 + (round * 6 + i) / 48));
+      }
+      if (!best) {
+        const low = await canvasToBlob(canvas, format, 30);
+        if (low.size <= targetBytes) best = low;
+        else {
+          const f = Math.max(0.35, Math.min(0.9, Math.sqrt(targetBytes / low.size) * 0.95));
+          width = Math.max(16, Math.round(width * f));
+          height = Math.max(16, Math.round(height * f));
+        }
+      }
+    } finally {
+      canvas.width = canvas.height = 0;
+    }
+  }
+  if ('close' in img.source) (img.source as ImageBitmap).close();
+  return best ?? smallest!;
+}
+
+const run: Engine = async ({ files, options, params, progress, signal }) => {
   const file = files[0];
   const ext = extOf(file.name);
+  const targetKb = Number(options.target || params.target || 0);
+  if (targetKb > 0) {
+    const target = targetKb * 1024;
+    if (file.size <= target) return [{ name: file.name, blob: file }];
+    const blob = await compressToTarget(file, target, signal, progress);
+    progress(1);
+    const outExt = blob.type === 'image/webp' ? 'webp' : 'jpg';
+    return [{ name: `${baseName(file.name)}-${targetKb}kb.${outExt}`, blob }];
+  }
   const q = Math.min(100, Math.max(10, Number(options.quality ?? 75) || 75));
   let maxWidth = 0;
   if (options.maxWidth !== '' && options.maxWidth !== undefined) {
