@@ -109,4 +109,31 @@ export function initHeader(): void {
     menuBtn.setAttribute('aria-expanded', String(!isOpen));
     document.body.style.overflow = isOpen ? '' : 'hidden';
   });
+
+  // Suggest (never force) the visitor's language version of this page.
+  try {
+    const sel = document.querySelector<HTMLSelectElement>('[data-lang-switch]');
+    const current = document.documentElement.lang.slice(0, 2);
+    const wanted = (navigator.languages || [navigator.language]).map((l) => l.slice(0, 2).toLowerCase());
+    if (sel && !localStorage.getItem('tc-lang-hint')) {
+      const opts = Array.from(sel.options);
+      const match = wanted.find((w) => w !== current && opts.some((o) => o.textContent?.toLowerCase() === w));
+      if (match && wanted[0] !== current) {
+        const opt = opts.find((o) => o.textContent?.toLowerCase() === match)!;
+        const names: Record<string, [string, string]> = {
+          en: ['This page is available in English', 'Switch'], fr: ['Cette page existe en français', 'Afficher'],
+          es: ['Esta página está disponible en español', 'Ver'], de: ['Diese Seite gibt es auf Deutsch', 'Anzeigen'],
+          pt: ['Esta página está disponível em português', 'Ver'], it: ['Questa pagina è disponibile in italiano', 'Vedi'],
+        };
+        const [text, cta] = names[match] ?? names.en;
+        const bar = document.createElement('div');
+        bar.className = 'lang-hint';
+        bar.setAttribute('role', 'status');
+        bar.innerHTML = `<span>${text}</span><a href="${opt.value}">${cta} →</a><button type="button" class="icon-btn" aria-label="Close">✕</button>`;
+        bar.querySelector('button')!.addEventListener('click', () => { localStorage.setItem('tc-lang-hint', '1'); bar.remove(); });
+        bar.querySelector('a')!.addEventListener('click', () => localStorage.setItem('tc-lang-hint', '1'));
+        document.body.append(bar);
+      }
+    }
+  } catch { /* storage blocked */ }
 }

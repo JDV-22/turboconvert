@@ -683,7 +683,10 @@ for (const t of PDF_SIZE_TARGETS) {
     id: `compress-pdf-to-${t.en}`, category: 'pdf', engine: 'pdf-compress', accept: ['pdf'], multiple: true, mode: 'each',
     maxMb: 200, heavy: true, from: 'PDF', to: 'PDF',
     options: [{ ...targetSize, default: String(t.kb) }],
-    slugs: { en: `compress-pdf-to-${t.en}`, fr: `compresser-pdf-${t.fr}` },
+    slugs: {
+      en: `compress-pdf-to-${t.en}`, fr: `compresser-pdf-${t.fr}`, es: `comprimir-pdf-a-${t.en}`,
+      de: `pdf-auf-${t.en}-komprimieren`, pt: `comprimir-pdf-para-${t.en}`, it: `comprimere-pdf-a-${t.en}`,
+    },
     related: ['compress-pdf', 'split-pdf', 'pdf-to-jpg', 'compress-image'],
   });
 }
@@ -701,7 +704,10 @@ for (const t of IMG_SIZE_TARGETS) {
     accept: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'bmp', 'avif'], multiple: true, mode: 'each',
     maxMb: 100, from: 'IMG', to: 'IMG',
     options: [{ ...imageTarget, default: String(t.kb) }],
-    slugs: { en: `compress-image-to-${t.en}`, fr: `compresser-image-${t.fr}` },
+    slugs: {
+      en: `compress-image-to-${t.en}`, fr: `compresser-image-${t.fr}`, es: `comprimir-imagen-a-${t.en}`,
+      de: `bild-auf-${t.en}-komprimieren`, pt: `comprimir-imagem-para-${t.en}`, it: `comprimere-immagine-a-${t.en}`,
+    },
     related: ['compress-image', 'resize-image', 'heic-to-jpg', 'compress-pdf'],
   });
 }
