@@ -17,10 +17,11 @@ const heavySize = engineSize[tool.engine] ?? '≈ 5 MB';
 const compare = ['pdf-compress', 'image-compress', 'image-resize'].includes(tool.engine) || tool.id === 'compress-video';
 const keys = [
   'tool.convert', 'tool.convertN', 'tool.working', 'tool.loadingEngine', 'tool.done', 'tool.doneN', 'tool.failed', 'tool.download',
-  'tool.saved', 'tool.bigger', 'tool.errWrongPassword', 'tool.errType', 'org.hint', 'org.rotate', 'org.delete', 'org.restore', 'org.left', 'org.right', 'org.loading', 'org.none', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',
+  'tool.saved', 'tool.bigger', 'tool.errWrongPassword', 'tool.errType', 'org.hint', 'org.rotate', 'org.delete', 'org.restore', 'org.left', 'org.right', 'org.loading', 'org.none', 'edit.loading', 'edit.hintEdit', 'edit.hintSign', 'edit.hintFill', 'edit.noFields', 'edit.fieldsFound', 'edit.place', 'edit.text', 'edit.date', 'edit.sign', 'edit.image', 'edit.check', 'edit.cross', 'edit.whiteout', 'edit.highlight', 'edit.delete', 'edit.smaller', 'edit.bigger', 'edit.color', 'edit.typeHere', 'edit.sigTitle', 'edit.sigDraw', 'edit.sigType', 'edit.sigUpload', 'edit.sigClear', 'edit.sigUse', 'edit.sigName', 'edit.sigDrawHint', 'edit.cancel', 'edit.page', 'edit.nothing', 'edit.save', 'tool.errSize', 'tool.errGeneric', 'tool.errPassword', 'tool.remove', 'tool.moveUp', 'tool.moveDown',
 ];
 const strings: Record<string, string> = { maxLabel };
 for (const k of keys) strings[k.replace('tool.', '')] = t(k);
+if (tool.engine === 'pdf-edit') strings.convert = t('edit.save');
 const config = {
   id: tool.id, engine: tool.engine, params: tool.params ?? {}, accept: tool.accept, multiple: tool.multiple,
   mode: tool.mode, minFiles: tool.minFiles ?? 1, maxMb: tool.maxMb, compare, formats, s: strings,

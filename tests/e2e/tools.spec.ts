@@ -17,6 +17,7 @@ const SETUP: Record<string, { files?: string[]; options?: Record<string, string>
   'protect-pdf': { options: { password: 'secret-123' } },
   'unlock-pdf': { files: ['sample-protected.pdf'], options: { password: 'secret-123' } },
   'split-pdf': { options: { ranges: '1-2, 3' } },
+  'flatten-pdf': { files: ['sample-form.pdf'] },
   'trim-video': { options: { start: '0', end: '2' } },
   'trim-audio': { options: { start: '0', end: '2' } },
 };
@@ -38,6 +39,16 @@ for (const tool of TOOLS) {
       await page.fill(`[data-options] [name="${name}"]`, value);
     }
     if (tool.engine === 'pdf-organize') await page.waitForSelector('.org-page img');
+    if (tool.engine === 'pdf-edit') {
+      // The sign page opens the signature dialog on load: close it, then add a text.
+      await page.waitForSelector('.pe-page canvas');
+      if (await page.locator('dialog.pe-modal[open]').count()) await page.click('dialog.pe-modal [data-cancel]');
+      await page.click('.pe-tool:has(svg path[d^="M4 7V5"])');
+      const first = page.locator('.pe-page').first();
+      const b = (await first.boundingBox())!;
+      await first.click({ position: { x: b.width * 0.3, y: b.height * 0.2 } });
+      await page.keyboard.type('Test 123');
+    }
     await page.click('[data-convert]');
     await expect(page.locator('[data-tool-app]')).toHaveAttribute('data-state', 'done', { timeout: 170_000 });
     await expect(page.locator('[data-done-icon]')).toHaveAttribute('data-ok', 'true');

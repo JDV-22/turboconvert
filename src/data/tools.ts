@@ -176,6 +176,24 @@ export const TOOLS: ToolDef[] = [
     related: ['merge-pdf', 'split-pdf', 'rotate-pdf'],
   },
   {
+    id: 'edit-pdf', category: 'pdf', engine: 'pdf-edit', params: { mode: 'edit' }, accept: ['pdf'], multiple: false, mode: 'each',
+    maxMb: 100, popular: true, from: 'PDF', to: 'PDF',
+    slugs: { en: 'edit-pdf', fr: 'modifier-pdf' },
+    related: ['sign-pdf', 'fill-pdf-form', 'watermark-pdf', 'organize-pdf'],
+  },
+  {
+    id: 'sign-pdf', category: 'pdf', engine: 'pdf-edit', params: { mode: 'sign' }, accept: ['pdf'], multiple: false, mode: 'each',
+    maxMb: 100, popular: true, from: 'PDF', to: 'PDF',
+    slugs: { en: 'sign-pdf', fr: 'signer-pdf' },
+    related: ['fill-pdf-form', 'edit-pdf', 'protect-pdf', 'flatten-pdf'],
+  },
+  {
+    id: 'fill-pdf-form', category: 'pdf', engine: 'pdf-edit', params: { mode: 'fill' }, accept: ['pdf'], multiple: false, mode: 'each',
+    maxMb: 100, from: 'PDF', to: 'PDF',
+    slugs: { en: 'fill-pdf-form', fr: 'remplir-formulaire-pdf' },
+    related: ['sign-pdf', 'flatten-pdf', 'edit-pdf', 'compress-pdf'],
+  },
+  {
     id: 'pdf-to-jpg', category: 'pdf', engine: 'pdf-to-image', params: { format: 'jpg' }, accept: ['pdf'], multiple: true, mode: 'each',
     maxMb: 200, popular: true, from: 'PDF', to: 'JPG',
     options: [
