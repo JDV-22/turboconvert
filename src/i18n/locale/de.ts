@@ -54,6 +54,9 @@ const de: LocalePack = {
       'webm-to-mp4': 'webm-in-mp4',
       'mkv-to-mp4': 'mkv-in-mp4',
       'mp3-to-mp4': 'mp3-in-mp4',
+      'video-to-mp3': 'video-in-mp3',
+      'mov-to-mp3': 'mov-in-mp3',
+      'gif-to-mp4': 'gif-in-mp4',
       // Audio
       'wav-to-mp3': 'wav-in-mp3',
       'mp3-to-wav': 'mp3-in-wav',

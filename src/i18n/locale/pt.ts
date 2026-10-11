@@ -52,6 +52,9 @@ const pt: LocalePack = {
       'webm-to-mp4': 'webm-para-mp4',
       'mkv-to-mp4': 'mkv-para-mp4',
       'mp3-to-mp4': 'mp3-para-mp4',
+      'video-to-mp3': 'video-para-mp3',
+      'mov-to-mp3': 'mov-para-mp3',
+      'gif-to-mp4': 'gif-para-mp4',
       // Áudio
       'wav-to-mp3': 'wav-para-mp3',
       'mp3-to-wav': 'mp3-para-wav',
