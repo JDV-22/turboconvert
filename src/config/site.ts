@@ -39,6 +39,9 @@ export const ANALYTICS = {
   vercel: typeof process !== 'undefined' && process.env.VERCEL === '1',
   // Google Analytics 4 measurement ID (G-XXXXXXX). Loaded only after consent.
   ga4: '',
+  // Cloudflare Web Analytics (free, cookieless): dashboard → Web Analytics →
+  // turboconvert.io → manual JS snippet. The token is public by design.
+  cloudflareToken: 'c7d5d73caf004d2e8b09f107b789a3de',
   // Umami Cloud (free, cookieless, CNIL-exempt when configured as such):
   // cloud.umami.is → Add website → paste the Website ID here.
   umamiWebsiteId: '',
