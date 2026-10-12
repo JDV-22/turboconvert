@@ -85,7 +85,7 @@ const pt: LocalePack = {
   },
 
   home: {
-    title: 'Conversor de arquivos grátis — PDF, imagem, vídeo, sem upload',
+    title: 'TurboConvert — Conversor de arquivos grátis, sem upload',
     description: 'Converta PDF, Word, Excel, imagens, áudio e vídeo de graça. 50+ ferramentas que rodam no seu navegador: sem upload, sem cadastro, sem marca d’água.',
     faq: [
       { q: 'O TurboConvert é grátis mesmo?', a: 'Sim. Todas as ferramentas são grátis, sem conta, sem limite diário e sem marca d’água. O site é mantido por publicidade discreta, nunca cobrando pelas suas conversões.' },

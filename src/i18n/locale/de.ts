@@ -87,7 +87,7 @@ const de: LocalePack = {
   },
 
   home: {
-    title: 'Dateien kostenlos umwandeln – PDF, Bild, Video, ohne Upload',
+    title: 'TurboConvert – Dateien kostenlos umwandeln, ohne Upload',
     description: 'PDF, Word, Excel, Bilder, Audio und Video kostenlos umwandeln. Über 50 Tools direkt im Browser: kein Upload, keine Anmeldung, kein Wasserzeichen.',
     faq: [
       { q: 'Ist TurboConvert wirklich kostenlos?', a: 'Ja. Alle Tools sind kostenlos – ohne Konto, ohne Tageslimit und ohne Wasserzeichen. Die Website finanziert sich über dezente Werbung, nie über Gebühren für Ihre Umwandlungen.' },

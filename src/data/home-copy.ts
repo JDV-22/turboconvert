@@ -9,7 +9,7 @@ interface HomeCopy {
 
 export const HOME_COPY: Partial<Record<Locale, HomeCopy>> = {
   en: {
-    title: 'Free Online File Converter — PDF, Image, Video, No Upload',
+    title: 'TurboConvert — Free File Converter for PDF, Image & Video',
     description: 'Convert PDF, Word, Excel, images, audio and video for free. 50+ tools that run in your browser: no upload, no sign-up, no watermark, no limits.',
     faq: [
       { q: 'Is TurboConvert really free?', a: 'Yes. Every tool is free with no account, no daily limit and no watermark. The site is funded by discreet advertising, never by charging for your conversions.' },
@@ -30,7 +30,7 @@ export const HOME_COPY: Partial<Record<Locale, HomeCopy>> = {
 </ul>`,
   },
   fr: {
-    title: 'Convertisseur de fichiers gratuit — PDF, image, vidéo, sans envoi',
+    title: 'TurboConvert — Convertisseur de fichiers gratuit, sans envoi',
     description: 'Convertissez PDF, Word, Excel, images, audio et vidéo gratuitement. 50+ outils dans votre navigateur : sans envoi, sans inscription, sans filigrane.',
     faq: [
       { q: 'TurboConvert est-il vraiment gratuit ?', a: 'Oui. Tous les outils sont gratuits, sans compte, sans limite quotidienne et sans filigrane. Le site est financé par une publicité discrète, jamais en faisant payer vos conversions.' },

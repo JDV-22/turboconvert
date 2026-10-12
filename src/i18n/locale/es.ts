@@ -87,7 +87,7 @@ const es: LocalePack = {
   },
 
   home: {
-    title: 'Convertidor de archivos gratis — PDF, imagen, video, sin subir',
+    title: 'TurboConvert — Convertidor de archivos gratis, sin subir',
     description: 'Convierte PDF, Word, Excel, imágenes, audio y video gratis. Más de 50 herramientas en tu navegador: sin subir archivos, sin registro y sin marca de agua.',
     faq: [
       { q: '¿TurboConvert es realmente gratis?', a: 'Sí. Todas las herramientas son gratuitas, sin cuenta, sin límite diario y sin marca de agua. El sitio se financia con publicidad discreta, nunca cobrando por tus conversiones.' },

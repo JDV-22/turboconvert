@@ -85,7 +85,7 @@ const it: LocalePack = {
   },
 
   home: {
-    title: 'Convertitore di file gratis online — PDF, immagini, video',
+    title: 'TurboConvert — Convertitore di file gratis online',
     description: 'Converti PDF, Word, Excel, immagini, audio e video gratis. Oltre 50 strumenti nel tuo browser: nessun caricamento, nessuna registrazione, nessuna filigrana.',
     faq: [
       { q: 'TurboConvert è davvero gratis?', a: 'Sì. Tutti gli strumenti sono gratuiti, senza account, senza limiti giornalieri e senza filigrana. Il sito si finanzia con una pubblicità discreta, mai facendoti pagare le conversioni.' },
