@@ -13,6 +13,7 @@ const pt: LocalePack = {
       'edit-pdf': 'editar-pdf',
       'sign-pdf': 'assinar-pdf',
       'fill-pdf-form': 'preencher-formulario-pdf',
+      'scan-to-pdf': 'digitalizar-documento-pdf',
       'pdf-to-jpg': 'pdf-para-jpg',
       'pdf-to-png': 'pdf-para-png',
       'jpg-to-pdf': 'jpg-para-pdf',

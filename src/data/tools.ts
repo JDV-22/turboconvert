@@ -71,6 +71,24 @@ const pageSize: OptionDef = {
     { value: 'letter', label: 'Letter' },
   ],
 };
+const scanPage: OptionDef = { ...pageSize, default: 'a4' };
+const scanFilter: OptionDef = {
+  id: 'filter', type: 'select', label: 'opt.scanFilter', default: 'enhanced',
+  choices: [
+    { value: 'enhanced', label: 'opt.scanFilter.enhanced' },
+    { value: 'bw', label: 'opt.scanFilter.bw' },
+    { value: 'gray', label: 'opt.scanFilter.gray' },
+    { value: 'original', label: 'opt.scanFilter.original' },
+  ],
+};
+const scanQuality: OptionDef = {
+  id: 'quality', type: 'select', label: 'opt.scanQuality', default: 'medium',
+  choices: [
+    { value: 'high', label: 'opt.scanQuality.high' },
+    { value: 'medium', label: 'opt.scanQuality.medium' },
+    { value: 'small', label: 'opt.scanQuality.small' },
+  ],
+};
 const margin: OptionDef = {
   id: 'margin', type: 'select', label: 'opt.margin', default: '0',
   choices: [
@@ -230,6 +248,13 @@ export const TOOLS: ToolDef[] = [
     options: [pageSize, margin],
     slugs: { en: 'jpg-to-pdf', fr: 'jpg-en-pdf' },
     related: ['png-to-pdf', 'pdf-to-jpg', 'merge-pdf', 'compress-pdf'],
+  },
+  {
+    id: 'scan-to-pdf', category: 'pdf', engine: 'scan-pdf', accept: ['jpg', 'jpeg', 'png', 'webp', 'heic', 'heif'], multiple: true, mode: 'all',
+    maxMb: 50, popular: true, from: 'Photo', to: 'PDF',
+    options: [scanFilter, scanQuality, scanPage],
+    slugs: { en: 'scan-to-pdf', fr: 'scanner-document-pdf' },
+    related: ['jpg-to-pdf', 'ocr-pdf', 'compress-pdf', 'sign-pdf'],
   },
   {
     id: 'png-to-pdf', category: 'pdf', engine: 'images-to-pdf', accept: ['png', 'jpg', 'jpeg', 'webp', 'gif', 'bmp', 'avif'], multiple: true, mode: 'all',

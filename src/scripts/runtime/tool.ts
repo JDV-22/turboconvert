@@ -381,6 +381,18 @@ export function initTool(root: HTMLElement): void {
     if (pasted.length && root.dataset.state !== 'working') addFiles(pasted, 'paste');
   });
 
+  // Custom UIs (e.g. the scanner) can add files or replace the list (reorder, delete).
+  root.addEventListener('tc:add-files', (e) => {
+    if (root.dataset.state === 'working') return;
+    if (root.dataset.state === 'done') files = [];
+    addFiles((e as CustomEvent<File[]>).detail, 'camera');
+  });
+  root.addEventListener('tc:set-files', (e) => {
+    if (root.dataset.state === 'working') return;
+    files = (e as CustomEvent<File[]>).detail.slice();
+    render();
+  });
+
   // Range inputs show their value.
   optionsForm?.querySelectorAll<HTMLInputElement>('input[type=range]').forEach((r) => {
     const out = optionsForm.querySelector<HTMLOutputElement>(`output[for="${r.id}"]`);
